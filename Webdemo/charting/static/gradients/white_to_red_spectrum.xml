@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<gradient name="White to Red Heatmap">
-  <color position="0" color="#ffffff" />
-  <color position="25" color="#00ffff" />
-  <color position="35" color="#00ff00" />
-  <color position="65" color="#ffff00" />
-  <color position="90" color="#ff8000" />
-  <color position="100" color="#ff0000" />
-</gradient>
