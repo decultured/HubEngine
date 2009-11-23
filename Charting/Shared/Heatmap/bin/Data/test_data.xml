@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<visualization>
+  <gradient name="Black to Red Heatmap">
+    <stop position="-185" color="0x000000" />
+    <stop position="10" color="0x000000" />
+    <stop position="30" color="0x0000ff" />
+    <stop position="45" color="0x00ffff" />
+    <stop position="60" color="0x00ff00" />
+    <stop position="75" color="0xffff00" />
+    <stop position="90" color="0xff0000" />
+    <stop position="1327" color="0xffffff" />
+  </gradient>
+  <dataset>
+    <dataType id="influence" title="Influence" type="decimal" binding="intensity" transformType="linear"/>
+    <dataType id="sentiment" title="Sentiment" type="integer" binding="yaxis" transformType="linear"/>
+    <dataType id="date" title="Date" type="date" binding="xaxis" transformType="linear"  minValue="3" maxValue="333" />
+    <dataPoint id="1327">
+      <dataValue id="influence" value="-185" />
+      <dataValue id="sentiment" value="-185" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="110">
+      <dataValue id="influence" value="-185" />
+      <dataValue id="sentiment" value="1327" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="200">
+      <dataValue id="influence" value="1327" />
+      <dataValue id="sentiment" value="-185" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="210">
+      <dataValue id="influence" value="1327" />
+      <dataValue id="sentiment" value="1327" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="105">
+      <dataValue id="influence" value="-185" />
+      <dataValue id="sentiment" value="326" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="115">
+      <dataValue id="influence" value="326" />
+      <dataValue id="sentiment" value="326" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="205">
+      <dataValue id="influence" value="326" />
+      <dataValue id="sentiment" value="-185" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="215">
+      <dataValue id="influence" value="1327" />
+      <dataValue id="sentiment" value="326" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="216">
+      <dataValue id="influence" value="326" />
+      <dataValue id="sentiment" value="1327" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+
+  </dataset>
+</visualization>

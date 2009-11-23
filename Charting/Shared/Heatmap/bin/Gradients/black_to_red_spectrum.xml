@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<gradient name="Black to Red Heatmap">
+  <color position="0" color="#000000" />
+  <color position="10" color="#000000" />
+  <color position="30" color="#0000ff" />
+  <color position="45" color="#00ffff" />
+  <color position="60" color="#00ff00" />
+  <color position="75" color="#ffff00" />
+  <color position="90" color="#ff0000" />
+  <color position="100" color="#ffffff" />
+</gradient>

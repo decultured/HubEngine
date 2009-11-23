@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" applicationComplete="Initialize()" layout="absolute" resize="AppResize(event);">
+	<mx:Script source="Main.as"/>
+	<mx:Style source="chartStyle.css"/>
+
+	<mx:Image width="100%" height="100%" top="0" left="0" id="ViewCanvas" />
+</mx:Application>

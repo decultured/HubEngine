@@ -1,0 +1,4 @@
+#!/bin/sh
+
+mxmlc -source-path=../../hub/ -target-player=10 -debug=true -output=/Users/jgraves/Sites/charting.local/web/static/flash/stream-build.swf src/Main.mxml
+

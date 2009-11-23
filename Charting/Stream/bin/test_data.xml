@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<visualization>
+  <dataset>
+    <dataType id="influence" title="Influence" type="decimal" binding="intensity" transformType="linear"/>
+    <dataType id="sentiment" title="Sentiment" type="integer" binding="yaxis" transformType="linear"/>
+    <dataType id="date" title="Date" type="date" binding="xaxis" transformType="linear"  minValue="3" maxValue="333" />
+    <dataPoint id="1">
+      <dataValue id="influence" value="-185" />
+      <dataValue id="sentiment" value="0" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="2">
+      <dataValue id="influence" value="-423" />
+      <dataValue id="sentiment" value="1" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="3">
+      <dataValue id="influence" value="1327" />
+      <dataValue id="sentiment" value="2" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="4">
+      <dataValue id="influence" value="987" />
+      <dataValue id="sentiment" value="3" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="5">
+      <dataValue id="influence" value="-185" />
+      <dataValue id="sentiment" value="4" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="6">
+      <dataValue id="influence" value="326" />
+      <dataValue id="sentiment" value="5" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="7">
+      <dataValue id="influence" value="123" />
+      <dataValue id="sentiment" value="6" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="8">
+      <dataValue id="influence" value="1327" />
+      <dataValue id="sentiment" value="7" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="9">
+      <dataValue id="influence" value="326" />
+      <dataValue id="sentiment" value="8" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+
+  </dataset>
+</visualization>

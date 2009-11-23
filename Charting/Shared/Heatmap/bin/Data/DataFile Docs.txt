@@ -1,0 +1,18 @@
+<visualization>
+  <dataset>
+    Attributes:
+      xmin - Minimum X value.  If not provided, or not valid, use the smallest listed value in the dataset
+      xmax - Same as above for maximum X value.
+      ymin - Same as above for minimum Y value.
+      ymax - Same as above for maximum Y value.
+      xtype - The type of data used in the X axis: can be date, number, or integer.
+        Affects how the data is notated, displayed and processed.
+        Default is "number."
+      ytype - Same as above for "Y" axis.
+    <point> - Individual data values to display in the heatmap
+      Attributes:
+        x - The position on the x axis.
+        y - The position on the y axis.
+        intensity - the intensity of the data value, commonly used for either size or opacity of display.
+          Should be a value between 0.0 and 1.0, where 0.0 is not displayed, and 1.0 is displayed at full intensity.
+          Default intensity is 0.5.

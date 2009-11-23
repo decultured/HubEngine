@@ -1,0 +1,15 @@
+﻿Application { 
+	padding:0;
+	margin:0;
+	backgroundColor: #fff;
+}
+
+.ViewCanvas {
+	padding:0;
+	margin:0;
+    top:25;
+	left:35;
+	bottom:45;
+	right:5; 
+	backgroundColor: #ff0000;
+}

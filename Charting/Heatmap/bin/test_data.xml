@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<visualization>
+  <gradient name="Black to Red Heatmap">
+    <color position="0" color="#000000" />
+    <color position="10" color="#000000" />
+    <color position="30" color="#0000ff" />
+    <color position="45" color="#00ffff" />
+    <color position="60" color="#00ff00" />
+    <color position="75" color="#ffff00" />
+    <color position="90" color="#ff0000" />
+    <color position="100" color="#ffffff" />
+  </gradient>
+  <dataset xmax="15" xmin="0" ymax="15" ymin="0" xtype="date" ytype="number">
+    <point x="1.0" y="1.0" intensity="0.01" />
+    <point x="2.0" y="2.0" intensity="0.05" />
+    <point x="3.0" y="3.0" intensity="0.1" />
+    <point x="4.0" y="4.0" intensity="0.2" />
+    <point x="5.0" y="5.0" intensity="0.3" />
+    <point x="6.0" y="6.0" intensity="0.4" />
+    <point x="7.0" y="7.0" intensity="0.5" />
+    <point x="8.0" y="8.0" intensity="0.6" />
+    <point x="9.0" y="9.0" intensity="0.7" />
+    <point x="10.0" y="10.0" intensity="0.8" />
+    <point x="11.0" y="11.0" intensity="0.9" />
+    <point x="12.0" y="12.0" intensity="1.0" />
+  </dataset>
+</visualization>

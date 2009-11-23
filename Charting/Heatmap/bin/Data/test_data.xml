@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<visualization>
+  <dataset>
+    <dataType id="influence" title="Influence" type="decimal" binding="intensity" transformType="linear"/>
+    <dataType id="sentiment" title="Sentiment" type="integer" binding="yaxis" transformType="linear"/>
+    <dataType id="date" title="Date" type="date" binding="xaxis" transformType="linear"  minValue="3" maxValue="333" />
+    <dataPoint id="1327">
+      <dataValue id="influence" value="-185" />
+      <dataValue id="sentiment" value="-185" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="110">
+      <dataValue id="influence" value="-185" />
+      <dataValue id="sentiment" value="1327" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="200">
+      <dataValue id="influence" value="1327" />
+      <dataValue id="sentiment" value="-185" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="210">
+      <dataValue id="influence" value="1327" />
+      <dataValue id="sentiment" value="1327" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="105">
+      <dataValue id="influence" value="-185" />
+      <dataValue id="sentiment" value="326" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="115">
+      <dataValue id="influence" value="326" />
+      <dataValue id="sentiment" value="326" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="205">
+      <dataValue id="influence" value="326" />
+      <dataValue id="sentiment" value="-185" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="215">
+      <dataValue id="influence" value="1327" />
+      <dataValue id="sentiment" value="326" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+    <dataPoint id="216">
+      <dataValue id="influence" value="326" />
+      <dataValue id="sentiment" value="1327" />
+      <dataValue id="date" value="1" />
+    </dataPoint>
+
+  </dataset>
+</visualization>
