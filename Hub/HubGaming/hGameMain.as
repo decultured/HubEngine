@@ -22,14 +22,14 @@ package HubGaming
 
 		public function StartLoop():void
 		{
+			_StateMachine.CurrentState.Start();
 			_ThisTime = getTimer();
 			_GameTimer= new Timer(1);
 			_GameTimer.addEventListener("timer", MainLoop);
-			_GameTimer.start();			
+			_GameTimer.start();
 		}
 		
-		
-		protected function MainLoop(event:TimerEvent):void
+		protected function RunFrame(event:TimerEvent):void
 		{
 			_LastTime = _ThisTime;
 			_ThisTime = getTimer();

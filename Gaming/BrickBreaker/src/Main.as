@@ -21,12 +21,10 @@ private var debugger:MonsterDebugger;
 public function Initialize():void
 {
 	debugger = new MonsterDebugger(this);
-	MonsterDebugger.trace(this, "Hello World!")
+	MonsterDebugger.trace(this, "Hello World!");
 
-	MainGame = new BrickBreaker(ViewBitmap);
+	MainGame = new BrickBreaker();
 	AppResize(null);
-	MainGame.StartLoop();
-
 }
 
 public function AppResize(event:Event):void
@@ -41,6 +39,10 @@ public function AppResize(event:Event):void
 	ViewBitmapAsset = new BitmapAsset(ViewBitmap);
 	ViewCanvas.source = ViewBitmapAsset;
 	
-	MainGame.ResetCanvas(ViewBitmap);
+	hGlobalGraphics.Canvas.ViewBitmap = ViewBitmap;
+}
 
+public function EnterFrame(event:Event):void
+{
+	MainGame.Run();
 }

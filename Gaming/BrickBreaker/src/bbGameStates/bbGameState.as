@@ -8,18 +8,16 @@ package bbGameStates
 	
 	public class bbGameState extends hGameState
 	{
-		private var _ViewBitmap:BitmapData;
+		public var _BallImage:hImage;
 
 		public function bbGameState() 
 		{
 			super();
 		}
 		
-		public function set ViewBitmap(viewBitmap:BitmapData):void { _ViewBitmap = viewBitmap; }
-		public function get ViewBitmap():BitmapData { return _ViewBitmap; }
-		
 		public override function Start():void
 		{
+			_BallImage = hGlobalGraphics.ImageLibrary.GetImageByFileName("http://charting.local/static/images/brickbreaker/ball.png?n=1234");
 		}
 		
 		public override function Stop():void
@@ -30,16 +28,24 @@ package bbGameStates
 		{
 			_ElapsedTime = elapsedTime;
 
-			_ViewBitmap.lock();
+			var numBalls:uint = Math.round(Math.random()*5000);
 
-			var color:uint = Math.round(Math.random()*0xffffff);
-			_ViewBitmap.fillRect(new Rectangle(0, 0, _ViewBitmap.width, _ViewBitmap.height), color);
-			_ViewBitmap.unlock();			
+			hGlobalGraphics.Canvas.Begin(true, 0x000000);
+			
+			for (var i:uint = 0; i < 100; i++)
+			{
+//				var position:Point = new Point(Math.round(Math.random()*640), Math.round(Math.random()*480))
+				var matrix:Matrix = new Matrix();
+				var scaleval:uint = Math.random()*5;
+				matrix.scale(scaleval, scaleval);
+				matrix.rotate(Math.random()*6.2918);
+				matrix.translate(Math.round(Math.random()*640), Math.round(Math.random()*480));
 
-			if (color > 0xd0d0d0)
-				return getQualifiedClassName(bbMenuState);
-			else
-				return Name;
+				_BallImage.RenderTransformed(hGlobalGraphics.Canvas.ViewBitmap, matrix);
+//				_BallImage.RenderSimple(hGlobalGraphics.Canvas.ViewBitmap, position);
+			}
+
+			hGlobalGraphics.Canvas.End();
 
 			return Name;
 		}

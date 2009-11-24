@@ -8,6 +8,7 @@ package bbGameStates
 	
 	public class bbMenuState extends hGameState
 	{
+		private var _ViewBitmap:BitmapData;
 		private var _CurrentColor:Number = 0;
 
 		public function bbMenuState() 
@@ -15,12 +16,12 @@ package bbGameStates
 			super();
 		}
 		
+		public function set ViewBitmap(viewBitmap:BitmapData):void { _ViewBitmap = viewBitmap; }
+		public function get ViewBitmap():BitmapData { return _ViewBitmap; }
+		
 		public override function Start():void
 		{
 			_CurrentColor = 0;
-			
-			hGlobalGraphics.ImageLibrary.AddImageFromFile("http://charting.local/static/images/brickbreaker/ball.png?n=1234")
-			hGlobalGraphics.ImageLibrary.LoadAllUnloadedImages();
 		}
 		
 		public override function Stop():void

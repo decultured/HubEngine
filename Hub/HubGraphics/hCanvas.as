@@ -1,23 +1,33 @@
 package HubGraphics
 {
+	import flash.display.*;
+	import flash.geom.*;
+	
 	public class hCanvas
 	{
 		private var _ViewBitmap:BitmapData;
 		
-		public function ResetCanvas(viewBitmap:BitmapData):void
+		public function set ViewBitmap(viewBitmap:BitmapData):void
 		{
 			_ViewBitmap = viewBitmap;
-			_GameState.ViewBitmap = _ViewBitmap;
-			_MenuState.ViewBitmap = _ViewBitmap;
 		}
-		
-		public function ResetCanvas(viewBitmap:BitmapData):void
+
+		public function get ViewBitmap():BitmapData
 		{
-			_ViewBitmap = viewBitmap;
-			_GameState.ViewBitmap = _ViewBitmap;
-			_MenuState.ViewBitmap = _ViewBitmap;
+			return _ViewBitmap;
 		}
 		
+		public function Begin(clear:Boolean = true, clearColor:uint = 0xffffff):void 
+		{
+			_ViewBitmap.lock();
+			
+			if (clear)
+				_ViewBitmap.fillRect(new Rectangle(0, 0, _ViewBitmap.width, _ViewBitmap.height), clearColor);
+		}
 		
+		public function End():void
+		{
+			_ViewBitmap.unlock();			
+		}
 	}
 }

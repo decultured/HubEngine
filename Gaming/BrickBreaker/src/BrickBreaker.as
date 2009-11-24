@@ -8,35 +8,20 @@ package
 	import HubGaming.*;
 	import bbGameStates.*;
 
-	public class BrickBreaker extends hGameMain
+	public class BrickBreaker extends hGameStateMachine
 	{
-		private var _ViewBitmap:BitmapData;
-		private var _GameState:bbGameState;	
-		private var _MenuState:bbMenuState;	
+		public var _GameState:bbGameState;	
+		public var _MenuState:bbMenuState;	
 
-		public function BrickBreaker(viewBitmap:BitmapData)
+		public function BrickBreaker()
 		{
 			super();
 
 			_GameState = new bbGameState();
 			_MenuState = new bbMenuState();
 
-			ResetCanvas(viewBitmap);
-
-			_StateMachine.AddState(_MenuState, true);		
-			_StateMachine.AddState(_GameState);		
-		}
-		
-		public function ResetCanvas(viewBitmap:BitmapData):void
-		{
-			_ViewBitmap = viewBitmap;
-			_GameState.ViewBitmap = _ViewBitmap;
-			_MenuState.ViewBitmap = _ViewBitmap;
-		}
-		
-		override protected function MainLoop(event:TimerEvent):void
-		{
-			super.MainLoop(event);
+			AddState(_MenuState, true);		
+			AddState(_GameState);		
 		}
 	}
 }

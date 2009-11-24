@@ -1,18 +1,24 @@
 package HubGaming 
 {
+	import flash.utils.getTimer;
+
 	public class hGameStateMachine
 	{
-		protected var _States:Object; 
+		protected var _States:Object = new Object(); 
 		protected var _CurrentState:hGameState = null;
+		protected var _DefaultState:hGameState = null;
 		protected var _StateResponse:String = null;
+
+		protected var _LastTime:uint = 0;
+		protected var _ThisTime:uint = 0;
 
 		public function get States():Object {return _States;}
 		public function get CurrentState():hGameState {return _CurrentState;}
 		public function get StateResponse():String {return _StateResponse;}
+		public function get ElapsedTime():uint { return _ThisTime - _LastTime; }
 
 		public function hGameStateMachine()
 		{
-			_States = new Object();
 		}
 		
 		public function AddState(newState:hGameState, makeDefault:Boolean = false):String
@@ -23,7 +29,7 @@ package HubGaming
 			_States[newState.Name] = newState;
 			
 			if (makeDefault)
-				_CurrentState = newState;
+				_DefaultState = newState;
 				
 			return newState.Name;
 		}
@@ -39,17 +45,21 @@ package HubGaming
 		
 		public function GetStateByName(stateName:String):Boolean {return _States[stateName];}
 		
-		public function Run(elapsedTime:uint):void
+		public function Run():void
 		{
-			if (_CurrentState != null)
-			{
-				_StateResponse = _CurrentState.Run(elapsedTime);
-				if (_StateResponse != _CurrentState.Name && _States[_StateResponse] != null)
-				{
+			_LastTime = _ThisTime;
+			_ThisTime = getTimer();
+			
+			if (_CurrentState != null) {
+				_StateResponse = _CurrentState.Run(ElapsedTime);
+				if (_StateResponse != _CurrentState.Name && _States[_StateResponse] != null) {
 					_CurrentState.Stop();
 					_CurrentState = _States[_StateResponse];
 					_CurrentState.Start();
 				}
+			} else if (_DefaultState != null) {
+				_CurrentState = _DefaultState;
+				_CurrentState.Start();				
 			}
 		}
 	}

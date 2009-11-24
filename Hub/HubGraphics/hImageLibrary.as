@@ -1,56 +1,62 @@
 ﻿package HubGraphics
 {	
+	import flash.events.*;
+	import flash.display.*;
+	import flash.net.URLRequest;
+	import nl.demonsters.debugger.MonsterDebugger;
+
 	public class hImageLibrary
 	{
-		public var Images:Object;
+		public static var COMPLETE:String = "complete";
+		public static var PROGRESS:String = "progress";
+
+		private var _Images:Object;
+		private var _BitmapLoader:Loader;
+		
+		private var _UnloadedImages:Number = 0;
 		
 		public function hImageLibrary() 
 		{
-			Images = new Object();
+			_Images = new Object();
 		}
 		
-		public function AddImage(name:String, filename:String, replace:Boolean = false):Boolean
+		//TODO : Handle Replace = true
+		public function AddImageFromFile(filename:String, replace:Boolean = false):hImage
 		{
-			newImage:hImage = new hImage(name)
+			var newImage:hImage = new hImage(filename);
+			_Images[filename] = newImage;
+			_UnloadedImages++;
+			return newImage;
 		}
 		
-		public function GetImageByName(name:String):hImage
+		public function GetImageByFileName(filename:String):hImage
 		{
-			return Images["name"];
+			return _Images[filename];
 		}
 		
-		public function LoadAllImages():void
+		public function LoadAllUnloadedImages():void
 		{
-			BitmapLoader = new Loader();
-
-			BitmapLoader.contentLoaderInfo.addEventListener(Event.OPEN, HandleOpen);
-			BitmapLoader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, HandleProgress);
-			BitmapLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, HandleComplete);
-
-			BitmapLoader.load(new URLRequest(_FileName));				
+			if (_UnloadedImages >= 0)
+				LoadNextUnloadedImage();
 		}
 		
-		private function HandleOpen(event:Event):void
+		private function LoadNextUnloadedImage():void
 		{
-		}
-		
-		private function HandleProgress(event:ProgressEvent):void
-		{
+			for (var filename:String in _Images) {
+				var newImage:hImage = _Images[filename];
+				if (newImage && newImage.IsLoaded == false) {
+					newImage.addEventListener(hImage.COMPLETE, HandleComplete);
+					newImage.LoadFromFilename();
+					break;
+				}
+			}
 		}
 		
 		private function HandleComplete(event:Event):void
 		{
-			LoadedImage = Bitmap(BitmapLoader.content);
+			MonsterDebugger.trace(this, "Image added to Image Library!");
 			
-			Size.y = LoadedImage.height;
-			Size.x = LoadedImage.width;
-			
-			Bounds.width = LoadedImage.width;
-			Bounds.height = LoadedImage.height;
-			
-			Loaded = true;
-			
-			dispatchEvent(new Event(hImage.COMPLETE))
-		}		
+			LoadNextUnloadedImage();
+		}
 	}
 }
