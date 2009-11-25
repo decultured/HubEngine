@@ -29,7 +29,7 @@ package bbGameStates
 		{
 			_Game.Update(elapsedTime);
 
-			hGlobalGraphics.Canvas.Begin(true, 0x000000);
+			hGlobalGraphics.Canvas.Begin(true, 0xcccccc);
 			_Game.Render();
 			hGlobalGraphics.Canvas.End();
 

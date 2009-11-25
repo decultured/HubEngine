@@ -21,11 +21,18 @@ package HubGaming
 		private var _TransformMatrix:Matrix = new Matrix();
 
 		
+		public function get Width():Number {return _Image.Width;}
+		public function get Height():Number {return _Image.Width;}
 		public function get Scaler():Number {return _Scale;}
 		public function get Position():Point {return _Position;}
 		public function get Rotation():Number {return _Rotation;}
 		public function get Velocity():Point {return _Velocity;}
 		public function get Acceleration():Point {return _Acceleration;}
+		public function get Visible():Boolean {return _Visible;}
+		public function get Active():Boolean {return _Active;}
+
+		public function set Visible(visible:Boolean):void {_Visible = visible;}
+		public function set Active(active:Boolean):void {_Active = active;}
 
 		public function hGameObject(imageFilename:String)
 		{
@@ -86,6 +93,9 @@ package HubGaming
 
 		public function Update(elapsedTime:Number):void
 		{
+			if (!_Active)
+				return;
+			
 			if (_Acceleration.x || _Acceleration.y ) {
 				_Velocity.x += _Acceleration.x * elapsedTime;
 				_Velocity.y += _Acceleration.y * elapsedTime;
@@ -99,7 +109,7 @@ package HubGaming
 		
 		public function Render():void
 		{
-			if (!_Image)
+			if (!_Image || !_Visible)
 				return;
 
 			if (_Scale == 1.0 && _Rotation == 0.0) {

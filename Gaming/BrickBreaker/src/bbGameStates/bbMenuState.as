@@ -26,7 +26,7 @@ package bbGameStates
 		
 		public override function Run(elapsedTime:Number):String
 		{
-			_CurrentColor += 0x020202;
+			_CurrentColor += 0x050505;
 
 			hGlobalGraphics.Canvas.Begin(true, _CurrentColor);
 			hGlobalGraphics.Canvas.End();

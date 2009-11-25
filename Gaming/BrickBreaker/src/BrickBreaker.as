@@ -16,6 +16,8 @@ package
 
 		private var _Game:BrickBreakerGame;
 
+		public function get Game():BrickBreakerGame {return _Game;}
+
 		public function BrickBreaker()
 		{
 			super();

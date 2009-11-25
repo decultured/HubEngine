@@ -23,6 +23,9 @@
 		//TODO : Handle Replace = true
 		public function AddImageFromFile(filename:String, replace:Boolean = false):hImage
 		{
+			if (_Images[filename])
+				return _Images[filename];
+				
 			var newImage:hImage = new hImage(filename);
 			_Images[filename] = newImage;
 			_UnloadedImages++;
