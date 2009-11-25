@@ -10,18 +10,26 @@ package
 
 	public class BrickBreaker extends hGameStateMachine
 	{
-		public var _GameState:bbGameState;	
-		public var _MenuState:bbMenuState;	
+		private var _MenuState:bbMenuState;
+		private var _LoaderState:bbLoaderState;
+		private var _GameState:bbGameState;
+
+		private var _Game:BrickBreakerGame;
 
 		public function BrickBreaker()
 		{
 			super();
 
-			_GameState = new bbGameState();
-			_MenuState = new bbMenuState();
+			_Game = new BrickBreakerGame();
 
+			_MenuState = new bbMenuState();
+			_LoaderState = new bbLoaderState();
+			_GameState = new bbGameState();
+			_GameState.Game = _Game;
+			
 			AddState(_MenuState, true);		
-			AddState(_GameState);		
+			AddState(_LoaderState);
+			AddState(_GameState);
 		}
 	}
 }

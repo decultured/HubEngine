@@ -9,13 +9,13 @@ package HubGaming
 		protected var _DefaultState:hGameState = null;
 		protected var _StateResponse:String = null;
 
-		protected var _LastTime:uint = 0;
-		protected var _ThisTime:uint = 0;
+		protected var _LastTime:Number = 0;
+		protected var _ThisTime:Number = 0;
 
 		public function get States():Object {return _States;}
 		public function get CurrentState():hGameState {return _CurrentState;}
 		public function get StateResponse():String {return _StateResponse;}
-		public function get ElapsedTime():uint { return _ThisTime - _LastTime; }
+		public function get ElapsedTime():Number { return _ThisTime - _LastTime; }
 
 		public function hGameStateMachine()
 		{
@@ -48,7 +48,7 @@ package HubGaming
 		public function Run():void
 		{
 			_LastTime = _ThisTime;
-			_ThisTime = getTimer();
+			_ThisTime = Number(getTimer()) * 0.001;
 			
 			if (_CurrentState != null) {
 				_StateResponse = _CurrentState.Run(ElapsedTime);

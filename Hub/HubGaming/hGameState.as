@@ -4,7 +4,7 @@ package HubGaming
 	
 	public class hGameState
 	{
-		protected var _ElapsedTime:uint = 0;
+		protected var _ElapsedTime:Number = 0;
 		
 		public function hGameState() 
 		{
@@ -20,7 +20,7 @@ package HubGaming
 		{
 		}
 		
-		public function Run(elapsedTime:uint):String
+		public function Run(elapsedTime:Number):String
 		{
 			_ElapsedTime = elapsedTime;
 			

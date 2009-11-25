@@ -18,26 +18,21 @@ package bbGameStates
 		public override function Start():void
 		{
 			_CurrentColor = 0;
-			
-			hGlobalGraphics.ImageLibrary.AddImageFromFile("http://charting.local/static/images/brickbreaker/ball.png?n=1234")
-			hGlobalGraphics.ImageLibrary.LoadAllUnloadedImages();
 		}
 		
 		public override function Stop():void
 		{
 		}
 		
-		public override function Run(elapsedTime:uint):String
+		public override function Run(elapsedTime:Number):String
 		{
-			_ElapsedTime = elapsedTime;
-
-			_CurrentColor += 0x010101;
+			_CurrentColor += 0x020202;
 
 			hGlobalGraphics.Canvas.Begin(true, _CurrentColor);
 			hGlobalGraphics.Canvas.End();
 
 			if (_CurrentColor > 0xffffff)
-				return getQualifiedClassName(bbGameState);
+				return getQualifiedClassName(bbLoaderState);
 			else
 				return Name;
 		}

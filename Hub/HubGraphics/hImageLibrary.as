@@ -5,7 +5,7 @@
 	import flash.net.URLRequest;
 	import nl.demonsters.debugger.MonsterDebugger;
 
-	public class hImageLibrary
+	public class hImageLibrary extends Sprite
 	{
 		public static var COMPLETE:String = "complete";
 		public static var PROGRESS:String = "progress";
@@ -47,9 +47,11 @@
 				if (newImage && newImage.IsLoaded == false) {
 					newImage.addEventListener(hImage.COMPLETE, HandleComplete);
 					newImage.LoadFromFilename();
-					break;
+					return;
 				}
 			}
+			
+			dispatchEvent(new Event(hImageLibrary.COMPLETE));
 		}
 		
 		private function HandleComplete(event:Event):void

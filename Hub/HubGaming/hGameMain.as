@@ -3,14 +3,25 @@ package HubGaming
 	import flash.utils.Timer;
 	import flash.utils.getTimer;
 	import flash.events.TimerEvent;
+
+
 	
 	public class hGameMain 
 	{
-		protected var _GameTimer:Timer;
-		protected var _LastTime:uint;
-		protected var _ThisTime:uint;
-		
-		protected var _StateMachine:hGameStateMachine;
+		private static var _instance:hGameMain = new hGameMain();
+
+      	public function hGameMain()
+        {
+            if (_instance != null)
+            {
+                throw new Error("hGameMain can only be accessed through hGameMain.instance");
+            }
+        }
+
+        public static function get instance():hGameMain
+        {
+            return _instance;
+        }
 		
 		public function hGameMain()
 		{

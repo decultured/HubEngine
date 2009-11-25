@@ -88,10 +88,6 @@
 		
 		private function HandleComplete(event:Event):void
 		{
-			MonsterDebugger.trace(this, "Image doner! " + FileName);
-
-			MonsterDebugger.trace(event.target.content, "What is this");
-
 			_Bitmap = event.target.content.bitmapData;
 			
 			_Size.y = _Bitmap.height;
@@ -102,8 +98,6 @@
 			
 			_Loaded = true;
 
-			MonsterDebugger.trace(this, "More done! " + FileName);
-			
 			dispatchEvent(new Event(hImage.COMPLETE));
 		}		
 	}
