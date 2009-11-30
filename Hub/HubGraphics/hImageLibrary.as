@@ -3,7 +3,6 @@
 	import flash.events.*;
 	import flash.display.*;
 	import flash.net.URLRequest;
-	import nl.demonsters.debugger.MonsterDebugger;
 
 	public class hImageLibrary extends Sprite
 	{
@@ -59,8 +58,6 @@
 		
 		private function HandleComplete(event:Event):void
 		{
-			MonsterDebugger.trace(this, "Image added to Image Library!");
-			
 			LoadNextUnloadedImage();
 		}
 	}

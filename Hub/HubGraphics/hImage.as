@@ -4,7 +4,6 @@
 	import flash.net.URLRequest;
 	import flash.events.*;
 	import flash.geom.*;
-	import nl.demonsters.debugger.MonsterDebugger;
 	
 	public class hImage extends Sprite
 	{
@@ -37,7 +36,6 @@
 			BitmapLoader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, HandleProgress);
 			BitmapLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, HandleComplete);
 			BitmapLoader.load(new URLRequest(FileName));							
-			MonsterDebugger.trace(this, "Image added! " + FileName);
 		}
 
 		public function SetBitmap(loadedBitmap:BitmapData):void

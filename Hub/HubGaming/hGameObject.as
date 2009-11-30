@@ -20,11 +20,25 @@ package HubGaming
 
 		private var _TransformMatrix:Matrix = new Matrix();
 
-		
+		public function get Top():Number {return _Position.y;}
+		public function get Left():Number {return _Position.x;}
+		public function get Bottom():Number
+		{
+			if (_Image)
+				return _Position.y + _Image.Height;
+			return _Position.y;
+		}
+		public function get Right():Number
+		{
+			if (_Image)
+				return _Position.x + _Image.Width;
+			return _Position.x;
+		}
 		public function get Width():Number {return _Image.Width;}
 		public function get Height():Number {return _Image.Width;}
 		public function get Scaler():Number {return _Scale;}
 		public function get Position():Point {return _Position;}
+		public function get Center():Point {return _CenterOffsetPosition;}
 		public function get Rotation():Number {return _Rotation;}
 		public function get Velocity():Point {return _Velocity;}
 		public function get Acceleration():Point {return _Acceleration;}
@@ -86,8 +100,8 @@ package HubGaming
 		{
 			if (_Image != null)
 			{
-				_CenterOffsetPosition.x = _Position.x - (_Image.Width * 0.5);
-				_CenterOffsetPosition.y = _Position.y - (_Image.Height * 0.5);
+				_CenterOffsetPosition.x = _Position.x + (_Image.Width * 0.5);
+				_CenterOffsetPosition.y = _Position.y + (_Image.Height * 0.5);
 			}
 		}
 
@@ -96,15 +110,11 @@ package HubGaming
 			if (!_Active)
 				return;
 			
-			if (_Acceleration.x || _Acceleration.y ) {
-				_Velocity.x += _Acceleration.x * elapsedTime;
-				_Velocity.y += _Acceleration.y * elapsedTime;
-			}
+			if (_Acceleration.x || _Acceleration.y )
+				AddVelocity(_Acceleration.x * elapsedTime, _Acceleration.y * elapsedTime);
 			
-			if (_Velocity.x || _Velocity.y ) {
-				_Position.x += _Velocity.x * elapsedTime;
-				_Position.y += _Velocity.y * elapsedTime;
-			}		
+			if (_Velocity.x || _Velocity.y )
+				Translate(_Velocity.x * elapsedTime, _Velocity.y * elapsedTime);
 		}
 		
 		public function Render():void
