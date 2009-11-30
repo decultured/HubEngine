@@ -8,6 +8,7 @@ import mx.core.BitmapAsset;
 import HubGraphics.*;
 import HubMath.*;
 import HubGaming.*;
+import HubInput.*;
 import flash.events.*;
 import mx.events.*;
 import nl.demonsters.debugger.MonsterDebugger;
@@ -24,6 +25,7 @@ public function Initialize():void
 	MonsterDebugger.trace(this, "Hello World!");
 
 	MainGame = new BrickBreaker();
+	hGlobalInput.Initialize(ViewCanvas);
 	AppResize(null);
 }
 
