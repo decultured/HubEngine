@@ -16,7 +16,6 @@
 		private var _FileName:String;
 		private var _Loaded:Boolean = false;
 		private var _IsAlpha:Boolean = false;
-		private var _BitmapLoader:Loader;
 		
 		public function hImage(filename:String)
 		{
@@ -33,6 +32,7 @@
 		{
 			var BitmapLoader:Loader = new Loader();
 			BitmapLoader.contentLoaderInfo.addEventListener(Event.OPEN, HandleOpen);
+			BitmapLoader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, HandleError);
 			BitmapLoader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, HandleProgress);
 			BitmapLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, HandleComplete);
 			BitmapLoader.load(new URLRequest(FileName));							
@@ -77,6 +77,10 @@
 		}
 
 		private function HandleOpen(event:Event):void
+		{
+		}
+
+		private function HandleError(event:IOErrorEvent):void
 		{
 		}
 		

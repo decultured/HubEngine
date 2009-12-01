@@ -5,6 +5,7 @@ package bbGameStates
 	import flash.geom.*;
 	import flash.utils.*;
 	import HubGraphics.*;
+	import HubAudio.*;
 	import flash.events.*;
 	
 	public class bbLoaderState extends hGameState
@@ -20,6 +21,7 @@ package bbGameStates
 		{
 			_Complete = false;
 			hGlobalGraphics.ImageLibrary.addEventListener(hImageLibrary.COMPLETE, HandleComplete);
+			hGlobalAudio.SoundLibrary.LoadAllUnloadedSounds();
 			hGlobalGraphics.ImageLibrary.LoadAllUnloadedImages();
 		}
 		

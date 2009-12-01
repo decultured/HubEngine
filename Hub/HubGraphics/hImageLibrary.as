@@ -10,7 +10,6 @@
 		public static var PROGRESS:String = "progress";
 
 		private var _Images:Object;
-		private var _BitmapLoader:Loader;
 		
 		private var _UnloadedImages:Number = 0;
 		

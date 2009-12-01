@@ -6,11 +6,14 @@ package bbGameObjects
 	
 	public class Paddle extends hGameObject
 	{
+		private var _MaxXVelocity:Number = 320; 
+		private var _YPosition:Number = 440;
+		
 		public function Paddle(imageFilename:String)
 		{
 			super(imageFilename);
 			
-			ResetTranslation(20, 440);
+			ResetTranslation(0, _YPosition);
 //			ResetVelocity(165, 0);
 //          ResetAcceleration(0, 1000);
 		}
@@ -18,12 +21,12 @@ package bbGameObjects
 		public override function Update(elapsedTime:Number):void
 		{
 
-//			ResetTranslation(hGlobalInput.Mouse.X - Width * 0.5, 440);
+//			ResetTranslation(hGlobalInput.Mouse.X - Width * 0.5, _YPosition);
 			
 			if (hGlobalInput.Keyboard.KeyPressed(hKeyboard.RIGHT) && !hGlobalInput.Keyboard.KeyPressed(hKeyboard.LEFT))
-				ResetVelocity(165, 0);
+				ResetVelocity(_MaxXVelocity, 0);
 			else if (hGlobalInput.Keyboard.KeyPressed(hKeyboard.LEFT) && !hGlobalInput.Keyboard.KeyPressed(hKeyboard.RIGHT))
-				ResetVelocity(-165, 0);
+				ResetVelocity(-_MaxXVelocity, 0);
 			else
 				ResetVelocity(0, 0);
 

@@ -11,6 +11,8 @@ package HubGaming
 		private var _Active:Boolean = true; 
 
 		private var _Position:Point = new Point(0, 0);
+		private var _PositionOffset:Point = new Point(0, 0);
+		private var _PreviousPosition:Point = new Point(0, 0);
 		private var _CenterOffsetPosition:Point = new Point(0, 0);
 		private var _Scale:Number = 1.0;
 		private var _Rotation:Number = 0.0;

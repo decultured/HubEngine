@@ -26,7 +26,7 @@ package bbGameStates
 		
 		public override function Run(elapsedTime:Number):String
 		{
-			_CurrentColor += 0x050505;
+			/*_CurrentColor += 0x050505;
 
 			hGlobalGraphics.Canvas.Begin(true, _CurrentColor);
 			hGlobalGraphics.Canvas.End();
@@ -34,7 +34,9 @@ package bbGameStates
 			if (_CurrentColor > 0xffffff)
 				return getQualifiedClassName(bbLoaderState);
 			else
-				return Name;
+				return Name;*/
+			
+			return getQualifiedClassName(bbLoaderState);
 		}
 	}
 }
