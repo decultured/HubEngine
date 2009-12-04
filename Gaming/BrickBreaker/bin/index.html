@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Hub Engine Demo</title>
+	<script type="text/javascript" src="swfobject.js"></script>
+</head>
+<body>
+<h1>HubEngine Demo</h1>
+<h2>Brick Breaker Demo</h2>
+<div id="brickbreaker_display">
+</div>
+<script type="text/javascript">
+  var flashvars = {
+    data_url: "test_data.xml?seed=1234",
+    image_url: "spot.png?seed=1234",
+  };
+
+  var attributes = {};
+  swfobject.embedSWF("brickbreaker.swf?seed=1234", "brickbreaker_display", "640", "480", "10.0.0","expressInstall.swf", flashvars, params, attributes);
+</script>
+</body>
+</html>
