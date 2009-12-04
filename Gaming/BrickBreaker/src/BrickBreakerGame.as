@@ -19,6 +19,7 @@ package
 		
       	public function BrickBreakerGame()
         {
+<<<<<<< HEAD
 			_Music = hGlobalAudio.SoundLibrary.AddSoundFromFile("fractal.mp3?n=1234");
 			_BrickBounceSound = hGlobalAudio.SoundLibrary.AddSoundFromFile("button-29.mp3?n=1234");
 			_PaddleBounceSound = hGlobalAudio.SoundLibrary.AddSoundFromFile("ballpaddle.mp3?n=34534");
@@ -27,6 +28,16 @@ package
 			_Cursor = new Cursor("cursor.png?n=1234");
 			_Ball = new Ball("ball.png?n=1234");
 			_Paddle = new Paddle("paddle.png?n=1s34");
+=======
+			_Music = hGlobalAudio.SoundLibrary.AddSoundFromFile("http://charting.local/static/images/brickbreaker/fractal.mp3?n=1234");
+			_BrickBounceSound = hGlobalAudio.SoundLibrary.AddSoundFromFile("http://charting.local/static/images/brickbreaker/button-29.mp3?n=1234");
+			_PaddleBounceSound = hGlobalAudio.SoundLibrary.AddSoundFromFile("http://charting.local/static/images/brickbreaker/ballpaddle.mp3?n=34534");
+			_FailSound = hGlobalAudio.SoundLibrary.AddSoundFromFile("http://charting.local/static/images/brickbreaker/button-10.mp3?n=1234");
+			
+			_Cursor = new Cursor("http://charting.local/static/images/brickbreaker/cursor.png?n=1234");
+			_Ball = new Ball("http://charting.local/static/images/brickbreaker/ball.png?n=1234");
+			_Paddle = new Paddle("http://charting.local/static/images/brickbreaker/paddle.png?n=1s34");
+>>>>>>> b6d6a859ba41b371eac3ed5621f9c3552eb214e3
 			_Blocks = new Array();
 			for (var i:uint = 0; i < 15; i++)
 			{

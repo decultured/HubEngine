@@ -7,11 +7,6 @@ package HubInput
 		
 	public class hKeyboard 
 	{
-		public static const LEFT:uint = 37;
-		public static const RIGHT:uint = 39;
-		public static const UP:uint = 38;
-		public static const DOWN:uint = 37;
-		
 		private var _Target:DisplayObject;
 		private var _Keys:Array;
 
@@ -64,7 +59,5 @@ package HubInput
 			if (event.keyCode < 256)
 				_Keys[event.keyCode] = 0;
 		}
-		
-		
 	}	
 }
