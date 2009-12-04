@@ -34,8 +34,7 @@ package bbGameStates
 		{
 			if (_Complete)
 				return getQualifiedClassName(bbGameState);
-			else
-				return Name;
+			return Name;
 		}
 		
 		private function HandleComplete(event:Event):void

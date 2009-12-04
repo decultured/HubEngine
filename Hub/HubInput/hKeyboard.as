@@ -14,7 +14,6 @@ package HubInput
 		
 		private var _Target:DisplayObject;
 		private var _Keys:Array;
-		private var _KeyPressed:Boolean = false;
 
 		public function hKeyboard(target:DisplayObject) 
 		{
@@ -25,32 +24,45 @@ package HubInput
 			_Keys = new Array(256);
 			for (var i:uint = 0; i < 256; i++)
 			{
-				_Keys[i] = false;
+				_Keys[i] = 0;
 			}
 		}
 		
 		public function KeyPressed(keyCode:uint):Boolean
 		{
-			if (keyCode < 256)
-				return _Keys[keyCode];
+			if (keyCode < 256 && _Keys[keyCode] > 0)
+				return true;
+			return false;
+		}
+		
+		public function KeyJustPressed(keyCode:uint):Boolean
+		{
+			if (keyCode < 256 && _Keys[keyCode] == 2)
+				return true;
 			return false;
 		}
 		
 		public function Update():void
 		{
-			
+			for (var i:uint = 0; i < 256; i++)
+			{
+				if (_Keys[i] == 1)
+					_Keys[i] = 2;
+				else if (_Keys[i] == 2)
+					_Keys[i] = 3;
+			}
 		}
 		
 		private function HandleKeyDown(event:KeyboardEvent):void
 		{
-			if (event.keyCode < 256)
-				_Keys[event.keyCode] = true;
+			if (event.keyCode < 256 && _Keys[event.keyCode] == 0)
+				_Keys[event.keyCode] = 1;
 		}
 		
 		private function HandleKeyUp(event:KeyboardEvent):void
 		{
 			if (event.keyCode < 256)
-				_Keys[event.keyCode] = false;
+				_Keys[event.keyCode] = 0;
 		}
 		
 		

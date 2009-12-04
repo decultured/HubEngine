@@ -5,6 +5,7 @@ package bbGameStates
 	import flash.geom.*;
 	import flash.utils.*;
 	import HubGraphics.*;
+	import HubInput.*;
 	
 	public class bbGameState extends hGameState
 	{
@@ -33,6 +34,8 @@ package bbGameStates
 			_Game.Render();
 			hGlobalGraphics.Canvas.End();
 
+			if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.P) || hGlobalInput.Keyboard.KeyPressed(hKeyCodes.UP_ARROW))
+				return getQualifiedClassName(bbPausedState);
 			return Name;
 		}
 	}
