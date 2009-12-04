@@ -23,9 +23,9 @@ package bbGameObjects
 
 //			ResetTranslation(hGlobalInput.Mouse.X - Width * 0.5, _YPosition);
 			
-			if (hGlobalInput.Keyboard.KeyPressed(hKeyboard.RIGHT) && !hGlobalInput.Keyboard.KeyPressed(hKeyboard.LEFT))
+			if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.RIGHT_ARROW) && !hGlobalInput.Keyboard.KeyPressed(hKeyCodes.LEFT_ARROW))
 				ResetVelocity(_MaxXVelocity, 0);
-			else if (hGlobalInput.Keyboard.KeyPressed(hKeyboard.LEFT) && !hGlobalInput.Keyboard.KeyPressed(hKeyboard.RIGHT))
+			else if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.LEFT_ARROW) && !hGlobalInput.Keyboard.KeyPressed(hKeyCodes.RIGHT_ARROW))
 				ResetVelocity(-_MaxXVelocity, 0);
 			else
 				ResetVelocity(0, 0);

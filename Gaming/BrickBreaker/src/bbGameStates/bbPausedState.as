@@ -7,11 +7,11 @@ package bbGameStates
 	import HubGraphics.*;
 	import HubInput.*;
 	
-	public class bbGameState extends hGameState
+	public class bbPausedState extends hGameState
 	{
 		private var _Game:BrickBreakerGame;
 		
-		public function bbGameState() 
+		public function bbPausedState() 
 		{
 			super();
 		}
@@ -28,14 +28,12 @@ package bbGameStates
 		
 		public override function Run(elapsedTime:Number):String
 		{
-			_Game.Update(elapsedTime);
-
 			hGlobalGraphics.Canvas.Begin(true, 0xcccccc);
 			_Game.Render();
 			hGlobalGraphics.Canvas.End();
 
-			if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.P) || hGlobalInput.Keyboard.KeyPressed(hKeyCodes.UP_ARROW))
-				return getQualifiedClassName(bbPausedState);
+			if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.P) || hGlobalInput.Keyboard.KeyPressed(hKeyCodes.PAUSE))
+				return getQualifiedClassName(bbGameState);
 			return Name;
 		}
 	}
