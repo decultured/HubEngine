@@ -22,7 +22,7 @@ private var debugger:MonsterDebugger;
 public function Initialize():void
 {
 	debugger = new MonsterDebugger(this);
-	MonsterDebugger.trace(this, "Hello World!");
+//	MonsterDebugger.trace(this, "Hello World!");
 
 	MainGame = new BrickBreaker();
 	hGlobalInput.Initialize(ViewCanvas.stage);

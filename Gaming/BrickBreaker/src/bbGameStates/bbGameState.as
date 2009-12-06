@@ -9,7 +9,7 @@ package bbGameStates
 	
 	public class bbGameState extends hGameState
 	{
-		private var _Game:BrickBreakerGame;
+		public var _Game:BrickBreakerGame;
 		
 		public function bbGameState() 
 		{

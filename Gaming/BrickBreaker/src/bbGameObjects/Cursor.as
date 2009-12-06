@@ -10,7 +10,7 @@ package bbGameObjects
 		public function Cursor(imageFilename:String)
 		{
 			super(imageFilename);
-			Mouse.hide();
+			//Mouse.hide();
 		}
 		
 		public override function Update(elapsedTime:Number):void

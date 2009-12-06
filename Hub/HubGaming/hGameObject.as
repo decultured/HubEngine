@@ -5,7 +5,7 @@ package HubGaming
 	
 	public class hGameObject
 	{
-		private var _Image:hImage;
+		public var _Image:hImage;
 
 		private var _Visible:Boolean = true;
 		private var _Active:Boolean = true; 

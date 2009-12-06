@@ -10,8 +10,7 @@
 		public static var PROGRESS:String = "progress";
 
 		private var _Images:Object;
-		
-		private var _UnloadedImages:Number = 0;
+		private var _LoaderQueue:Array;
 		
 		public function hImageLibrary() 
 		{
@@ -26,7 +25,6 @@
 				
 			var newImage:hImage = new hImage(filename);
 			_Images[filename] = newImage;
-			_UnloadedImages++;
 			return newImage;
 		}
 		
@@ -35,29 +33,41 @@
 			return _Images[filename];
 		}
 		
+		// TODO : Handle errors when files do not load
 		public function LoadAllUnloadedImages():void
 		{
-			if (_UnloadedImages >= 0)
+			//TODO : Add new images on subsequent calls
+			if (_LoaderQueue != null && _LoaderQueue.length > 0)
+				return;
+			
+			_LoaderQueue = new Array();
+			for (var filename:String in _Images) {
+				var newImage:hImage = _Images[filename];
+				if (newImage && newImage.IsLoaded == false) {
+					_LoaderQueue.push(newImage);
+				}
+			}
+			
+			if (_LoaderQueue.length >= 0)
 				LoadNextUnloadedImage();
 		}
 		
 		private function LoadNextUnloadedImage():void
 		{
-			for (var filename:String in _Images) {
-				var newImage:hImage = _Images[filename];
-				if (newImage && newImage.IsLoaded == false) {
-					newImage.addEventListener(hImage.COMPLETE, HandleComplete);
-					newImage.LoadFromFilename();
-					return;
-				}
-			}
-			
-			dispatchEvent(new Event(hImageLibrary.COMPLETE));
+			if (_LoaderQueue == null || _LoaderQueue.length == 0)
+				return;
+
+			var newImage:hImage = _LoaderQueue.pop();
+			newImage.addEventListener(hImage.COMPLETE, HandleComplete);
+			newImage.LoadFromFilename();
 		}
 		
 		private function HandleComplete(event:Event):void
 		{
-			LoadNextUnloadedImage();
+			if (_LoaderQueue.length == 0)
+				dispatchEvent(new Event(hImageLibrary.COMPLETE));
+			else
+				LoadNextUnloadedImage();
 		}
 	}
 }

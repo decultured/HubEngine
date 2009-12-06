@@ -12,7 +12,7 @@ package bbGameObjects
 		public function Ball(imageFilename:String)
 		{
 			super(imageFilename);
-			_WallBounceSound = hGlobalAudio.SoundLibrary.AddSoundFromFile("button-16.mp3?n=1234");
+			_WallBounceSound = hGlobalAudio.SoundLibrary.AddSoundFromFile("button-16.mp3?n=12f34");
 			
 			Reset();
 		}

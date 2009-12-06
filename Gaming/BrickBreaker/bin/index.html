@@ -11,13 +11,33 @@
 <div id="brickbreaker_display">
 </div>
 <script type="text/javascript">
-  var flashvars = {
-    data_url: "test_data.xml?seed=1234",
-    image_url: "spot.png?seed=1234",
-  };
-
+  var filename= "brickbreaker.swf?seed=" + (Math.floor(Math.random()*99999999)).toString();
+  var flashvars = {};
+  var params = {};
   var attributes = {};
-  swfobject.embedSWF("brickbreaker.swf?seed=1234", "brickbreaker_display", "640", "480", "10.0.0","expressInstall.swf", flashvars, params, attributes);
+  swfobject.embedSWF(filename, "brickbreaker_display", "640", "480", "10.0.0", "expressInstall.swf", flashvars, params, attributes);
 </script>
+<h3>Notes:</h3>
+<p>
+	This app may not work properly without explicitly setting file permissions for flash to access local files on your machine.  If this flash app includes files loaded at runtime for this directory, you will need to give it permission. To do so, create a file in the Global Flash Player Trust directory.
+</p>
+<p>
+Mac: app support/Macromedia/FlashPlayerTrust<br />
+(for example, /Library/Application Support/Macromedia/FlashPlayerTrust)<br />
+Windows: system\Macromed\Flash\FlashPlayerTrust<br />
+(for example, C:\windows\system32\Macromed\Flash\FlashPlayerTrust)<br />
+</p>
+<p>
+	The Flash Player Trust directory can contain any number of text files, each of which lists trusted paths, with one path per line. Each path can be an individual SWF file, HTML file, or directory. Comment lines begin with the # symbol. For example, a Flash Player trust configuration file containing the following text grants trusted status to all files in the specified directory and all subdirectories:
+</p>
+<p>
+	# Trust files in the following directories:<br />
+	C:\Documents and Settings\All Users\Documents\SampleApp
+</p>
+<p>
+	The paths listed in a trust configuration file should always be local paths or SMB network paths. Any HTTP path in a trust configuration file is ignored; only local files can be trusted.<br />
+	To avoid conflicts, give each trust configuration file a filename corresponding to the installing application, and use a .cfg file extension.
+</p>
+<p><a href="http://livedocs.adobe.com/flex/3/html/help.html?content=05B_Security_03.html#122782">Read more information here.</a></p>
 </body>
 </html>

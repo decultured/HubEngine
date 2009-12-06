@@ -1,9 +1,13 @@
 ﻿package HubGraphics
 {
-	import flash.display.*;
+	import flash.display.Sprite;
+	import flash.display.Bitmap;
+	import flash.display.Loader;
+    import flash.display.BitmapData;
 	import flash.net.URLRequest;
 	import flash.events.*;
 	import flash.geom.*;
+	import nl.demonsters.debugger.MonsterDebugger;
 	
 	public class hImage extends Sprite
 	{
@@ -22,7 +26,7 @@
 			_FileName = filename;
 		}
 
-		public function get Bitmap():BitmapData	{ return _Bitmap; }
+//		public function get GetBitmapData():BitmapData	{ return _Bitmap; }
 		public function get Width():Number {return _Bounds.width;}
 		public function get Height():Number {return _Bounds.height;}
 		public function get IsLoaded():Boolean { return _Loaded; }
@@ -78,20 +82,35 @@
 
 		private function HandleOpen(event:Event):void
 		{
+
 		}
 
 		private function HandleError(event:IOErrorEvent):void
 		{
+			dispatchEvent(new Event(hImage.COMPLETE));
 		}
 		
 		private function HandleProgress(event:ProgressEvent):void
 		{
 		}
 		
+		// TODO : Handle error when user does not have permissions.
+		// Use the contentLoaderInfo property of Loader to check status,
+		// Must be checked BEFORE content is checked at all.  Accessing
+		// The content property of a loader object without permissions
+		// causes an unreported error. 
 		private function HandleComplete(event:Event):void
 		{
-			_Bitmap = event.target.content.bitmapData;
+			var loader:Loader = Loader(event.target.loader);
+            var image:Bitmap = Bitmap(loader.content);
 			
+			if (loader && image && image.bitmapData) {
+				_Bitmap = image.bitmapData;
+			} else {
+				dispatchEvent(new Event(hImage.COMPLETE));
+				return;
+			}
+				
 			_Size.y = _Bitmap.height;
 			_Size.x = _Bitmap.width;
 			

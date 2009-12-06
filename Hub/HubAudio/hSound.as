@@ -4,6 +4,7 @@ package HubAudio
 	import flash.net.URLRequest;
 	import flash.events.*;
 	import flash.media.*;
+	import nl.demonsters.debugger.MonsterDebugger;
 	
 	public class hSound extends Sprite
 	{
@@ -70,10 +71,12 @@ package HubAudio
 		
 		private function HandleError(event:IOErrorEvent):void
 		{
+			dispatchEvent(new Event(hSound.COMPLETE));
 		}
 		
 		private function HandleProgress(event:ProgressEvent):void
 		{
+			dispatchEvent(new Event(hSound.COMPLETE));
 		}
 		
 		private function HandleComplete(event:Event):void
