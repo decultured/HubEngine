@@ -9,6 +9,8 @@ package bbGameObjects
 		private var _MaxXVelocity:Number = 320; 
 		private var _YPosition:Number = 440;
 		
+		public function get DefaultYPosition():Number {return _YPosition;}
+		
 		public function Paddle(imageFilename:String)
 		{
 			super(imageFilename);

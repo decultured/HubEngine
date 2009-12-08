@@ -20,6 +20,7 @@ package bbGameStates
 		
 		public override function Start():void
 		{
+			_Game.Reset();
 		}
 		
 		public override function Stop():void
