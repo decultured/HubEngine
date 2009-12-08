@@ -48,14 +48,18 @@
 				}
 			}
 			
-			if (_LoaderQueue.length >= 0)
+			if (_LoaderQueue.length > 0)
 				LoadNextUnloadedImage();
+			else
+				dispatchEvent(new Event(hImageLibrary.COMPLETE));			
 		}
 		
 		private function LoadNextUnloadedImage():void
 		{
-			if (_LoaderQueue == null || _LoaderQueue.length == 0)
+			if (_LoaderQueue == null || _LoaderQueue.length == 0) {
+				dispatchEvent(new Event(hImageLibrary.COMPLETE));
 				return;
+			}
 
 			var newImage:hImage = _LoaderQueue.pop();
 			newImage.addEventListener(hImage.COMPLETE, HandleComplete);
@@ -64,10 +68,7 @@
 		
 		private function HandleComplete(event:Event):void
 		{
-			if (_LoaderQueue.length == 0)
-				dispatchEvent(new Event(hImageLibrary.COMPLETE));
-			else
-				LoadNextUnloadedImage();
+			LoadNextUnloadedImage();
 		}
 	}
 }

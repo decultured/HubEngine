@@ -1,42 +1,51 @@
 package bbGameStates 
 {
 	import HubGaming.*;
-	import flash.display.BitmapData;
+	import flash.display.*;
 	import flash.geom.*;
 	import flash.utils.*;
 	import HubGraphics.*;
+	import bbGameUI.*;
+	import nl.demonsters.debugger.MonsterDebugger;
+	import flash.events.MouseEvent;
+	import flash.events.Event;
 	
 	public class bbMenuState extends hGameState
 	{
-		private var _CurrentColor:Number = 0;
-
+		private var _StartGame:Boolean = false;
+		
+		public var _Menu:bbMenu;
+		
 		public function bbMenuState() 
 		{
 			super();
+			_Menu = new bbMenu();
 		}
+		
+		private function StartGameEvent(event:MouseEvent):void { _StartGame = true; }
 		
 		public override function Start():void
 		{
-			_CurrentColor = 0;
+			_StartGame = false;
+			hGlobalGraphics.View.ViewImage.addChild(_Menu);
+			_Menu.StartGameButton.addEventListener(MouseEvent.CLICK, StartGameEvent);
 		}
 		
 		public override function Stop():void
 		{
+			hGlobalGraphics.View.ViewImage.removeChild(_Menu);
+			_Menu.StartGameButton.removeEventListener(MouseEvent.CLICK, StartGameEvent);
 		}
 		
 		public override function Run(elapsedTime:Number):String
 		{
-			/*_CurrentColor += 0x050505;
-
-			hGlobalGraphics.Canvas.Begin(true, _CurrentColor);
-			hGlobalGraphics.Canvas.End();
-
-			if (_CurrentColor > 0xffffff)
-				return getQualifiedClassName(bbLoaderState);
-			else
-				return Name;*/
+			hGlobalGraphics.View.Begin(true, 0xffffcc);
+			hGlobalGraphics.View.End();
 			
-			return getQualifiedClassName(bbLoaderState);
+			if (!_StartGame)
+				return Name;
+			else
+				return getQualifiedClassName(bbLoaderState);
 		}
 	}
 }

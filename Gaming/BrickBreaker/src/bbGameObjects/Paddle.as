@@ -36,8 +36,8 @@ package bbGameObjects
 				Position.x = 0;
 			}
 
-			if (Position.x > hGlobalGraphics.Canvas.Width - Width) {
-				Position.x = hGlobalGraphics.Canvas.Width - Width;
+			if (Position.x > hGlobalGraphics.View.Width - Width) {
+				Position.x = hGlobalGraphics.View.Width - Width;
 			}
 
 		}

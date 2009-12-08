@@ -47,21 +47,22 @@ package HubAudio
 				}
 			}
 			
-			if (_LoaderQueue.length >= 0)
+			if (_LoaderQueue.length > 0)
 				LoadNextUnloadedSound();
+			else
+				dispatchEvent(new Event(hSoundLibrary.COMPLETE));			
 		}
 		
 		private function LoadNextUnloadedSound():void
 		{
-			if (_LoaderQueue == null || _LoaderQueue.length == 0)
+			if (_LoaderQueue == null || _LoaderQueue.length == 0) {
+				dispatchEvent(new Event(hSoundLibrary.COMPLETE));
 				return;
+			}
 
 			var newSound:hSound = _LoaderQueue.pop();
 			newSound.addEventListener(hSound.COMPLETE, HandleComplete);
 			newSound.LoadFromFilename();
-			
-			if (_LoaderQueue.length > 0)
-				dispatchEvent(new Event(hSoundLibrary.COMPLETE));
 		}
 		
 		private function HandleComplete(event:Event):void

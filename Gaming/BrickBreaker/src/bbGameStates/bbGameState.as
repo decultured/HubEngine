@@ -30,12 +30,15 @@ package bbGameStates
 		{
 			_Game.Update(elapsedTime);
 
-			hGlobalGraphics.Canvas.Begin(true, 0xcccccc);
+			hGlobalInput.Update();
+			hGlobalGraphics.View.Begin(true, 0xcccccc);
 			_Game.Render();
-			hGlobalGraphics.Canvas.End();
+			hGlobalGraphics.View.End();
 
-			if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.P) || hGlobalInput.Keyboard.KeyPressed(hKeyCodes.UP_ARROW))
+			if (hGlobalInput.Keyboard.KeyJustPressed(hKeyCodes.P) || hGlobalInput.Keyboard.KeyJustPressed(hKeyCodes.PAUSE))
 				return getQualifiedClassName(bbPausedState);
+			if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.Q))
+				return getQualifiedClassName(bbMenuState);
 			return Name;
 		}
 	}

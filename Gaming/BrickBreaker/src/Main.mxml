@@ -3,11 +3,9 @@
 	xmlns:mx="http://www.adobe.com/2006/mxml"
 	applicationComplete="Initialize()"
 	layout="absolute"
-	resize="AppResize(event);"
 	enterFrame="EnterFrame(event)"
+	xmlns:custom="bbGameUI.*"
 	frameRate="120">
-	
 	<mx:Script source="Main.as"/>
-	<mx:Style source="BrickBreakerStyles.css"/>
-	<mx:Image id="ViewCanvas" styleName="ViewCanvas" top="0" left="0" width="100%" height="100% "/>
+	<mx:Image id="ViewImage" styleName="ViewCanvas" top="0" left="0" width="100%" height="100%"/>
 </mx:Application>

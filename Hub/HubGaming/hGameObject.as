@@ -2,6 +2,7 @@ package HubGaming
 {
 	import flash.geom.*;
 	import HubGraphics.*;
+	import nl.demonsters.debugger.MonsterDebugger;
 	
 	public class hGameObject
 	{
@@ -10,10 +11,10 @@ package HubGaming
 		private var _Visible:Boolean = true;
 		private var _Active:Boolean = true; 
 
-		private var _Position:Point = new Point(0, 0);
-		private var _PositionOffset:Point = new Point(0, 0);
 		private var _PreviousPosition:Point = new Point(0, 0);
-		private var _CenterOffsetPosition:Point = new Point(0, 0);
+		private var _Position:Point = new Point(0, 0);
+		private var _PreviousCenter:Point = new Point(0, 0);
+		private var _Center:Point = new Point(0, 0);
 		private var _Scale:Number = 1.0;
 		private var _Rotation:Number = 0.0;
 		private var _Velocity:Point = new Point(0,0);
@@ -24,30 +25,26 @@ package HubGaming
 
 		public function get Top():Number {return _Position.y;}
 		public function get Left():Number {return _Position.x;}
-		public function get Bottom():Number
-		{
-			if (_Image)
-				return _Position.y + _Image.Height;
-			return _Position.y;
-		}
-		public function get Right():Number
-		{
-			if (_Image)
-				return _Position.x + _Image.Width;
-			return _Position.x;
-		}
+		public function get Bottom():Number {return _Position.y + _Image.Height;}
+		public function get Right():Number {return _Position.x + _Image.Width;}
+
 		public function get Width():Number {return _Image.Width;}
 		public function get Height():Number {return _Image.Width;}
 		public function get Scaler():Number {return _Scale;}
+
 		public function get Position():Point {return _Position;}
-		public function get Center():Point {return _CenterOffsetPosition;}
+		public function get PreviousPosition():Point {return _PreviousPosition;}
+
+		public function get Center():Point {return _Center;}
+		public function get PreviousCenter():Point {return _PreviousCenter;}
+
 		public function get Rotation():Number {return _Rotation;}
 		public function get Velocity():Point {return _Velocity;}
 		public function get Acceleration():Point {return _Acceleration;}
-		public function get Visible():Boolean {return _Visible;}
-		public function get Active():Boolean {return _Active;}
 
+		public function get Visible():Boolean {return _Visible;}
 		public function set Visible(visible:Boolean):void {_Visible = visible;}
+		public function get Active():Boolean {return _Active;}
 		public function set Active(active:Boolean):void {_Active = active;}
 
 		public function hGameObject(imageFilename:String)
@@ -64,14 +61,14 @@ package HubGaming
 		{
 			_Position.x = X;
 			_Position.y = Y;
-			CalcCenterOffsetPosition();
+			CalcCenter();
 		}
 
 		public function Translate(X:Number, Y:Number):void
 		{
 			_Position.x += X;
 			_Position.y += Y;
-			CalcCenterOffsetPosition();
+			CalcCenter();
 		}
 		
 		public function ResetVelocity(X:Number = 0.0, Y:Number = 0.0):void
@@ -98,12 +95,12 @@ package HubGaming
 			_Acceleration.y += Y;
 		}
 		
-		private function CalcCenterOffsetPosition():void
+		private function CalcCenter():void
 		{
 			if (_Image != null)
 			{
-				_CenterOffsetPosition.x = _Position.x + (_Image.Width * 0.5);
-				_CenterOffsetPosition.y = _Position.y + (_Image.Height * 0.5);
+				_Center.x = _Position.x + (_Image.Width * 0.5);
+				_Center.y = _Position.y + (_Image.Height * 0.5);
 			}
 		}
 
@@ -111,7 +108,12 @@ package HubGaming
 		{
 			if (!_Active)
 				return;
-			
+
+			_PreviousPosition.x = _Position.x;
+			_PreviousPosition.y = _Position.y;
+			_PreviousCenter.x = _Center.x;
+			_PreviousCenter.y = _Center.y;
+
 			if (_Acceleration.x || _Acceleration.y )
 				AddVelocity(_Acceleration.x * elapsedTime, _Acceleration.y * elapsedTime);
 			
@@ -125,7 +127,7 @@ package HubGaming
 				return;
 
 			if (_Scale == 1.0 && _Rotation == 0.0) {
-				_Image.RenderSimple(hGlobalGraphics.Canvas.ViewBitmap, _Position);
+				_Image.RenderSimple(hGlobalGraphics.View.ViewBitmapData, _Position);
 			} else {
 				_TransformMatrix.identity();
 				if (_Scale != 1.0)
@@ -133,7 +135,7 @@ package HubGaming
 				if (_Rotation != 0.0)
 					_TransformMatrix.rotate(_Rotation);
 				_TransformMatrix.translate(_Position.x, _Position.y);
-				_Image.RenderTransformed(hGlobalGraphics.Canvas.ViewBitmap, _TransformMatrix);			
+				_Image.RenderTransformed(hGlobalGraphics.View.ViewBitmapData, _TransformMatrix);			
 			}
 		}
 	}

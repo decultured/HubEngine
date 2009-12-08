@@ -1,16 +1,24 @@
 package HubGraphics
 {
+	import mx.controls.*;
+	import flash.display.*;
+	
 	public class hGlobalGraphics
 	{
-		static protected var _Canvas:hCanvas;
+		static protected var _View:hView;
 		static protected var _ImageLibrary:hImageLibrary;
 		
-		static public function get Canvas():hCanvas
+		static public function Initialize(viewImage:Image):void
 		{
-			if (_Canvas == null)
-				_Canvas = new hCanvas();
-			
-			return _Canvas;
+			if (_View == null)
+				_View = new hView(viewImage);
+			else
+				_View.Initialize();
+		}
+
+		static public function get View():hView
+		{
+			return _View;
 		}
 		
 		static public function get ImageLibrary():hImageLibrary

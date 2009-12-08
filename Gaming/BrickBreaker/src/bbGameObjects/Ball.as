@@ -3,6 +3,7 @@ package bbGameObjects
 	import HubGaming.*;
 	import HubGraphics.*;
 	import HubAudio.*;
+	import nl.demonsters.debugger.MonsterDebugger;
 	
 	public class Ball extends hGameObject
 	{
@@ -33,8 +34,8 @@ package bbGameObjects
 				_WallBounceSound.Play();
 			}
 
-			if (Position.x > hGlobalGraphics.Canvas.Width) {
-				Position.x = hGlobalGraphics.Canvas.Width * 2 - Position.x;
+			if (Position.x > hGlobalGraphics.View.Width) {
+				Position.x = hGlobalGraphics.View.Width * 2 - Position.x;
 				ResetVelocity(-Math.abs(Velocity.x), Velocity.y);
 				_WallBounceSound.Play();
 			}

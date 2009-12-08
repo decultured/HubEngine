@@ -3,6 +3,8 @@ package
 	import bbGameObjects.*;
 	import HubGraphics.*;
 	import HubAudio.*;
+	import HubMath.*;
+	import flash.geom.*;
 	
 	public class BrickBreakerGame 
 	{
@@ -43,40 +45,56 @@ package
 
 		public function Update(elapsedTime:Number):void
 		{
-			_Music.PlayOnlyOne(999);
+//			_Music.PlayOnlyOne(999);
 			_Ball.Update(elapsedTime);
 			_Paddle.Update(elapsedTime);
-			_Cursor.Update(elapsedTime);
 
 			// Collide Ball with Blocks
 			var blocksLength:uint = _Blocks.length;
 			for (var i:uint = 0; i < blocksLength; i++) {
 				if (!_Blocks[i] || !_Blocks[i] is Block || !_Blocks[i].Active)
 					continue;
-				
-				if (_Ball.Center.x > _Blocks[i].Left && _Ball.Center.x < _Blocks[i].Right) {
-					if (_Ball.Center.y > _Blocks[i].Top && _Ball.Center.y < _Blocks[i].Bottom) {
-						_Blocks[i].Active = false;
-						_Blocks[i].Visible = false;
-						_BrickBounceSound.Play();
-						_ActiveBlocks--;
-						continue;
-					}
-				}
 				_Blocks[i].Update(elapsedTime);
+				
+				if (hCollision.PointInAlignedRect(_Ball.Center, _Blocks[i].Left, _Blocks[i].Top, _Blocks[i].Right, _Blocks[i].Bottom)) {
+					var TopLeft:Point = new Point(_Blocks[i].Left, _Blocks[i].Top);
+					var TopRight:Point = new Point(_Blocks[i].Right, _Blocks[i].Top);
+					var BottomLeft:Point = new Point(_Blocks[i].Left, _Blocks[i].Bottom);
+					var BottomRight:Point = new Point(_Blocks[i].Right, _Blocks[i].Bottom);
+
+					if (hCollision.LineSegmentToLineSegment(_Ball.PreviousCenter, _Ball.Center, BottomLeft, BottomRight)) {
+						_Ball.ResetVelocity(_Ball.Velocity.x, Math.abs(_Ball.Velocity.y));
+					}
+					else if (hCollision.LineSegmentToLineSegment(_Ball.PreviousCenter, _Ball.Center, TopLeft, TopRight)) {
+						_Ball.ResetVelocity(_Ball.Velocity.x, -Math.abs(_Ball.Velocity.y));
+					}
+					if (hCollision.LineSegmentToLineSegment(_Ball.PreviousCenter, _Ball.Center, TopRight, BottomRight)) {
+						_Ball.ResetVelocity(Math.abs(_Ball.Velocity.x), _Ball.Velocity.y);
+					}
+					else if (hCollision.LineSegmentToLineSegment(_Ball.PreviousCenter, _Ball.Center, TopLeft, BottomLeft)) {
+						_Ball.ResetVelocity(-Math.abs(_Ball.Velocity.x), _Ball.Velocity.y);
+					}
+					
+					_Blocks[i].Active = false;
+					_Blocks[i].Visible = false;
+					_BrickBounceSound.Play();
+					_ActiveBlocks--;
+					break;
+				}
 			}
 			
 			//Collide Ball With Paddle
-			if (_Ball.Center.x > _Paddle.Left && _Ball.Center.x < _Paddle.Right && 
-				_Ball.Center.y > _Paddle.Top && _Ball.Center.y < _Paddle.Bottom)
+			if (hCollision.PointInAlignedRect(_Ball.Center, _Paddle.Left, _Paddle.Top, _Paddle.Right, _Paddle.Bottom))
+			/*if (_Ball.Center.x > _Paddle.Left && _Ball.Center.x < _Paddle.Right && 
+				_Ball.Center.y > _Paddle.Top && _Ball.Center.y < _Paddle.Bottom)*/
 			{
-				_Ball.Position.y = _Paddle.Top - _Ball.Height;
+				_Ball.Position.y = _Paddle.Position.y - _Ball.Height;
 				_Ball.ResetVelocity(_Ball.Velocity.x, -Math.abs(_Ball.Velocity.y));
 				_PaddleBounceSound.Play();
 			}
 			
 			//Reset if Ball Hits Bottom
-			if (_Ball.Bottom > hGlobalGraphics.Canvas.Height) {
+			if (_Ball.Bottom > hGlobalGraphics.View.Height) {
 				_Ball.Reset();
 				ResetBlocks();
 				_FailSound.Play();	
@@ -101,6 +119,8 @@ package
 		
 		public function Render():void
 		{
+			_Cursor.Update(0);
+			
 			var blocksLength:uint = _Blocks.length;
 			for (var i:uint = 0; i < blocksLength; i++) {
 				if (_Blocks[i] && _Blocks[i] is Block)
