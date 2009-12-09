@@ -20,11 +20,16 @@ package bbGameStates
 		
 		public override function Start():void
 		{
+			if (_Game.GameOver)
+				_Game.Reset(true);
+
 			hGlobalInput.GetFocus();
+			_Game.ShowHUD();
 		}
 		
 		public override function Stop():void
 		{
+			_Game.HideHUD();
 		}
 		
 		public override function Run(elapsedTime:Number):String
@@ -39,8 +44,10 @@ package bbGameStates
 			if (hGlobalInput.Keyboard.KeyJustPressed(hKeyCodes.P) || hGlobalInput.Keyboard.KeyJustPressed(hKeyCodes.PAUSE) || !hGlobalInput.ApplicationActive)
 				return getQualifiedClassName(bbPausedState);
 			if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.Q)) {
-				_Game.Reset();
 				return getQualifiedClassName(bbMenuState);
+			}
+			if (_Game.GameOver) {
+				return getQualifiedClassName(bbGameOverState);
 			}
 			return Name;
 		}

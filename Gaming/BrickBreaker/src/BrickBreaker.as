@@ -14,6 +14,7 @@ package
 		private var _LoaderState:bbLoaderState;
 		private var _GameState:bbGameState;
 		private var _PausedState:bbPausedState;
+		private var _GameOverState:bbGameOverState;
 
 		private var _Game:BrickBreakerGame;
 
@@ -28,14 +29,17 @@ package
 			_MenuState = new bbMenuState();
 			_LoaderState = new bbLoaderState();
 			_GameState = new bbGameState();
-			_PausedState = new bbPausedState();
 			_GameState.Game = _Game;
+			_PausedState = new bbPausedState();
 			_PausedState.Game = _Game;
+			_GameOverState = new bbGameOverState();
+			_GameOverState.Game = _Game;
 			
 			AddState(_MenuState, true);		
 			AddState(_LoaderState);
 			AddState(_GameState);
 			AddState(_PausedState);
+			AddState(_GameOverState);
 		}
 	}
 }

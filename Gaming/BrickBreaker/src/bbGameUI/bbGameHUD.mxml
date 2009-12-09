@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="640" height="480">
+	<mx:HBox borderStyle="solid" paddingTop="5" paddingBottom="5" paddingLeft="5" paddingRight="5" bottom="0" left="0" right="0" color="0x404050" backgroundColor="0xccccff">
+       <mx:Label text="Score: "/>
+       <mx:Label id="Score" text="0"/>
+       <mx:Label text="Balls: "/>
+       <mx:Label id="Balls" text="5"/>
+	</mx:HBox>
+</mx:Canvas>

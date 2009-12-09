@@ -19,11 +19,11 @@ public function Initialize():void
 	debugger = new MonsterDebugger(this);
 //	MonsterDebugger.trace(this, "Hello World!");
 
-	MainGame = new BrickBreaker();
+	AppResize(null);
 	
+	MainGame = new BrickBreaker();
 	hGlobalInput.Initialize(ViewImage);
-//	application.addEventListener(KeyboardEvent.KEY_UP, hGlobalInput.Keyboard.HandleKeyUp);
-//	application.addEventListener(KeyboardEvent.KEY_DOWN, hGlobalInput.Keyboard.HandleKeyDown);
+
 	AppResize(null);
 }
 

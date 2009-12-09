@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="640" height="480" backgroundColor="0xffffff">
+	<mx:Label id="Loading" text="Game Over!" color="0x000000" top="100" horizontalCenter="0" />
+	<mx:Label id="Score" text="" color="0x000000" top="150" horizontalCenter="0" />
+	<mx:Button id="StartGameButton" label="Start New Game!" bottom="150" horizontalCenter="0" />
+	<mx:Button id="MainMenuButton" label="Back to Main Menu" bottom="100" horizontalCenter="0" />
+</mx:Canvas>

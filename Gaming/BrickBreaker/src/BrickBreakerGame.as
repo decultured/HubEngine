@@ -5,6 +5,7 @@ package
 	import HubAudio.*;
 	import HubMath.*;
 	import flash.geom.*;
+	import bbGameUI.*;
 	
 	public class BrickBreakerGame 
 	{
@@ -18,9 +19,19 @@ package
 		public var _PaddleBounceSound:hSound;
 		public var _FailSound:hSound;
 		public var _Music:hSound;
+		public var _HUD:bbGameHUD;
+		
+		private var _Score:Number = 0;
+		private var _Balls:Number = 5;
+		private var _GameOver:Boolean = false;
+
+		public function get Score():Number {return _Score;}
+		public function get GameOver():Boolean {return _GameOver;}
 		
       	public function BrickBreakerGame()
         {
+			_HUD = new bbGameHUD();
+
 			hGlobalGraphics.ImageLibrary.AddImage("background", "background-1.png");
 			hGlobalGraphics.BackgroundImage = "background";
 			
@@ -44,7 +55,45 @@ package
 				}				
 			}
 			_ActiveBlocks = _Blocks.length;
+			Reset();
         }
+
+		public function Reset(clear:Boolean = false):void
+		{
+			if (clear)
+			{
+				var blocksLength:uint = _Blocks.length;
+				for (var i:uint = 0; i < blocksLength; i++) {
+					if (!_Blocks[i] || !_Blocks[i] is Block)
+						continue;
+					_Blocks[i].Active = true;
+					_Blocks[i].Visible = true;
+				}
+				
+				_GameOver = false;
+				_Score = 0;
+				_Balls = 5;
+				_HUD.Balls.text = String(_Balls);
+				_HUD.Score.text = String(_Score);
+			}
+			
+			_Ball.ResetTranslation(320 - _Ball.Width * 0.5, 400);
+			_Ball.ResetVelocity(205, -200);
+			_Paddle.ResetTranslation(320 - _Paddle.Width * 0.5, _Paddle.DefaultYPosition)
+			_ActiveBlocks = _Blocks.length;
+		}
+		
+		public function get HUD():bbGameHUD {return _HUD;}
+
+		public function ShowHUD():void
+		{
+			hGlobalGraphics.View.ViewImage.addChild(_HUD);			
+		}
+
+		public function HideHUD():void
+		{
+			hGlobalGraphics.View.ViewImage.removeChild(_HUD);
+		}
 
 		public function Update(elapsedTime:Number):void
 		{
@@ -111,6 +160,8 @@ package
 						_Blocks[i].Visible = false;
 						_BrickBounceSound.Play();
 						_ActiveBlocks--;
+						_Score += 100;
+						_HUD.Score.text = String(_Score);
 						break;
 					}
 				}
@@ -132,28 +183,17 @@ package
 			//Reset if Ball Hits Bottom
 			if (_Ball.Bottom > hGlobalGraphics.View.Height) {
 				_Ball.Reset();
+				_Balls--;
+				
+				if (_Balls < 0)
+					_GameOver = true;
+				_HUD.Balls.text = String(_Balls);				
 				Reset();
 				_FailSound.Play();	
 			}
 						
 			if (_ActiveBlocks < 1)
 				Reset();			
-		}
-		
-		public function Reset():void
-		{
-			var blocksLength:uint = _Blocks.length;
-			for (var i:uint = 0; i < blocksLength; i++) {
-				if (!_Blocks[i] || !_Blocks[i] is Block)
-					continue;
-				_Blocks[i].Active = true;
-				_Blocks[i].Visible = true;
-			}
-			
-			_Ball.ResetTranslation(hGlobalGraphics.View.Width * 0.5 - _Ball.Width * 0.5, 400);
-			_Ball.ResetVelocity(205, -200);
-			_Paddle.ResetTranslation(hGlobalGraphics.View.Width * 0.5 - _Paddle.Width * 0.5, _Paddle.DefaultYPosition)
-			_ActiveBlocks = _Blocks.length;
 		}
 		
 		public function Render():void
@@ -165,9 +205,6 @@ package
 			}
 			_Ball.Render();
 			_Paddle.Render();
-
-			/*_Cursor.Update(0);
-			_Cursor.Render();*/
 		}
 	}
 }

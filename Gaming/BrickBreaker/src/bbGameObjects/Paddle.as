@@ -7,7 +7,7 @@ package bbGameObjects
 	public class Paddle extends hGameObject
 	{
 		private var _MaxXVelocity:Number = 320; 
-		private var _YPosition:Number = 440;
+		private var _YPosition:Number = 400;
 		
 		public function get DefaultYPosition():Number {return _YPosition;}
 		
