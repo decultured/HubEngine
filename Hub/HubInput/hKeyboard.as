@@ -2,15 +2,15 @@ package HubInput
 {
 	import flash.events.KeyboardEvent;
 	import flash.events.Event;
-	import flash.display.DisplayObject;
+	import mx.core.UIComponent;
 	import nl.demonsters.debugger.MonsterDebugger;
 		
 	public class hKeyboard 
 	{
-		private var _Target:DisplayObject;
+		private var _Target:UIComponent;
 		private var _Keys:Array;
 
-		public function hKeyboard(target:DisplayObject) 
+		public function hKeyboard(target:UIComponent) 
 		{
 			_Target = target;
 			_Target.addEventListener(KeyboardEvent.KEY_DOWN, HandleKeyDown, false, 0, true);

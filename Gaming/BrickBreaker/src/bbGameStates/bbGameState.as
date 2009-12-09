@@ -20,7 +20,7 @@ package bbGameStates
 		
 		public override function Start():void
 		{
-			_Game.Reset();
+			hGlobalInput.GetFocus();
 		}
 		
 		public override function Stop():void
@@ -36,10 +36,12 @@ package bbGameStates
 			_Game.Render();
 			hGlobalGraphics.View.End();
 
-			if (hGlobalInput.Keyboard.KeyJustPressed(hKeyCodes.P) || hGlobalInput.Keyboard.KeyJustPressed(hKeyCodes.PAUSE))
+			if (hGlobalInput.Keyboard.KeyJustPressed(hKeyCodes.P) || hGlobalInput.Keyboard.KeyJustPressed(hKeyCodes.PAUSE) || !hGlobalInput.ApplicationActive)
 				return getQualifiedClassName(bbPausedState);
-			if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.Q))
+			if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.Q)) {
+				_Game.Reset();
 				return getQualifiedClassName(bbMenuState);
+			}
 			return Name;
 		}
 	}

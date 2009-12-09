@@ -31,12 +31,12 @@ package
 			_Paddle = new Paddle("paddle.png");
 
 			_Blocks = new Array();
-			for (var i:uint = 0; i < 15; i++)
+			for (var i:uint = 0; i < 10; i++)
 			{
-				for (var j:uint = 0; j < 15; j++)
+				for (var j:uint = 0; j < 12; j++)
 				{
 					var newBlock:Block = new Block("brick.png?n=2");
-					newBlock.Translate(20 + i*40, 20 + j*15);
+					newBlock.Translate(20 + i*60, 20 + j*20);
 					_Blocks.push(newBlock);
 				}				
 			}
@@ -56,7 +56,7 @@ package
 					continue;
 				_Blocks[i].Update(elapsedTime);
 				
-				if (hCollision.PointInAlignedRect(_Ball.Center, _Blocks[i].Left, _Blocks[i].Top, _Blocks[i].Right, _Blocks[i].Bottom, _Ball.Width * 0.5)) {
+				if (hCollision.PointInAlignedRect(_Ball.Center, _Blocks[i].Left, _Blocks[i].Top, _Blocks[i].Right, _Blocks[i].Bottom, _Ball.Width * 15.5)) {
 					var TopLeft:Point = new Point(_Blocks[i].Left, _Blocks[i].Top);
 					var TopRight:Point = new Point(_Blocks[i].Right, _Blocks[i].Top);
 					var BottomLeft:Point = new Point(_Blocks[i].Left, _Blocks[i].Bottom);
@@ -119,8 +119,8 @@ package
 				_Ball.Position.y = _Paddle.Position.y - _Ball.Height;
 				
 				_Ball.AddVelocity((_Ball.Center.x - _Paddle.Center.x) * 8, 0);
-				if (_Ball.Velocity.x > 400)
-					_Ball.ResetVelocity(400, _Ball.Velocity.y);
+				if (_Ball.Velocity.x > 250)
+					_Ball.ResetVelocity(250, _Ball.Velocity.y);
 				_Ball.Velocity.normalize(_Ball.Speed);
 				_Ball.ResetVelocity(_Ball.Velocity.x, -Math.abs(_Ball.Velocity.y));
 				_PaddleBounceSound.Play();

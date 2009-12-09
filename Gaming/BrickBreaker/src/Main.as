@@ -20,8 +20,10 @@ public function Initialize():void
 //	MonsterDebugger.trace(this, "Hello World!");
 
 	MainGame = new BrickBreaker();
-	hGlobalInput.Initialize(stage);
 	
+	hGlobalInput.Initialize(ViewImage);
+//	application.addEventListener(KeyboardEvent.KEY_UP, hGlobalInput.Keyboard.HandleKeyUp);
+//	application.addEventListener(KeyboardEvent.KEY_DOWN, hGlobalInput.Keyboard.HandleKeyDown);
 	AppResize(null);
 }
 

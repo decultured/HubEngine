@@ -2,12 +2,12 @@ package HubInput
 {
 	import flash.events.MouseEvent;
 	import flash.events.Event;
-	import flash.display.DisplayObject;
+	import mx.core.UIComponent;
 	import flash.geom.*;
 
 	public class hMouse 
 	{
-		private var _Target:DisplayObject;
+		private var _Target:UIComponent;
 
 		private var _Position:Point = new Point(0,0);
 		private var _LeftPressed:Boolean = false;
@@ -19,7 +19,7 @@ package HubInput
 		public function get X():Number {return _Position.x;}
 		public function get Y():Number {return _Position.y;}
 
-		public function hMouse(target:DisplayObject) 
+		public function hMouse(target:UIComponent) 
 		{
 			_Target = target;
 			_Target.addEventListener(MouseEvent.MOUSE_DOWN, LeftDownEvent, false, 0, true); 
