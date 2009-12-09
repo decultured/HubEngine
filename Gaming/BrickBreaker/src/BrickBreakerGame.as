@@ -21,21 +21,24 @@ package
 		
       	public function BrickBreakerGame()
         {
+			hGlobalGraphics.ImageLibrary.AddImage("background", "background-1.png");
+			hGlobalGraphics.BackgroundImage = "background";
+			
 			_Music = hGlobalAudio.SoundLibrary.AddSoundFromFile("fractal.mp3?n=12f34");
 			_BrickBounceSound = hGlobalAudio.SoundLibrary.AddSoundFromFile("button-29.mp3?n=12f34");
 			_PaddleBounceSound = hGlobalAudio.SoundLibrary.AddSoundFromFile("ballpaddle.mp3?n=34f534");
 			_FailSound = hGlobalAudio.SoundLibrary.AddSoundFromFile("button-10.mp3?n=2");
 			
-			_Cursor = new Cursor("cursor.png");
-			_Ball = new Ball("ball.png");
-			_Paddle = new Paddle("paddle.png");
+			_Cursor = new Cursor("cursor", "cursor.png");
+			_Ball = new Ball("ball", "ball.png");
+			_Paddle = new Paddle("paddle", "paddle.png");
 
 			_Blocks = new Array();
 			for (var i:uint = 0; i < 10; i++)
 			{
 				for (var j:uint = 0; j < 12; j++)
 				{
-					var newBlock:Block = new Block("brick.png?n=2");
+					var newBlock:Block = new Block("brick", "brick.png?n=2");
 					newBlock.Translate(20 + i*60, 20 + j*20);
 					_Blocks.push(newBlock);
 				}				
@@ -155,8 +158,6 @@ package
 		
 		public function Render():void
 		{
-			_Cursor.Update(0);
-			
 			var blocksLength:uint = _Blocks.length;
 			for (var i:uint = 0; i < blocksLength; i++) {
 				if (_Blocks[i] && _Blocks[i] is Block)
@@ -164,7 +165,9 @@ package
 			}
 			_Ball.Render();
 			_Paddle.Render();
-			_Cursor.Render();
+
+			/*_Cursor.Update(0);
+			_Cursor.Render();*/
 		}
 	}
 }

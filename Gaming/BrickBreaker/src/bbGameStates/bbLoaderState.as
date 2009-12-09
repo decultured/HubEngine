@@ -12,6 +12,7 @@ package bbGameStates
 	public class bbLoaderState extends hGameState
 	{
 		private var _Complete:Boolean = false;
+		private var _LoaderError:Boolean = false;
 		public var _LoaderUI:bbLoader;
 
 		public function bbLoaderState() 
@@ -21,15 +22,25 @@ package bbGameStates
 		}
 
 		private function CompleteEvent(event:MouseEvent):void { _Complete = true; }
+		private function LoaderErrorClicked(event:MouseEvent):void { _LoaderError = true; }
 		
 		public override function Start():void
 		{
 			_Complete = false;
+			_LoaderError = false;
 			hGlobalGraphics.ImageLibrary.addEventListener(hImageLibrary.COMPLETE, HandleComplete);
+			hGlobalGraphics.ImageLibrary.addEventListener(hImageLibrary.IO_ERROR, HandleLoaderError);
 			hGlobalAudio.SoundLibrary.LoadAllUnloadedSounds();
 			hGlobalGraphics.ImageLibrary.LoadAllUnloadedImages();
 
 			hGlobalGraphics.View.ViewImage.addChild(_LoaderUI);
+		}
+		
+		private function HandleLoaderError(event:Event):void
+		{
+			_LoaderUI.StartGameButton.label = "Error Loading Required Files!"
+			_LoaderUI.StartGameButton.addEventListener(MouseEvent.CLICK, LoaderErrorClicked);
+			_LoaderUI.StartGameButton.enabled = true;
 		}
 		
 		public override function Stop():void
@@ -42,6 +53,8 @@ package bbGameStates
 		{
 			if (_Complete)
 				return getQualifiedClassName(bbGameState);
+			if (_LoaderError)
+				return getQualifiedClassName(bbMenuState);
 			return Name;
 		}
 		

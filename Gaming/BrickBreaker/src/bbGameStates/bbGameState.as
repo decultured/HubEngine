@@ -30,11 +30,11 @@ package bbGameStates
 		public override function Run(elapsedTime:Number):String
 		{
 			_Game.Update(elapsedTime);
-
 			hGlobalInput.Update();
-			hGlobalGraphics.View.Begin(true, 0xcccccc);
+			
+			hGlobalGraphics.BeginFrame(true, 0xcccccc);
 			_Game.Render();
-			hGlobalGraphics.View.End();
+			hGlobalGraphics.EndFrame();
 
 			if (hGlobalInput.Keyboard.KeyJustPressed(hKeyCodes.P) || hGlobalInput.Keyboard.KeyJustPressed(hKeyCodes.PAUSE) || !hGlobalInput.ApplicationActive)
 				return getQualifiedClassName(bbPausedState);

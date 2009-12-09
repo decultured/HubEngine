@@ -7,9 +7,9 @@ package bbGameObjects
 	
 	public class Cursor extends hGameObject
 	{
-		public function Cursor(imageFilename:String)
+		public function Cursor(imageName:String, imageURL:String)
 		{
-			super(imageFilename);
+			super(imageName, imageURL);
 			//Mouse.hide();
 		}
 		

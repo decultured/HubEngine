@@ -11,20 +11,15 @@ package bbGameObjects
 		
 		public function get DefaultYPosition():Number {return _YPosition;}
 		
-		public function Paddle(imageFilename:String)
+		public function Paddle(imageName:String, imageURL:String)
 		{
-			super(imageFilename);
+			super(imageName, imageURL);
 			
 			ResetTranslation(0, _YPosition);
-//			ResetVelocity(165, 0);
-//          ResetAcceleration(0, 1000);
 		}
 		
 		public override function Update(elapsedTime:Number):void
 		{
-
-//			ResetTranslation(hGlobalInput.Mouse.X - Width * 0.5, _YPosition);
-			
 			if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.RIGHT_ARROW) && !hGlobalInput.Keyboard.KeyPressed(hKeyCodes.LEFT_ARROW))
 				ResetVelocity(_MaxXVelocity, 0);
 			else if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.LEFT_ARROW) && !hGlobalInput.Keyboard.KeyPressed(hKeyCodes.RIGHT_ARROW))

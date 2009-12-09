@@ -47,9 +47,9 @@ package HubGaming
 		public function get Active():Boolean {return _Active;}
 		public function set Active(active:Boolean):void {_Active = active;}
 
-		public function hGameObject(imageFilename:String)
+		public function hGameObject(imageName:String, imageURL:String)
 		{
-			_Image = hGlobalGraphics.ImageLibrary.AddImageFromFile(imageFilename);
+			_Image = hGlobalGraphics.ImageLibrary.AddImage(imageName, imageURL);
 		}
 		
 		public function ResetScale(newScale:Number = 1.0):void { _Scale = newScale; }

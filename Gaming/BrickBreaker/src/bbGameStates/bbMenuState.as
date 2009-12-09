@@ -39,9 +39,6 @@ package bbGameStates
 		
 		public override function Run(elapsedTime:Number):String
 		{
-			hGlobalGraphics.View.Begin(true, 0xffffcc);
-			hGlobalGraphics.View.End();
-			
 			if (!_StartGame)
 				return Name;
 			else

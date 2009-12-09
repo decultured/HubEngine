@@ -13,9 +13,9 @@ package bbGameObjects
 		
 		public function get Speed():Number {return _Speed;}
 		
-		public function Ball(imageFilename:String)
+		public function Ball(imageName:String, imageURL:String)
 		{
-			super(imageFilename);
+			super(imageName, imageURL);
 			_WallBounceSound = hGlobalAudio.SoundLibrary.AddSoundFromFile("button-16.mp3?n=12f34");
 			
 			Reset();
@@ -49,13 +49,6 @@ package bbGameObjects
 				ResetVelocity(Velocity.x, Math.abs(Velocity.y));
 				_WallBounceSound.Play();
 			}
-
-			/*if (Position.y > hGlobalGraphics.View.Height - Height) {
-				Position.y = (hGlobalGraphics.View.Height - Height) * 2 - Position.y;
-				ResetVelocity(Velocity.x, -Math.abs(Velocity.y));
-				_WallBounceSound.Play();
-			}*/
-
 		}
 	}
 }
