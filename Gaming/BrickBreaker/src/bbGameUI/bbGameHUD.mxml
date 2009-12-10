@@ -5,5 +5,9 @@
        <mx:Label id="Score" text="0"/>
        <mx:Label text="Balls: "/>
        <mx:Label id="Balls" text="5"/>
+       <mx:Button label="Quit to Main Menu"/>
+       <mx:Button label="Pause"/>
+       <mx:Button label="Music On"/>
+       <mx:Button label="Sounds On"/>
 	</mx:HBox>
 </mx:Canvas>
