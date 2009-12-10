@@ -32,7 +32,7 @@ package
         {
 			_HUD = new bbGameHUD();
 
-			hGlobalGraphics.ImageLibrary.AddImage("background", "background-1.png");
+			hGlobalGraphics.ImageLibrary.AddImage("background", "background-1.png?n=12312");
 			hGlobalGraphics.BackgroundImage = "background";
 			
 			_Music = hGlobalAudio.SoundLibrary.AddSoundFromFile("fractal.mp3?n=12f34");
