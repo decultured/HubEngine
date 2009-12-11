@@ -19,8 +19,6 @@ public function Initialize():void
 	debugger = new MonsterDebugger(this);
 //	MonsterDebugger.trace(this, "Hello World!");
 
-	AppResize(null);
-	
 	MainGame = new BrickBreaker();
 	hGlobalInput.Initialize(ViewImage);
 

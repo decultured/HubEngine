@@ -3,6 +3,7 @@
 	import flash.events.*;
 	import flash.display.*;
 	import flash.net.URLRequest;
+	import nl.demonsters.debugger.MonsterDebugger;
 
 	public class hImageLibrary extends Sprite
 	{
@@ -18,13 +19,19 @@
 			_Images = new Object();
 		}
 		
-		//TODO : Handle Replace = true
-		public function AddImage(name:String, url:String, replace:Boolean = false):hImage
+		public function AddImage(name:String, url:String = null, replace:Boolean = false):hImage
 		{
+			MonsterDebugger.trace(this, "Name: " + name + " URL: " + url);
+
+			if (name == null)
+				return null;
+			
 			if (_Images[name])
 			{
-				if (!_Images[name].URL || replace)
+				if (url && (!_Images[name].URL || replace)) {
 					_Images[name].URL = url;
+					_Images[name].Loaded = false;
+				}
 				return _Images[name];
 			}
 				
@@ -43,14 +50,14 @@
 		// TODO : Handle errors when files do not load
 		public function LoadAllUnloadedImages():void
 		{
-			//TODO : Add new images on subsequent calls
+			// TODO : Add new images on subsequent calls
 			if (_LoaderQueue != null && _LoaderQueue.length > 0)
 				return;
 			
 			_LoaderQueue = new Array();
 			for (var name:String in _Images) {
 				var newImage:hImage = _Images[name];
-				if (newImage && newImage.IsLoaded == false) {
+				if (newImage && newImage.Loaded == false) {
 					_LoaderQueue.push(newImage);
 				}
 			}

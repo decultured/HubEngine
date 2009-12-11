@@ -5,9 +5,9 @@ package bbGameObjects
 	
 	public class Block extends hGameObject
 	{
-		public function Block(imageName:String, imageURL:String)
+		public function Block()
 		{
-			super(imageName, imageURL);
+			super();
 		}
 	}
 }

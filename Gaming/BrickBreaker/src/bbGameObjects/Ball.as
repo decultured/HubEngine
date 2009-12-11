@@ -13,10 +13,10 @@ package bbGameObjects
 		
 		public function get Speed():Number {return _Speed;}
 		
-		public function Ball(imageName:String, imageURL:String)
+		public function Ball()
 		{
-			super(imageName, imageURL);
-			_WallBounceSound = hGlobalAudio.SoundLibrary.AddSoundFromFile("button-16.mp3?n=12f34");
+			super();
+			_WallBounceSound = hGlobalAudio.SoundLibrary.AddSound("ball_hits_wall");
 			
 			Reset();
 		}

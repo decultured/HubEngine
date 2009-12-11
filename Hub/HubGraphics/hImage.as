@@ -12,6 +12,7 @@
 	public class hImage extends Sprite
 	{
 		public static var COMPLETE:String = "complete";
+		public static var PROGRESS:String = "progress";
 		public static var IO_ERROR:String = "io error";
 
 		private var _Bitmap:BitmapData;
@@ -23,17 +24,18 @@
 		private var _IsAlpha:Boolean = false;
 		private var _Name:String;
 		
+		public function get Width():Number {return _Bounds.width;}
+		public function get Height():Number {return _Bounds.height;}
+		public function set Loaded(isLoaded:Boolean):void {_Loaded = isLoaded;}
+		public function get Loaded():Boolean { return _Loaded; }
+		public function get URL():String { return _URL; }
+		public function set URL(url:String):void {_URL = url;}
+
 		public function hImage(name:String, url:String = null)
 		{
 			_URL = url;
 			_Name = name;
 		}
-
-		public function get Width():Number {return _Bounds.width;}
-		public function get Height():Number {return _Bounds.height;}
-		public function get IsLoaded():Boolean { return _Loaded; }
-		public function get URL():String { return _URL; }
-		public function set URL(url:String):void {_URL = url;}
 
 		public function LoadFromURL(url:String = null):void
 		{
@@ -105,11 +107,14 @@
 
 		private function HandleError(event:IOErrorEvent):void
 		{
+			MonsterDebugger.trace(this, _URL);
+			
 			dispatchEvent(new Event(hImage.IO_ERROR));
 		}
 		
 		private function HandleProgress(event:ProgressEvent):void
 		{
+			dispatchEvent(new Event(hImage.PROGRESS));
 		}
 		
 		// TODO : Handle error when user does not have permissions.

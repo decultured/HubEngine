@@ -21,42 +21,69 @@ package
 		public var _Music:hSound;
 		public var _HUD:bbGameHUD;
 		
+		private var _NextLevel:String = "level1.xml";
 		private var _Score:Number = 0;
 		private var _Balls:Number = 1;
+		private var _StartingBalls:Number = 3;
 		private var _GameOver:Boolean = false;
 
 		public function get Score():Number {return _Score;}
 		public function get GameOver():Boolean {return _GameOver;}
+		public function get NextLevel():String {return _NextLevel;}  
+		public function set NextLevel(nextLevel:String):void {_NextLevel = nextLevel;}  
 		
       	public function BrickBreakerGame()
         {
 			_HUD = new bbGameHUD();
 
-			hGlobalGraphics.ImageLibrary.AddImage("background", "background-1.png?n=12312");
-			hGlobalGraphics.BackgroundImage = "background";
+			_Music = hGlobalAudio.SoundLibrary.GetSoundFromName("background_music");
+			_BrickBounceSound = hGlobalAudio.SoundLibrary.GetSoundFromName("ball_hits_brick");
+			_PaddleBounceSound = hGlobalAudio.SoundLibrary.GetSoundFromName("ball_hits_paddle");
+			_FailSound = hGlobalAudio.SoundLibrary.GetSoundFromName("ball_lost");
 			
-			_Music = hGlobalAudio.SoundLibrary.AddSoundFromFile("fractal.mp3?n=12f34");
-			_BrickBounceSound = hGlobalAudio.SoundLibrary.AddSoundFromFile("button-29.mp3?n=12f34");
-			_PaddleBounceSound = hGlobalAudio.SoundLibrary.AddSoundFromFile("ballpaddle.mp3?n=34f534");
-			_FailSound = hGlobalAudio.SoundLibrary.AddSoundFromFile("button-10.mp3?n=2");
-			
-			_Cursor = new Cursor("cursor", "cursor.png");
-			_Ball = new Ball("ball", "ball.png");
-			_Paddle = new Paddle("paddle", "paddle.png");
-
+			_Cursor = new Cursor();
+			_Ball = new Ball();
+			_Paddle = new Paddle();
 			_Blocks = new Array();
-			for (var i:uint = 0; i < 10; i++)
-			{
-				for (var j:uint = 0; j < 12; j++)
-				{
-					var newBlock:Block = new Block("brick", "brick.png?n=2");
-					newBlock.Translate(20 + i*60, 20 + j*20);
-					_Blocks.push(newBlock);
-				}				
-			}
-			_ActiveBlocks = _Blocks.length;
+
 			Reset();
         }
+
+		public function AddBlock(imageName:String, shape:String, xPos:Number, yPos:Number, width:Number, height:Number):void
+		{
+			var newBlock:Block = new Block();
+			newBlock.Width = width;
+			newBlock.Height = height;
+			newBlock.SetImage(imageName);
+			newBlock.Translate(xPos, yPos);
+			_Blocks.push(newBlock);
+		}
+		
+		public function AddPaddle(imageName:String, width:Number, height:Number):void
+		{
+			_Ball.SetImage(imageName);
+			_Ball.Width = width;
+			_Ball.Height = height;
+		}
+		
+		public function AddBall(imageName:String, width:Number, height:Number):void
+		{
+			_Ball.SetImage(imageName);
+			_Ball.Width = width;
+			_Ball.Height = height;
+		}
+
+		public function ClearObjects():void
+		{
+			var blocksLength:uint = _Blocks.length;
+			for (var i:uint = 0; i < blocksLength; i++) {
+				if (!_Blocks[i] || !_Blocks[i] is Block)
+					continue;
+				delete _Blocks[i];
+			}
+			
+			_Blocks = new Array();
+		}
 
 		public function Reset(clear:Boolean = false):void
 		{
@@ -72,7 +99,7 @@ package
 				
 				_GameOver = false;
 				_Score = 0;
-				_Balls = 1;
+				_Balls = _StartingBalls;
 				_HUD.Balls.text = String(_Balls);
 				_HUD.Score.text = String(_Score);
 			}

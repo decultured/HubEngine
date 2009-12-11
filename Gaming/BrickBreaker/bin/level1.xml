@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <hubgame>
 	<resources>
-		<image url="background.png" name="background" />
+		<image url="background-1.png" name="background" />
 		<image url="brick.png" name="block_rectangle_normal" />
 		<image url="paddle.png" name="paddle_normal" />
 		<image url="cursor.png" name="cursor_normal" />
@@ -10,14 +10,14 @@
 		<sound url="button-10.mp3" name="ball_lost" />
 		<sound url="ballpaddle.mp3" name="ball_hits_paddle" />
 		<sound url="button-29.mp3" name="ball_hits_brick" />
-		<music url="fractal.mp3" />
+		<music url="fractal.mp3" name="background_music" />
 	</resources>
 	<objects>
 		<background image="background" />
 		<ball image="ball_normal" width="16" height="16" />
 		<paddle image="paddle_normal" width="80" height="10" />
 		<cursor image="cursor_normal" width="16" height="16" />
-		<block shape="rectangle" x="123" y="234" width="40" height="15" image="brick_rectangle_normal" />
-		<block shape="circle" x="123" y="234" width="" height="" image="name" />
+		<block image="block_rectangle_normal" shape="rectangle" x="123" y="234" width="40" height="15" />
+		<block image="block_rectangle_normal" shape="circle" x="123" y="234" width="15" height="15" />
 	</objects>
 </hubgame>

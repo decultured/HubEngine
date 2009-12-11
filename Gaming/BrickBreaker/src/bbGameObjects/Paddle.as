@@ -11,9 +11,9 @@ package bbGameObjects
 		
 		public function get DefaultYPosition():Number {return _YPosition;}
 		
-		public function Paddle(imageName:String, imageURL:String)
+		public function Paddle()
 		{
-			super(imageName, imageURL);
+			super();
 			
 			ResetTranslation(0, _YPosition);
 		}

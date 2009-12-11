@@ -8,17 +8,24 @@ package bbGameStates
 	import HubAudio.*;
 	import flash.events.*;
 	import bbGameUI.*;
+	import nl.demonsters.debugger.MonsterDebugger;
 	
 	public class bbLoaderState extends hGameState
 	{
 		private var _Complete:Boolean = false;
 		private var _LoaderError:Boolean = false;
-		public var _LoaderUI:bbLoader;
+		
+		public var _GameLoader:BrickBreakerLoader;
+		private var _LoaderUI:bbLoader;
+		private var _Game:BrickBreakerGame;
+
+		public function set Game(game:BrickBreakerGame):void {_Game = game;}
 
 		public function bbLoaderState() 
 		{
 			super();
 			_LoaderUI = new bbLoader();
+			_GameLoader = new BrickBreakerLoader();
 		}
 
 		private function CompleteEvent(event:MouseEvent):void { _Complete = true; }
@@ -28,12 +35,26 @@ package bbGameStates
 		{
 			_Complete = false;
 			_LoaderError = false;
-			hGlobalGraphics.ImageLibrary.addEventListener(hImageLibrary.COMPLETE, HandleComplete);
-			hGlobalGraphics.ImageLibrary.addEventListener(hImageLibrary.IO_ERROR, HandleLoaderError);
-			hGlobalAudio.SoundLibrary.LoadAllUnloadedSounds();
-			hGlobalGraphics.ImageLibrary.LoadAllUnloadedImages();
 
 			hGlobalGraphics.View.ViewImage.addChild(_LoaderUI);
+
+			if (!_Game) {
+//				HandleLoaderError(null);
+				return;
+			}
+				
+			_GameLoader.Game = _Game;
+			_GameLoader.URL = _Game.NextLevel;
+			_GameLoader.addEventListener(hGameLoader.COMPLETE, HandleXMLComplete)
+			_GameLoader.Load();
+		}
+		
+		private function HandleXMLComplete(event:Event):void 
+		{
+			hGlobalGraphics.ImageLibrary.addEventListener(hImageLibrary.COMPLETE, HandleComplete);
+			hGlobalGraphics.ImageLibrary.addEventListener(hImageLibrary.IO_ERROR, HandleLoaderError);
+			hGlobalGraphics.ImageLibrary.LoadAllUnloadedImages();
+			hGlobalAudio.SoundLibrary.LoadAllUnloadedSounds();
 		}
 		
 		private function HandleLoaderError(event:Event):void

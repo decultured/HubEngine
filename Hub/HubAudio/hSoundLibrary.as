@@ -7,6 +7,7 @@ package HubAudio
 	{
 		public static var COMPLETE:String = "complete";
 		public static var PROGRESS:String = "progress";
+		public static var IO_ERROR:String = "io error";
 
 		private var _Sounds:Object;
 		private var _LoaderQueue:Array;
@@ -16,33 +17,39 @@ package HubAudio
 			_Sounds = new Object();
 		}
 		
-		//TODO : Handle Replace = true
-		public function AddSoundFromFile(filename:String, replace:Boolean = false):hSound
+		public function AddSound(name:String, url:String = null, replace:Boolean = false):hSound
 		{
-			if (_Sounds[filename])
-				return _Sounds[filename];
-				
-			var newSound:hSound = new hSound(filename);
-			_Sounds[filename] = newSound;
+			if (_Sounds[name])
+			{
+				if (url && (!_Sounds[name].URL || replace)) {
+					_Sounds[name].URL = url;
+					_Sounds[name].Loaded = false;
+				}
+				return _Sounds[name];
+			}
+
+			var newSound:hSound = new hSound(name, url);
+			_Sounds[name] = newSound;
 			return newSound;
 		}
-		
-		//TODO : Add sound if doesn't exist?
-		public function GetSoundByFileName(filename:String):hSound
+
+		public function GetSoundFromName(name:String):hSound
 		{
-			return _Sounds[filename];
+			if (_Sounds[name])
+				return _Sounds[name];
+			else return AddSound(name, null);
 		}
 		
 		public function LoadAllUnloadedSounds():void
 		{
-			//TODO : Add new images on subsequent calls
+			// TODO : Add new images on subsequent calls
 			if (_LoaderQueue != null && _LoaderQueue.length > 0)
 				return;
 			
 			_LoaderQueue = new Array();
-			for (var filename:String in _Sounds) {
-				var newSound:hSound = _Sounds[filename];
-				if (newSound && newSound.IsLoaded == false) {
+			for (var name:String in _Sounds) {
+				var newSound:hSound = _Sounds[name];
+				if (newSound && newSound.Loaded == false) {
 					_LoaderQueue.push(newSound);
 				}
 			}
@@ -50,7 +57,7 @@ package HubAudio
 			if (_LoaderQueue.length > 0)
 				LoadNextUnloadedSound();
 			else
-				dispatchEvent(new Event(hSoundLibrary.COMPLETE));			
+				dispatchEvent(new Event(hSoundLibrary.COMPLETE));	
 		}
 		
 		private function LoadNextUnloadedSound():void
@@ -62,12 +69,18 @@ package HubAudio
 
 			var newSound:hSound = _LoaderQueue.pop();
 			newSound.addEventListener(hSound.COMPLETE, HandleComplete);
-			newSound.LoadFromFilename();
+			newSound.addEventListener(hSound.IO_ERROR, HandleError);
+			newSound.LoadFromURL();
 		}
 		
 		private function HandleComplete(event:Event):void
 		{
 			LoadNextUnloadedSound();
+		}
+
+		private function HandleError(event:Event):void
+		{
+			dispatchEvent(new Event(hSoundLibrary.IO_ERROR));	
 		}
 	}
 }

@@ -11,6 +11,9 @@ package HubGaming
 		private var _Visible:Boolean = true;
 		private var _Active:Boolean = true; 
 
+		private var _Width:Number = 0;
+		private var _Height:Number = 0;
+
 		private var _PreviousPosition:Point = new Point(0, 0);
 		private var _Position:Point = new Point(0, 0);
 		private var _PreviousCenter:Point = new Point(0, 0);
@@ -23,13 +26,16 @@ package HubGaming
 
 		private var _TransformMatrix:Matrix = new Matrix();
 
+		public function get Width():Number {return _Position.y;}
+		public function get Height():Number {return _Position.y;}
+		public function set Width(width:Number):void {_Width = width;}
+		public function set Height(height:Number):void {_Height = height;}
+
 		public function get Top():Number {return _Position.y;}
 		public function get Left():Number {return _Position.x;}
-		public function get Bottom():Number {return _Position.y + _Image.Height;}
-		public function get Right():Number {return _Position.x + _Image.Width;}
+		public function get Bottom():Number {return _Position.y + _Height;}
+		public function get Right():Number {return _Position.x + _Width;}
 
-		public function get Width():Number {return _Image.Width;}
-		public function get Height():Number {return _Image.Width;}
 		public function get Scaler():Number {return _Scale;}
 
 		public function get Position():Point {return _Position;}
@@ -47,9 +53,15 @@ package HubGaming
 		public function get Active():Boolean {return _Active;}
 		public function set Active(active:Boolean):void {_Active = active;}
 
-		public function hGameObject(imageName:String, imageURL:String)
+		public function hGameObject()
 		{
-			_Image = hGlobalGraphics.ImageLibrary.AddImage(imageName, imageURL);
+		}
+		
+		public function SetImage(imageName:String):hImage
+		{
+			_Image = hGlobalGraphics.ImageLibrary.GetImageFromName(imageName);
+			
+			return _Image;
 		}
 		
 		public function ResetScale(newScale:Number = 1.0):void { _Scale = newScale; }

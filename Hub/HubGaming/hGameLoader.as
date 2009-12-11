@@ -1,26 +1,34 @@
 package HubGaming
 {
-	import flash.display.Loader;
+	import flash.display.*;
 	import flash.events.*;
 	import flash.net.*;
 	import HubGraphics.*;
 	import HubAudio.*;
+	import nl.demonsters.debugger.MonsterDebugger;
 	
-	public class hGameLoader extends EventDispatcher
+	public class hGameLoader extends Sprite
 	{
+		public static var COMPLETE:String = "complete";
+
 		private var _Filename:String = null;
-				
-		public function hDataSetLoader(filename:String) 
+		private var _URL:String = null;
+
+		public function get URL():String {return _URL;}
+		public function set URL(url:String):void {_URL = url;}
+		
+		public function hGameLoader() 
 		{
-			_Filename = filename;
-			LoadXMLFile();
 		}
 		
-		private function LoadXMLFile():void
+		public function Load():void
 		{
-			var myXMLURL:URLRequest = new URLRequest(_Filename);
+			if (!_URL)
+				return;
+				
+			var myXMLURL:URLRequest = new URLRequest(_URL);
 			var myLoader:URLLoader = new URLLoader(myXMLURL);
-			
+
 			myLoader.addEventListener("complete", DataLoadComplete);
 		}
 		
@@ -30,73 +38,46 @@ package HubGaming
 			
 			LoadData(XMLData);
 
-			dispatchEvent(new hDataSetLoaderEvent(hDataSetLoaderEvent.COMPLETE, false, false, _DataSet));
+			dispatchEvent(new Event(hGameLoader.COMPLETE));
 
 			return true;
 		}
 
-		private function LoadData(dataSource:XML):Boolean
+		protected function LoadData(hubGame:XML):void
 		{
-			for each ( var dataType:XML in dataSource..dataType ) {
-				AddDataType(dataType);
+			for each (var newSound:XML in hubGame..sound) {
+				AddSound(newSound);
 			}
-			
-			for each ( var dataPoint:XML in dataSource..dataPoint ) {
-				AddDataPoint(dataPoint);
+			for each (var newMusic:XML in hubGame..music) {
+				AddMusic(newMusic);
 			}
-			
-			return true;
+			for each (var newImage:XML in hubGame..image) {
+				AddImage(newImage);
+			}
 		}
 		
-		public function AddImage(dataType:XML):hDataType
+		protected function AddImage(newImage:XML):hImage
 		{
-			if (dataType["@id"] == null)
+			if (newImage["@name"] == undefined)
 				return null;
 			
-			var id:String = dataType["@id"];
-			
-			var newDataType:hDataType = _DataSet.AddDataType(id, dataType["@type"], dataType["@type"], dataType["@binding"], dataType["@transformType"]);
-			
-			if (newDataType == null)
-				return null;
-				
-			if (dataType["@minValue"] != undefined)
-				newDataType.SetMinValueFixed(dataType["@minValue"]); 
-			if (dataType["@maxValue"] != undefined)
-				newDataType.SetMaxValueFixed(dataType["@maxValue"]); 
-			
-			return newDataType;
+			return hGlobalGraphics.ImageLibrary.AddImage(newImage["@name"], newImage["@url"]);
 		}
 		
-		public function AddSound(dataPoint:XML):void
+		protected function AddSound(newSound:XML):hSound
 		{
-			if (dataPoint["@id"] == null)
-				return;
+			if (newSound["@name"] == undefined)
+				return null;
 			
-			var id:String = dataPoint["@id"];
-
-			_DataSet.AddDataPoint(id, dataPoint["@displayName"]);
-
-			for each ( var dataValue:XML in dataPoint..dataValue ) {
-				if (dataValue["@id"] != undefined && dataValue["@value"] != undefined)
-					_DataSet.SetDataPointValue(id, dataValue["@id"], dataValue["@value"], dataValue["@displayName"]);
-			}
+			return hGlobalAudio.SoundLibrary.AddSound(newSound["@name"], newSound["@url"]);
 		}
-
-		public function AddMusic(dataPoint:XML):void
+		
+		protected function AddMusic(newMusic:XML):hSound
 		{
-			if (dataPoint["@id"] == null)
-				return;
+			if (newMusic["@name"] == undefined)
+				return null;
 			
-			var id:String = dataPoint["@id"];
-
-			_DataSet.AddDataPoint(id, dataPoint["@displayName"]);
-
-			for each ( var dataValue:XML in dataPoint..dataValue ) {
-				if (dataValue["@id"] != undefined && dataValue["@value"] != undefined)
-					_DataSet.SetDataPointValue(id, dataValue["@id"], dataValue["@value"], dataValue["@displayName"]);
-			}
+			return hGlobalAudio.SoundLibrary.AddSound(newMusic["@name"], newMusic["@url"]);
 		}
-	}
-	
+	}	
 }

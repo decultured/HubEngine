@@ -28,6 +28,7 @@ package
 
 			_MenuState = new bbMenuState();
 			_LoaderState = new bbLoaderState();
+			_LoaderState.Game = _Game;
 			_GameState = new bbGameState();
 			_GameState.Game = _Game;
 			_PausedState = new bbPausedState();
