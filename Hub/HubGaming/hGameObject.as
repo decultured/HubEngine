@@ -26,8 +26,8 @@ package HubGaming
 
 		private var _TransformMatrix:Matrix = new Matrix();
 
-		public function get Width():Number {return _Position.y;}
-		public function get Height():Number {return _Position.y;}
+		public function get Width():Number {return _Width;}
+		public function get Height():Number {return _Height;}
 		public function set Width(width:Number):void {_Width = width;}
 		public function set Height(height:Number):void {_Height = height;}
 

@@ -21,8 +21,6 @@
 		
 		public function AddImage(name:String, url:String = null, replace:Boolean = false):hImage
 		{
-			MonsterDebugger.trace(this, "Name: " + name + " URL: " + url);
-
 			if (name == null)
 				return null;
 			

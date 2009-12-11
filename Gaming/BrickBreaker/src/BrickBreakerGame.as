@@ -61,9 +61,9 @@ package
 		
 		public function AddPaddle(imageName:String, width:Number, height:Number):void
 		{
-			_Ball.SetImage(imageName);
-			_Ball.Width = width;
-			_Ball.Height = height;
+			_Paddle.SetImage(imageName);
+			_Paddle.Width = width;
+			_Paddle.Height = height;
 		}
 		
 		public function AddBall(imageName:String, width:Number, height:Number):void
@@ -218,9 +218,9 @@ package
 				Reset();
 				_FailSound.Play();	
 			}
-						
+
 			if (_ActiveBlocks < 1)
-				Reset();			
+				Reset(true);			
 		}
 		
 		public function Render():void

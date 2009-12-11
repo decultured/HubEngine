@@ -39,10 +39,12 @@ package bbGameStates
 			hGlobalGraphics.View.ViewImage.addChild(_LoaderUI);
 
 			if (!_Game) {
-//				HandleLoaderError(null);
+				HandleLoaderError(null);
 				return;
 			}
-				
+			
+			_Game.ClearObjects();
+			
 			_GameLoader.Game = _Game;
 			_GameLoader.URL = _Game.NextLevel;
 			_GameLoader.addEventListener(hGameLoader.COMPLETE, HandleXMLComplete)

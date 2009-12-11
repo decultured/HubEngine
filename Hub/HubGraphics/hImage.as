@@ -28,6 +28,7 @@
 		public function get Height():Number {return _Bounds.height;}
 		public function set Loaded(isLoaded:Boolean):void {_Loaded = isLoaded;}
 		public function get Loaded():Boolean { return _Loaded; }
+		public function get Name():String { return _Name; }
 		public function get URL():String { return _URL; }
 		public function set URL(url:String):void {_URL = url;}
 
@@ -43,6 +44,8 @@
 				if (url) {
 					_URL = url;
 				} else {
+					MonsterDebugger.trace(this, "No URL provided for: " +_Name);
+					
 					dispatchEvent(new Event(hImage.IO_ERROR));
 					return;
 				}
@@ -107,7 +110,7 @@
 
 		private function HandleError(event:IOErrorEvent):void
 		{
-			MonsterDebugger.trace(this, _URL);
+			MonsterDebugger.trace(this, "Image IO Error on: " + _URL);
 			
 			dispatchEvent(new Event(hImage.IO_ERROR));
 		}
