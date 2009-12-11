@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="640" height="480">
 	<mx:HBox styleName="hudBar" bottom="8" left="0" right="0" horizontalAlign="left" verticalAlign="middle" backgroundImage="@Embed(source='../../bin/hud-bg.png')" height="44" paddingLeft="20" paddingRight="20">
-       <mx:Label text="Score: " fontSize="22" color="#FAFAFA"/>
-       <mx:Label id="Score" text="0" fontSize="22" color="#FAFAFA"/>
-       <mx:Label text="Balls: " fontSize="22" color="#FAFAFA"/>
-       <mx:Label id="Balls" text="5" fontSize="22" color="#FAFAFA"/>
+       <mx:Label text="Score: " styleName="hudText"/>
+       <mx:Label id="Score" text="0" styleName="hudText"/>
+       <mx:Label text="Balls: " styleName="hudText"/>
+       <mx:Label id="Balls" text="5" styleName="hudText"/>
 	</mx:HBox>
 </mx:Canvas>

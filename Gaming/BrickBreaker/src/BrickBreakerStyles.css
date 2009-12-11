@@ -1,3 +1,9 @@
 .hudBar {
     
 }
+
+.hudText {
+    color: #FFF;
+    font-size: 22pt;
+    textTransform: uppercase;
+}

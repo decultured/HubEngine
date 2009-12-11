@@ -22,7 +22,7 @@ package
 		public var _HUD:bbGameHUD;
 		
 		private var _Score:Number = 0;
-		private var _Balls:Number = 5;
+		private var _Balls:Number = 1;
 		private var _GameOver:Boolean = false;
 
 		public function get Score():Number {return _Score;}
@@ -72,7 +72,7 @@ package
 				
 				_GameOver = false;
 				_Score = 0;
-				_Balls = 5;
+				_Balls = 1;
 				_HUD.Balls.text = String(_Balls);
 				_HUD.Score.text = String(_Score);
 			}

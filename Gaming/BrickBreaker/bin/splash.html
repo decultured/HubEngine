@@ -8,7 +8,11 @@
 		html, body {
 			background: #000 url(./splash/images/stars.gif) fixed;
 			color: #FFF;
+			font-family: Helvetica;
+			font-size: 10pt;
 		}
+		
+		.clear { clear: both; }
 		
 		#page-wrapper {
 			margin: 0 auto;
@@ -16,16 +20,58 @@
 		}
 		
 		#masthead {
-			background: url(./splash/images/logo.gif) center no-repeat;
-			height: 77px;
+			background: url(./splash/images/logo.png) center no-repeat;
+			height: 95px;
 			margin: 50px auto;
-			width: 835px;
+			width: 590px;
 		}
 		
 		#game-wrapper {
+			float: left;
 			margin: 0 auto;
 			width: 640px;
 		}
+		
+		
+		#sidebar {
+			background: url(./splash/images/sidebar-bg.png);
+			border: 1px solid #999;
+			float: right;
+			padding: 10px;
+			overflow: hidden;
+			width: 220px;
+			-khtml-border-radius: 3px;
+		}
+		
+		#sidebar h2 {
+			color: #800000;
+			margin: 5px 0;
+			padding-bottom: 5px;
+			text-transform: uppercase;
+			text-shadow: #FFF 0px 0px 2px;
+		}
+		
+		#highscores-list thead th {
+			background: red;
+/*			text-align: left;*/
+		}
+		
+		#highscores-list tr.alt td {
+			background: url(./splash/images/table-tr-alt.png) bottom;
+			border-bottom: 1px dotted #666;
+		}
+		
+		#footer {
+			color: #666;
+			font-size: 8pt;
+			margin-top: 25px;
+			text-align: right;
+			text-transform: uppercase;
+			width: 640px;
+		}
+		
+		#footer a { color: #777; }
+		#footer a:hover { color: #CCC; }
 	</style>
 </head>
 <body>
@@ -41,13 +87,38 @@
 			  swfobject.embedSWF(filename, "brickbreaker-display", "640", "480", "10.0.0", "expressInstall.swf", flashvars, params, attributes);
 			</script>
 		</div>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		<div id="sidebar">
+			<div id="highscores-list">
+				<h2>Recent Highscores</h2>
+				<table border="0" cellpadding="4" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th align="left">Player</th>
+							<th align="right">Score</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
+						<tr class="alt"><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
+						<tr><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
+						<tr class="alt"><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
+						<tr><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
+						<tr class="alt"><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
+						<tr><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
+						<tr class="alt"><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
+						<tr><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
+						<tr class="alt"><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
+						<tr><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
+						<tr class="alt"><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
+						<tr><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div id="footer">
+			AEROBLOX is a product of <a href="http://onemorepoint.com">OneMorePoint.com</a> | &copy; 2009 OneMorePoint
+		</div>
 	</div>
 </body>
 </html>

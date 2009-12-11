@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="640" height="480" backgroundColor="0xffffff">
-	<mx:Label id="Loading" text="Game Over!" color="0x000000" top="100" horizontalCenter="0" />
-	<mx:Label id="Score" text="" color="0x000000" top="150" horizontalCenter="0" />
-	<mx:Button id="StartGameButton" label="Start New Game!" bottom="150" horizontalCenter="0" />
-	<mx:Button id="MainMenuButton" label="Back to Main Menu" bottom="100" horizontalCenter="0" />
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="640" height="480" backgroundColor="0xffffff" backgroundImage="@Embed(source='../../bin/screens/background.png')">
+	<mx:Label id="Score" text="TOTAL SCORE: 1234567890" color="#E4FF00" top="193" horizontalCenter="0"  fontSize="28" fontWeight="normal" width="441" textAlign="center"/>
+	<mx:Image x="100" y="33" source="../bin/screens/game-over/gameover-text.png"/>
+	<mx:Image x="188" y="264" source="../bin/screens/game-over/new-game-btn.png" id="StartGameButton"/>
+	<mx:Image x="188" y="364" id="MainMenuButton" source="../bin/screens/game-over/main-menu-btn.png"/>
 </mx:Canvas>
