@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="640" height="480" backgroundImage="@Embed(source='../../bin/background-1.png')" borderStyle="none" alpha="1.0">
-	<mx:Button id="StartGameButton" label="Play!" top="198" left="10" right="10" bottom="199"/>
-	<mx:HBox x="0" y="47" width="640" backgroundImage="@Embed(source='../../bin/brick-breaker-logo.png')" height="59">
-	</mx:HBox>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="640" height="480" backgroundImage="@Embed(source='../../bin/screens/background.png')" borderStyle="none" alpha="1.0">
+	<mx:Image x="197" y="275" source="../bin/screens/game-over/new-game-btn.png" id="StartGameButton"/>
+	<mx:Image x="25" y="143" source="../bin/logo.png"/>
 </mx:Canvas>

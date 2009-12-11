@@ -38,9 +38,10 @@ package bbGameStates
 		
 		private function HandleLoaderError(event:Event):void
 		{
-			_LoaderUI.StartGameButton.label = "Error Loading Required Files!"
+			_LoaderUI.ErrorMessage.text = "Error Loading Required Files!"
 			_LoaderUI.StartGameButton.addEventListener(MouseEvent.CLICK, LoaderErrorClicked);
 			_LoaderUI.StartGameButton.enabled = true;
+			_LoaderUI.StartGameButton.alpha = 100;
 		}
 		
 		public override function Stop():void
@@ -62,6 +63,7 @@ package bbGameStates
 		{
 			_LoaderUI.StartGameButton.addEventListener(MouseEvent.CLICK, CompleteEvent);
 			_LoaderUI.StartGameButton.enabled = true;
+			_LoaderUI.StartGameButton.alpha = 100;
 		}
 	}
 }
