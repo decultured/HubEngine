@@ -57,13 +57,15 @@
 		<image url="paddle.png?nocache=plz1" name="paddle_normal" />
 		<image url="cursor.png?nocache=plz1" name="cursor_normal" />
 		<image url="ball.png?nocache=plz1" name="ball_normal" />
-		<sound url="button-16.mp3" name="ball_hits_wall" />
-		<sound url="button-10.mp3" name="ball_lost" />
-		<sound url="ballpaddle.mp3" name="ball_hits_paddle" />
-		<sound url="button-29.mp3" name="ball_hits_brick" />
-		<music url="fractal.mp3" name="background_music" />
+		<sound url="sounds/button-16.mp3" name="ball_hits_wall" />
+		<sound url="sounds/button-10.mp3" name="ball_lost" />
+		<sound url="sounds/ballpaddle.mp3" name="ball_hits_paddle" />
+		<sound url="sounds/button-29.mp3" name="ball_hits_brick" />
+		<music url="sounds/fractal.mp3" name="background_music" />
 	</resources>
 	<objects>
+		<next_level url="levels/level2.xml" />
+		
 		<background image="background" />
 		<ball image="ball_normal" width="16" height="16" />
 		<paddle image="paddle_normal" width="74" height="14" />
