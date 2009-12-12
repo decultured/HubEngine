@@ -4,26 +4,25 @@
 		<image url="background-1.png?nocache=plz1" name="background" />
 		<!-- rectangle blocks -->
 		<image url="blocks/rectangle/purple.png?nocache=plz1" name="block_rect_purple" offset_x="-20" offset_y="-20" />
-		
 		<image url="paddle.png?nocache=plz1" name="paddle_normal" />
 		<image url="cursor.png?nocache=plz1" name="cursor_normal" />
 		<image url="ball.png?nocache=plz1" name="ball_normal" />
-		<sound url="button-16.mp3" name="ball_hits_wall" />
-		<sound url="button-10.mp3" name="ball_lost" />
-		<sound url="ballpaddle.mp3" name="ball_hits_paddle" />
-		<sound url="button-29.mp3" name="ball_hits_brick" />
-		<music url="fractal.mp3" name="background_music" />
+		<sound url="sounds/button-16.mp3" name="ball_hits_wall" />
+		<sound url="sounds/button-10.mp3" name="ball_lost" />
+		<sound url="sounds/ballpaddle.mp3" name="ball_hits_paddle" />
+		<sound url="sounds/button-29.mp3" name="ball_hits_brick" />
+		<music url="sounds/fractal.mp3" name="background_music" />
 	</resources>
 	<objects>
-		<next_level url="levels/level1old.xml" />
+		<next_level url="levels/level2.xml" />
 		<background image="background" />
 		<ball image="ball_normal" width="16" height="16" />
 		<paddle image="paddle_normal" width="74" height="14" />
 		<cursor image="cursor_normal" width="16" height="16" />
-		
+
 		<block image="block_rect_purple" shape="rectangle" x="20" y="40" width="60" height="20" />
 		<block image="block_rect_purple" shape="rectangle" x="80" y="40" width="60" height="20" />
-<!--		<block image="block_rect_purple" shape="rectangle" x="140" y="40" width="60" height="20" />
+		<block image="block_rect_purple" shape="rectangle" x="140" y="40" width="60" height="20" />
 		<block image="block_rect_purple" shape="rectangle" x="200" y="40" width="60" height="20" />
 		<block image="block_rect_purple" shape="rectangle" x="260" y="40" width="60" height="20" />
 		<block image="block_rect_purple" shape="rectangle" x="320" y="40" width="60" height="20" />
@@ -82,6 +81,6 @@
 		<block image="block_rect_purple" shape="rectangle" x="380" y="220" width="60" height="20" />
 		<block image="block_rect_purple" shape="rectangle" x="440" y="220" width="60" height="20" />
 		<block image="block_rect_purple" shape="rectangle" x="500" y="220" width="60" height="20" />
-		<block image="block_rect_purple" shape="rectangle" x="560" y="220" width="60" height="20" /> -->
+		<block image="block_rect_purple" shape="rectangle" x="560" y="220" width="60" height="20" />
 	</objects>
 </hubgame>
