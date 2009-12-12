@@ -23,17 +23,20 @@ package
 			if (!_Game)
 				return;
 			
-			for each (var newBlock:XML in hubGame..block ) {
+			for each (var newBlock:XML in hubGame..block) {
 				_Game.AddBlock(newBlock["@image"], newBlock["@shape"], Number(newBlock["@x"]), Number(newBlock["@y"]), Number(newBlock["@width"]), Number(newBlock["@height"]));
 			}
-			for each (var newBall:XML in hubGame..ball ) {
+			for each (var newBall:XML in hubGame..ball) {
 				_Game.AddBall(newBall["@image"], Number(newBall["@width"]), Number(newBall["@height"]));
 			}
-			for each (var newPaddle:XML in hubGame..paddle ) {
+			for each (var newPaddle:XML in hubGame..paddle) {
 				_Game.AddPaddle(newPaddle["@image"], Number(newPaddle["@width"]), Number(newPaddle["@height"]));
 			}
-			for each (var newBackground:XML in hubGame..background ) {
+			for each (var newBackground:XML in hubGame..background) {
 				hGlobalGraphics.BackgroundImage = newBackground["@image"];
+			}
+			for each (var nextLevel:XML in hubGame..next_level) {
+				_Game.NextLevel = nextLevel["@url"];
 			}
 		}
 		

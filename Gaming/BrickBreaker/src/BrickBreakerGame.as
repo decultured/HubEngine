@@ -21,7 +21,9 @@ package
 		public var _Music:hSound;
 		public var _HUD:bbGameHUD;
 		
-		private var _NextLevel:String = "level1.xml";
+		private var _StartLevel:String = "level1.xml";
+		private var _CurrentLevel:String = "level1.xml";
+		private var _NextLevel:String = null;
 		private var _Score:Number = 0;
 		private var _Balls:Number = 1;
 		private var _StartingBalls:Number = 3;
@@ -31,6 +33,10 @@ package
 		public function get GameOver():Boolean {return _GameOver;}
 		public function get NextLevel():String {return _NextLevel;}  
 		public function set NextLevel(nextLevel:String):void {_NextLevel = nextLevel;}  
+		public function get StartLevel():String {return _StartLevel;}  
+		public function set StartLevel(startLevel:String):void {_StartLevel = startLevel;}
+		public function get CurrentLevel():String {return _CurrentLevel;}  
+		public function set CurrentLevel(currentLevel:String):void {_CurrentLevel = currentLevel;}  
 		
       	public function BrickBreakerGame()
         {
