@@ -28,9 +28,11 @@ package
 		private var _Balls:Number = 1;
 		private var _StartingBalls:Number = 3;
 		private var _GameOver:Boolean = false;
+		private var _LevelWon:Boolean = false;
 
 		public function get Score():Number {return _Score;}
 		public function get GameOver():Boolean {return _GameOver;}
+		public function get LevelWon():Boolean {return _LevelWon;}
 		public function get NextLevel():String {return _NextLevel;}  
 		public function set NextLevel(nextLevel:String):void {_NextLevel = nextLevel;}  
 		public function get StartLevel():String {return _StartLevel;}  
@@ -89,6 +91,8 @@ package
 			}
 			
 			_Blocks = new Array();
+			
+			_LevelWon = false;
 		}
 
 		public function Reset(clear:Boolean = false):void
@@ -226,7 +230,7 @@ package
 			}
 
 			if (_ActiveBlocks < 1)
-				Reset(true);			
+				_LevelWon = true;		
 		}
 		
 		public function Render():void

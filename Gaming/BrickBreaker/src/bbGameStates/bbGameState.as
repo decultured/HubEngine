@@ -6,6 +6,7 @@ package bbGameStates
 	import flash.utils.*;
 	import HubGraphics.*;
 	import HubInput.*;
+	import nl.demonsters.debugger.MonsterDebugger;
 	
 	public class bbGameState extends hGameState
 	{
@@ -48,6 +49,14 @@ package bbGameStates
 			}
 			if (_Game.GameOver) {
 				return getQualifiedClassName(bbGameOverState);
+			}
+			if (_Game.LevelWon) {
+				/*if (!_Game.NextLevel) {
+					return getQualifiedClassName(bbGameOverState);	
+				}*/
+				MonsterDebugger.trace(this, _Game.LevelWon);
+				_Game.CurrentLevel = _Game.NextLevel;
+				return getQualifiedClassName(bbLoaderState);
 			}
 			return Name;
 		}

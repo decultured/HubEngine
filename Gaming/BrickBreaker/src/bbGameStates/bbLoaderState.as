@@ -75,10 +75,17 @@ package bbGameStates
 		
 		public override function Run(elapsedTime:Number):String
 		{
-			if (_Complete)
+			if (_Complete) {
+				_LoaderUI.StartGameButton.enabled = false;
+				_LoaderUI.StartGameButton.alpha = 50;
+				_Game.Reset();
 				return getQualifiedClassName(bbGameState);
-			if (_LoaderError)
+			}
+			if (_LoaderError) {
+				_LoaderUI.StartGameButton.enabled = false;
+				_LoaderUI.StartGameButton.alpha = 50;
 				return getQualifiedClassName(bbMenuState);
+			}
 			return Name;
 		}
 		

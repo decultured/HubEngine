@@ -13,7 +13,7 @@ import nl.demonsters.debugger.MonsterDebugger;
 
 public var MainGame:BrickBreaker;
 private var debugger:MonsterDebugger;
-private var StartingLevel:String;
+private var StartLevel:String;
 
 public function Initialize():void
 {
@@ -23,9 +23,9 @@ public function Initialize():void
 	MainGame = new BrickBreaker();
 	hGlobalInput.Initialize(ViewImage);
 
-	StartingLevel = Application.application.parameters.starting_level;
-	MainGame.Game.StartLevel = StartingLevel;
-	MainGame.Game.CurrentLevel = StartingLevel;
+	StartLevel = Application.application.parameters.start_level;
+	MainGame.Game.StartLevel = StartLevel;
+	MainGame.Game.CurrentLevel = StartLevel;
 	MainGame.Game.NextLevel = null;
 
 	AppResize(null);
