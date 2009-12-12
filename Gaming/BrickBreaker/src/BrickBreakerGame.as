@@ -49,6 +49,7 @@ package
 			_PaddleBounceSound = hGlobalAudio.SoundLibrary.GetSoundFromName("ball_hits_paddle");
 			_FailSound = hGlobalAudio.SoundLibrary.GetSoundFromName("ball_lost");
 			
+			_Balls = _StartingBalls;
 			_Cursor = new Cursor();
 			_Ball = new Ball();
 			_Paddle = new Paddle();
@@ -57,11 +58,12 @@ package
 			Reset();
         }
 
-		public function AddBlock(imageName:String, shape:String, xPos:Number, yPos:Number, width:Number, height:Number):void
+		public function AddBlock(imageName:String, shape:String, xPos:Number, yPos:Number, width:Number, height:Number, currentFrame:uint):void
 		{
 			var newBlock:Block = new Block();
 			newBlock.Width = width;
 			newBlock.Height = height;
+			newBlock.CurrentFrame = currentFrame;
 			newBlock.SetImage(imageName);
 			newBlock.Translate(xPos, yPos);
 			_Blocks.push(newBlock);
@@ -108,6 +110,7 @@ package
 				}
 				
 				_GameOver = false;
+				_LevelWon = false;
 				_Score = 0;
 				_Balls = _StartingBalls;
 				_HUD.Balls.text = String(_Balls);
@@ -210,10 +213,12 @@ package
 				_Ball.Position.y = _Paddle.Position.y - _Ball.Height;
 				
 				_Ball.AddVelocity((_Ball.Center.x - _Paddle.Center.x) * 8, 0);
-				if (_Ball.Velocity.x > 250)
-					_Ball.ResetVelocity(250, _Ball.Velocity.y);
-				_Ball.Velocity.normalize(_Ball.Speed);
 				_Ball.ResetVelocity(_Ball.Velocity.x, -Math.abs(_Ball.Velocity.y));
+				if (_Ball.Velocity.x > 220)
+					_Ball.ResetVelocity(220, _Ball.Velocity.y);
+				if (_Ball.Velocity.x < -220)
+					_Ball.ResetVelocity(-220, _Ball.Velocity.y);
+				_Ball.Velocity.normalize(_Ball.Speed);
 				_PaddleBounceSound.Play();
 			}
 			

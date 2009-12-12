@@ -47,6 +47,7 @@ package bbGameStates
 			
 			_GameLoader.Game = _Game;
 			_GameLoader.URL = _Game.CurrentLevel;
+			_GameLoader.addEventListener(hGameLoader.IO_ERROR, HandleLoaderError);
 			_GameLoader.addEventListener(hGameLoader.COMPLETE, HandleXMLComplete)
 			_GameLoader.Load();
 		}

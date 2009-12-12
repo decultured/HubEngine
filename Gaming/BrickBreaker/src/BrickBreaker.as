@@ -27,6 +27,7 @@ package
 			_Game = new BrickBreakerGame();
 
 			_MenuState = new bbMenuState();
+			_MenuState.Game = _Game;
 			_LoaderState = new bbLoaderState();
 			_LoaderState.Game = _Game;
 			_GameState = new bbGameState();

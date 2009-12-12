@@ -8,7 +8,7 @@ package bbGameObjects
 	public class Ball extends hGameObject
 	{
 		private var _Speed:Number = 250;
-		private var _MaxVelocity:Number = 320; 
+		private var _MaxVelocity:Number = 320;
 		private var _WallBounceSound:hSound;
 		
 		public function get Speed():Number {return _Speed;}

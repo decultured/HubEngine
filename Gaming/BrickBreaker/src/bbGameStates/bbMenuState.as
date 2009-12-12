@@ -15,6 +15,9 @@ package bbGameStates
 		private var _StartGame:Boolean = false;
 		
 		public var _Menu:bbMenu;
+		private var _Game:BrickBreakerGame;
+
+		public function set Game(game:BrickBreakerGame):void {_Game = game;}
 		
 		public function bbMenuState() 
 		{
@@ -39,10 +42,11 @@ package bbGameStates
 		
 		public override function Run(elapsedTime:Number):String
 		{
-			if (!_StartGame)
-				return Name;
-			else
+			if (_StartGame) {
+				_Game.CurrentLevel = _Game.StartLevel;
 				return getQualifiedClassName(bbLoaderState);
+			}
+			return Name;
 		}
 	}
 }

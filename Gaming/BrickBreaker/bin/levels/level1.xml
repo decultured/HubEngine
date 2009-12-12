@@ -3,56 +3,7 @@
 	<resources>
 		<image url="background-1.png?nocache=plz1" name="background" />
 		<!-- rectangle blocks -->
-		<image url="blocks/rectangle/black.png?nocache=plz1" name="block_rect_black" />
-		<image url="blocks/rectangle/gray.png?nocache=plz1" name="block_rect_gray" />
-		<image url="blocks/rectangle/silver.png?nocache=plz1" name="block_rect_silver" />
-		<image url="blocks/rectangle/white.png?nocache=plz1" name="block_rect_white" />
-		<image url="blocks/rectangle/navy.png?nocache=plz1" name="block_rect_navy" />
-		<image url="blocks/rectangle/blue.png?nocache=plz1" name="block_rect_blue" />
-		<image url="blocks/rectangle/purple.png?nocache=plz1" name="block_rect_purple" />
-		<image url="blocks/rectangle/red.png?nocache=plz1" name="block_rect_red" />
-		<image url="blocks/rectangle/orange.png?nocache=plz1" name="block_rect_orange" />
-		<image url="blocks/rectangle/yellow.png?nocache=plz1" name="block_rect_yellow" />
-		<image url="blocks/rectangle/green.png?nocache=plz1" name="block_rect_green" />
-		<image url="blocks/rectangle/mint.png?nocache=plz1" name="block_rect_mint" />
-		<image url="blocks/rectangle/pink.png?nocache=plz1" name="block_rect_pink" />
-		<image url="blocks/rectangle/brown.png?nocache=plz1" name="block_rect_brown" />
-		<image url="blocks/rectangle/teal.png?nocache=plz1" name="block_rect_teal" />
-		<image url="blocks/rectangle/tan.png?nocache=plz1" name="block_rect_tan" />
-		<!-- circle blocks -->
-		<image url="blocks/circle/aqua.png?nocache=plz1" name="block_circle_aqua" />
-		<image url="blocks/circle/black.png?nocache=plz1" name="block_circle_black" />
-		<image url="blocks/circle/blue.png?nocache=plz1" name="block_circle_blue" />
-		<image url="blocks/circle/fuchsia.png?nocache=plz1" name="block_circle_fuchsia" />
-		<image url="blocks/circle/gray.png?nocache=plz1" name="block_circle_gray" />
-		<image url="blocks/circle/green.png?nocache=plz1" name="block_circle_green" />
-		<image url="blocks/circle/lime.png?nocache=plz1" name="block_circle_lime" />
-		<image url="blocks/circle/maroon.png?nocache=plz1" name="block_circle_maroon" />
-		<image url="blocks/circle/navy.png?nocache=plz1" name="block_circle_navy" />
-		<image url="blocks/circle/olive.png?nocache=plz1" name="block_circle_olive" />
-		<image url="blocks/circle/purple.png?nocache=plz1" name="block_rect_purple" />
-		<image url="blocks/circle/red.png?nocache=plz1" name="block_circle_red" />
-		<image url="blocks/circle/silver.png?nocache=plz1" name="block_circle_silver" />
-		<image url="blocks/circle/teal.png?nocache=plz1" name="block_circle_teal" />
-		<image url="blocks/circle/white.png?nocache=plz1" name="block_circle_white" />
-		<image url="blocks/circle/yellow.png?nocache=plz1" name="block_circle_yellow" />
-		<!-- square blocks -->
-		<image url="blocks/square/aqua.png?nocache=plz1" name="block_square_aqua" />
-		<image url="blocks/square/black.png?nocache=plz1" name="block_square_black" />
-		<image url="blocks/square/blue.png?nocache=plz1" name="block_square_blue" />
-		<image url="blocks/square/fuchsia.png?nocache=plz1" name="block_square_fuchsia" />
-		<image url="blocks/square/gray.png?nocache=plz1" name="block_square_gray" />
-		<image url="blocks/square/green.png?nocache=plz1" name="block_square_green" />
-		<image url="blocks/square/lime.png?nocache=plz1" name="block_square_lime" />
-		<image url="blocks/square/maroon.png?nocache=plz1" name="block_square_maroon" />
-		<image url="blocks/square/navy.png?nocache=plz1" name="block_square_navy" />
-		<image url="blocks/square/olive.png?nocache=plz1" name="block_square_olive" />
-		<image url="blocks/square/purple.png?nocache=plz1" name="block_square_purple" />
-		<image url="blocks/square/red.png?nocache=plz1" name="block_square_red" />
-		<image url="blocks/square/silver.png?nocache=plz1" name="block_square_silver" />
-		<image url="blocks/square/teal.png?nocache=plz1" name="block_square_teal" />
-		<image url="blocks/square/white.png?nocache=plz1" name="block_square_white" />
-		<image url="blocks/square/yellow.png?nocache=plz1" name="block_square_yellow" />
+		<image url="blocks/rectangle/purple.png?nocache=plz1" name="block_rect_purple" offset_x="-20" offset_y="-20" />
 		
 		<image url="paddle.png?nocache=plz1" name="paddle_normal" />
 		<image url="cursor.png?nocache=plz1" name="cursor_normal" />
@@ -64,6 +15,7 @@
 		<music url="fractal.mp3" name="background_music" />
 	</resources>
 	<objects>
+		<next_level url="levels/level1old.xml" />
 		<background image="background" />
 		<ball image="ball_normal" width="16" height="16" />
 		<paddle image="paddle_normal" width="74" height="14" />
@@ -71,7 +23,7 @@
 		
 		<block image="block_rect_purple" shape="rectangle" x="20" y="40" width="60" height="20" />
 		<block image="block_rect_purple" shape="rectangle" x="80" y="40" width="60" height="20" />
-		<block image="block_rect_purple" shape="rectangle" x="140" y="40" width="60" height="20" />
+<!--		<block image="block_rect_purple" shape="rectangle" x="140" y="40" width="60" height="20" />
 		<block image="block_rect_purple" shape="rectangle" x="200" y="40" width="60" height="20" />
 		<block image="block_rect_purple" shape="rectangle" x="260" y="40" width="60" height="20" />
 		<block image="block_rect_purple" shape="rectangle" x="320" y="40" width="60" height="20" />
@@ -130,6 +82,6 @@
 		<block image="block_rect_purple" shape="rectangle" x="380" y="220" width="60" height="20" />
 		<block image="block_rect_purple" shape="rectangle" x="440" y="220" width="60" height="20" />
 		<block image="block_rect_purple" shape="rectangle" x="500" y="220" width="60" height="20" />
-		<block image="block_rect_purple" shape="rectangle" x="560" y="220" width="60" height="20" />
+		<block image="block_rect_purple" shape="rectangle" x="560" y="220" width="60" height="20" /> -->
 	</objects>
 </hubgame>

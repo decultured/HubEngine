@@ -13,6 +13,8 @@ package HubGaming
 
 		private var _Width:Number = 0;
 		private var _Height:Number = 0;
+		
+		private var _CurrentFrame:uint = 0;
 
 		private var _PreviousPosition:Point = new Point(0, 0);
 		private var _Position:Point = new Point(0, 0);
@@ -52,6 +54,9 @@ package HubGaming
 		public function set Visible(visible:Boolean):void {_Visible = visible;}
 		public function get Active():Boolean {return _Active;}
 		public function set Active(active:Boolean):void {_Active = active;}
+
+		public function get CurrentFrame():uint {return _CurrentFrame;}
+		public function set CurrentFrame(currentFrame:uint):void {_CurrentFrame = currentFrame;}
 
 		public function hGameObject()
 		{

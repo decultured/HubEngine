@@ -49,9 +49,10 @@ package bbGameStates
 		{
 			hGlobalInput.Update();
 
-			if (_StartGame)
+			if (_StartGame) {
+				_Game.Reset(true);
 				return getQualifiedClassName(bbGameState);
-			else if (_MainMenu)
+			} else if (_MainMenu)
 				return getQualifiedClassName(bbMenuState);
 			return Name;
 		}

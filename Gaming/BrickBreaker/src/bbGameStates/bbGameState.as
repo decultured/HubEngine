@@ -51,10 +51,9 @@ package bbGameStates
 				return getQualifiedClassName(bbGameOverState);
 			}
 			if (_Game.LevelWon) {
-				/*if (!_Game.NextLevel) {
+				if (!_Game.NextLevel) {
 					return getQualifiedClassName(bbGameOverState);	
-				}*/
-				MonsterDebugger.trace(this, _Game.LevelWon);
+				}
 				_Game.CurrentLevel = _Game.NextLevel;
 				return getQualifiedClassName(bbLoaderState);
 			}
