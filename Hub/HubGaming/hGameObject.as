@@ -87,6 +87,10 @@ package HubGaming
 			_Position.y += Y;
 			CalcCenter();
 		}
+
+		public function DistanceSquaredTo(sourcePoint:Point):Number {
+			return (sourcePoint.x - _Position.x) * (sourcePoint.x - _Position.x) + (sourcePoint.y - _Position.y) * (sourcePoint.y - _Position.y);
+		}
 		
 		public function ResetVelocity(X:Number = 0.0, Y:Number = 0.0):void
 		{

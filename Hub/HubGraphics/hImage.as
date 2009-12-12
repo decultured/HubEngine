@@ -84,8 +84,6 @@
 			var SegmentsX:uint = uint(_Bounds.width / _SegmentWidth);
 			var SegmentsY:uint = uint(_Bounds.height / _SegmentHeight);
 
-			MonsterDebugger.trace(_SegmentWidth, "Segmenting " + Name + " " + _SegmentWidth + " " + _SegmentHeight + " " + SegmentsX + " " + SegmentsY);
-
 			for (var column:uint = 0; column < SegmentsX; column++)
 			{
 				for (var row:uint = 0; row < SegmentsY; row++)

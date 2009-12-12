@@ -6,6 +6,7 @@ package
 	import HubMath.*;
 	import flash.geom.*;
 	import bbGameUI.*;
+	import nl.demonsters.debugger.MonsterDebugger;
 	
 	public class BrickBreakerGame 
 	{
@@ -13,7 +14,6 @@ package
 		public var _Paddle:Paddle;
 		public var _Blocks:Array;
 		public var _Cursor:Cursor;
-		public var _ActiveBlocks:Number;
 
 		public var _BrickBounceSound:hSound;
 		public var _PaddleBounceSound:hSound;
@@ -25,7 +25,7 @@ package
 		private var _CurrentLevel:String = "level1.xml";
 		private var _NextLevel:String = null;
 		private var _Score:Number = 0;
-		private var _Balls:Number = 1;
+		private var _Balls:Number = 3;
 		private var _StartingBalls:Number = 3;
 		private var _GameOver:Boolean = false;
 		private var _LevelWon:Boolean = false;
@@ -113,14 +113,15 @@ package
 				_LevelWon = false;
 				_Score = 0;
 				_Balls = _StartingBalls;
+			}
+			
+			if (_HUD && _HUD.Balls && _HUD.Score) {
 				_HUD.Balls.text = String(_Balls);
 				_HUD.Score.text = String(_Score);
 			}
 			
-			_Ball.ResetTranslation(320 - _Ball.Width * 0.5, 400);
-			_Ball.ResetVelocity(205, -200);
+			_Ball.Reset();
 			_Paddle.ResetTranslation(320 - _Paddle.Width * 0.5, _Paddle.DefaultYPosition)
-			_ActiveBlocks = _Blocks.length;
 		}
 		
 		public function get HUD():bbGameHUD {return _HUD;}
@@ -142,70 +143,57 @@ package
 			_Paddle.Update(elapsedTime);
 
 			// Collide Ball with Blocks
+			var collisionBlock:Block = null;
 			var blocksLength:uint = _Blocks.length;
+			var activeBlocks:uint = 0;
 			for (var i:uint = 0; i < blocksLength; i++) {
 				if (!_Blocks[i] || !_Blocks[i] is Block || !_Blocks[i].Active)
 					continue;
-				_Blocks[i].Update(elapsedTime);
-				
-				if (hCollision.PointInAlignedRect(_Ball.Center, _Blocks[i].Left, _Blocks[i].Top, _Blocks[i].Right, _Blocks[i].Bottom, _Ball.Width * 15.5)) {
-					var TopLeft:Point = new Point(_Blocks[i].Left, _Blocks[i].Top);
-					var TopRight:Point = new Point(_Blocks[i].Right, _Blocks[i].Top);
-					var BottomLeft:Point = new Point(_Blocks[i].Left, _Blocks[i].Bottom);
-					var BottomRight:Point = new Point(_Blocks[i].Right, _Blocks[i].Bottom);
-
-					var intersect:Point;
-					var collided:Boolean = false;
-					// Bottom Side
-					if (_Ball.Velocity.y < 0) {
-						intersect = hCollision.LineSegmentIntersectionPoint(_Ball.PreviousCenter, _Ball.Center, BottomLeft, BottomRight);
-						if (intersect != null && intersect.x >= _Blocks[i].Left && intersect.x <= _Blocks[i].Right && _Ball.PreviousCenter.y > _Blocks[i].Bottom && _Ball.Center.y < _Blocks[i].Bottom) {
-							_Ball.ResetTranslation(intersect.x - _Ball.Width * 0.5, intersect.y - _Ball.Height * 0.5);
-//							_Ball.ResetTranslation(_Ball.Position.x, 2 * _Blocks[i].Bottom - _Ball.Position.y);
-							_Ball.ResetVelocity(_Ball.Velocity.x, Math.abs(_Ball.Velocity.y));
-							collided = true;
-						}
-					}
-					// Top Side
-					else if (_Ball.Velocity.y > 0) {
-						intersect = hCollision.LineSegmentIntersectionPoint(_Ball.PreviousCenter, _Ball.Center, TopLeft, TopRight);
-						if (intersect != null && intersect.x >= _Blocks[i].Left && intersect.x <= _Blocks[i].Right && _Ball.PreviousCenter.y < _Blocks[i].Top && _Ball.Center.y > _Blocks[i].Top) {
-							_Ball.ResetTranslation(intersect.x - _Ball.Width * 0.5, intersect.y - _Ball.Height * 0.5);
-//							_Ball.ResetTranslation(_Ball.Position.x, 2 * _Blocks[i].Top + _Ball.Position.y);
-							_Ball.ResetVelocity(_Ball.Velocity.x, -Math.abs(_Ball.Velocity.y));
-							collided = true;
-						}
-					}
-					// Right Side
-					if (_Ball.Velocity.x < 0) {
-						intersect = hCollision.LineSegmentIntersectionPoint(_Ball.PreviousCenter, _Ball.Center, TopRight, BottomRight);
-						if (intersect != null && intersect.y >= _Blocks[i].Top && intersect.y <= _Blocks[i].Bottom && _Ball.PreviousCenter.x > _Blocks[i].Right && _Ball.Center.x < _Blocks[i].Right) {
-							_Ball.ResetTranslation(intersect.x - _Ball.Width * 0.5, intersect.y - _Ball.Height * 0.5);
-							_Ball.ResetVelocity(Math.abs(_Ball.Velocity.x), _Ball.Velocity.y);
-							collided = true;
-						}
-					}
-					// Left Side
-					else if (_Ball.Velocity.x > 0) {
-						intersect = hCollision.LineSegmentIntersectionPoint(_Ball.PreviousCenter, _Ball.Center, TopLeft, BottomLeft);
-						if (intersect != null && intersect.y >= _Blocks[i].Top && intersect.y <= _Blocks[i].Bottom && _Ball.PreviousCenter.x < _Blocks[i].Left && _Ball.Center.x > _Blocks[i].Left) {
-							_Ball.ResetTranslation(intersect.x - _Ball.Width * 0.5, intersect.y - _Ball.Height * 0.5);
-							_Ball.ResetVelocity(-Math.abs(_Ball.Velocity.x), _Ball.Velocity.y);
-							collided = true;
-						}
-					}
 					
-					if (collided == true) {
-						_Blocks[i].Active = false;
-						_Blocks[i].Visible = false;
-						_BrickBounceSound.Play();
-						_ActiveBlocks--;
-						_Score += 100;
-						_HUD.Score.text = String(_Score);
-						break;
-					}
+				activeBlocks++;
+				
+				_Blocks[i].Update(elapsedTime);
+				_Blocks[i].CollideWithLine(_Ball.PreviousCenter, _Ball.Center);
+
+				if (_Blocks[i].Collided == true) {
+					if (!collisionBlock || collisionBlock.DistanceSquaredToCollisionPoint(_Ball.PreviousCenter) > _Blocks[i].DistanceSquaredToCollisionPoint(_Ball.PreviousCenter))
+						collisionBlock = _Blocks[i];
 				}
 			}
+
+			if (collisionBlock) {
+				collisionBlock.Active = false;
+				collisionBlock.Visible = false;
+
+				MonsterDebugger.trace(this, collisionBlock.CollisionPoint.x + " " + collisionBlock.CollisionPoint.y + " " + collisionBlock.Top + " " + collisionBlock.Left);
+
+				if (collisionBlock.CollisionSide == 0) {
+					// Top Side
+					_Ball.ResetTranslation(collisionBlock.CollisionPoint.x - _Ball.Width * 0.5, collisionBlock.CollisionPoint.y - _Ball.Height * 0.5);
+					_Ball.ResetVelocity(_Ball.Velocity.x, -Math.abs(_Ball.Velocity.y));
+				} else if (collisionBlock.CollisionSide == 1) {
+					// Right Side
+					_Ball.ResetTranslation(collisionBlock.CollisionPoint.x - _Ball.Width * 0.5, collisionBlock.CollisionPoint.y - _Ball.Height * 0.5);
+					_Ball.ResetVelocity(Math.abs(_Ball.Velocity.x), _Ball.Velocity.y);
+				} else if (collisionBlock.CollisionSide == 2) {
+					// Bottom Side
+					_Ball.ResetTranslation(collisionBlock.CollisionPoint.x - _Ball.Width * 0.5, collisionBlock.CollisionPoint.y - _Ball.Height * 0.5);
+					_Ball.ResetVelocity(_Ball.Velocity.x, Math.abs(_Ball.Velocity.y));
+				} else if (collisionBlock.CollisionSide == 3) {
+					// Left Side
+					_Ball.ResetTranslation(collisionBlock.CollisionPoint.x - _Ball.Width * 0.5, collisionBlock.CollisionPoint.y - _Ball.Height * 0.5);
+					_Ball.ResetVelocity(-Math.abs(_Ball.Velocity.x), _Ball.Velocity.y);
+				}
+				
+				activeBlocks--;
+				_BrickBounceSound.Play();
+				_Score += 100;
+				_HUD.Score.text = String(_Score);
+			}
+			
+			// End Level if No More Blocks
+			if (activeBlocks < 1)
+				_LevelWon = true;		
 			
 			//Collide Ball With Paddle
 			if (hCollision.PointInAlignedRect(_Ball.Center, _Paddle.Left, _Paddle.Top, _Paddle.Right, _Paddle.Bottom))
@@ -233,9 +221,6 @@ package
 				Reset();
 				_FailSound.Play();	
 			}
-
-			if (_ActiveBlocks < 1)
-				_LevelWon = true;		
 		}
 		
 		public function Render():void

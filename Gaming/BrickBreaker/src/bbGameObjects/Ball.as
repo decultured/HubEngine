@@ -23,8 +23,8 @@ package bbGameObjects
 
 		public function Reset():void
 		{
-			ResetTranslation(320, 400);
-			ResetVelocity(205, -200);
+			ResetTranslation(325, 380);
+			ResetVelocity(0, -_Speed);
 			Velocity.normalize(_Speed);
 		}
 		
