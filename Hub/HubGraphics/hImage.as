@@ -25,7 +25,6 @@
 		private var _IsAlpha:Boolean = false;
 		private var _Name:String;
 		
-		private var _Segmented:Boolean = false;
 		private var _Segments:Array;
 		private var _SegmentWidth:uint = 0;
 		private var _SegmentHeight:uint = 0;
@@ -77,13 +76,15 @@
 		
 		private function Segment():void
 		{
-			if (!_SegmentWidth || !_SegmentHeight || _SegmentWidth > Width || _SegmentHeight > height)
+			if (!_SegmentWidth || !_SegmentHeight || _SegmentWidth > Width || _SegmentHeight > Height)
 				return;
 			
 			_Segments = new Array();
 			
 			var SegmentsX:uint = uint(_Bounds.width / _SegmentWidth);
-			var SegmentsY:uint = uint(_Bounds.width / _SegmentHeight);
+			var SegmentsY:uint = uint(_Bounds.height / _SegmentHeight);
+
+			MonsterDebugger.trace(_SegmentWidth, "Segmenting " + Name + " " + _SegmentWidth + " " + _SegmentHeight + " " + SegmentsX + " " + SegmentsY);
 
 			for (var column:uint = 0; column < SegmentsX; column++)
 			{
@@ -92,16 +93,16 @@
 					_Segments.push(new Rectangle(column * _SegmentWidth, row * _SegmentHeight, _SegmentWidth, _SegmentHeight));
 				}
 			}
-			
-			if (_Segments.length)
-				_Segmented = true;
 		}
 
 		public function GetSegmentBounds(segment:uint):Rectangle
 		{
-			if (!_Segmented || !_Segments || segment >= _Segments.length)
+			if (!_Segments)
 				return _Bounds;
 			
+			if (segment >= _Segments.length)
+				return _Segments[0];
+
 			return _Segments[segment];
 		}
 

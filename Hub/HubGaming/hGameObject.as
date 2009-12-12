@@ -144,7 +144,7 @@ package HubGaming
 				return;
 
 			if (_Scale == 1.0 && _Rotation == 0.0) {
-				_Image.RenderSimple(hGlobalGraphics.View.ViewBitmapData, _Position);
+				_Image.RenderSimple(hGlobalGraphics.View.ViewBitmapData, _Position, _CurrentFrame);
 			} else {
 				_TransformMatrix.identity();
 				if (_Scale != 1.0)

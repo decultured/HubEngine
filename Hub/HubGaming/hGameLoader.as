@@ -93,7 +93,7 @@ package HubGaming
 			if (!newImageClass)
 				return null;
 				
-			if (newImage["@segmented"] && newImage["@segment_width"] && newImage["@segment_height"])
+			if (newImage["@segment_width"] && newImage["@segment_height"])
 				newImageClass.SetSegmentSize(uint(newImage["@segment_width"]), uint(newImage["@segment_height"]));
 			
 			if (newImage["@offset_x"])
