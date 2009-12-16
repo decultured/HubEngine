@@ -1,0 +1,4 @@
+#!/bin/sh
+
+mxmlc -source-path=../../hub/ -target-player=10 -output=bin/brickbreaker.swf src/Main.mxml
+
