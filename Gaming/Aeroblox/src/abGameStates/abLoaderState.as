@@ -1,4 +1,4 @@
-package bbGameStates 
+package abGameStates 
 {
 	import HubGaming.*;
 	import flash.display.BitmapData;
@@ -7,24 +7,24 @@ package bbGameStates
 	import HubGraphics.*;
 	import HubAudio.*;
 	import flash.events.*;
-	import bbGameUI.*;
+	import abGameUI.*;
 	
-	public class bbLoaderState extends hGameState
+	public class abLoaderState extends hGameState
 	{
 		private var _Complete:Boolean = false;
 		private var _LoaderError:Boolean = false;
 		
-		public var _GameLoader:BrickBreakerLoader;
-		private var _LoaderUI:bbLoader;
-		private var _Game:BrickBreakerGame;
+		public var _GameLoader:AerobloxLoader;
+		private var _LoaderUI:abLoader;
+		private var _Game:AerobloxGame;
 
-		public function set Game(game:BrickBreakerGame):void {_Game = game;}
+		public function set Game(game:AerobloxGame):void {_Game = game;}
 
-		public function bbLoaderState() 
+		public function abLoaderState() 
 		{
 			super();
-			_LoaderUI = new bbLoader();
-			_GameLoader = new BrickBreakerLoader();
+			_LoaderUI = new abLoader();
+			_GameLoader = new AerobloxLoader();
 		}
 
 		private function CompleteEvent(event:MouseEvent):void { _Complete = true; }
@@ -79,12 +79,12 @@ package bbGameStates
 				_LoaderUI.StartGameButton.enabled = false;
 				_LoaderUI.StartGameButton.alpha = 50;
 				_Game.Reset();
-				return getQualifiedClassName(bbGameState);
+				return getQualifiedClassName(abGameState);
 			}
 			if (_LoaderError) {
 				_LoaderUI.StartGameButton.enabled = false;
 				_LoaderUI.StartGameButton.alpha = 50;
-				return getQualifiedClassName(bbMenuState);
+				return getQualifiedClassName(abMenuState);
 			}
 			return Name;
 		}

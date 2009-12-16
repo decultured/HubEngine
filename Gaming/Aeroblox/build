@@ -1,0 +1,3 @@
+#!/bin/sh
+
+mxmlc -source-path=../../hub/ -target-player=10 -debug=true -output=bin/aeroblox.swf src/Main.mxml

@@ -5,11 +5,11 @@
 	backgroundColor="#000000"
 	layout="absolute"
 	enterFrame="EnterFrame(event)"
-	xmlns:custom="bbGameUI.*"
+	xmlns:custom="abGameUI.*"
 	frameRate="120"
 	activate="hGlobalInput.ApplicationActivate(event);"
 	deactivate="hGlobalInput.ApplicationDeactivate(event);">
 	<mx:Script source="Main.as"/>
-	<mx:Style source="BrickBreakerStyles.css"/>
+	<mx:Style source="AerobloxStyles.css"/>
 	<mx:Image id="ViewImage" styleName="ViewCanvas" horizontalCenter="0" verticalCenter="0" width="640" height="480"/>
 </mx:Application>

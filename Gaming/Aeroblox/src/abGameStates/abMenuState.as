@@ -1,27 +1,27 @@
-package bbGameStates 
+package abGameStates 
 {
 	import HubGaming.*;
 	import flash.display.*;
 	import flash.geom.*;
 	import flash.utils.*;
 	import HubGraphics.*;
-	import bbGameUI.*;
+	import abGameUI.*;
 	import flash.events.MouseEvent;
 	import flash.events.Event;
 	
-	public class bbMenuState extends hGameState
+	public class abMenuState extends hGameState
 	{
 		private var _StartGame:Boolean = false;
 		
-		public var _Menu:bbMenu;
-		private var _Game:BrickBreakerGame;
+		public var _Menu:abMenu;
+		private var _Game:AerobloxGame;
 
-		public function set Game(game:BrickBreakerGame):void {_Game = game;}
+		public function set Game(game:AerobloxGame):void {_Game = game;}
 		
-		public function bbMenuState() 
+		public function abMenuState() 
 		{
 			super();
-			_Menu = new bbMenu();
+			_Menu = new abMenu();
 		}
 		
 		private function StartGameEvent(event:MouseEvent):void { _StartGame = true; }
@@ -43,7 +43,7 @@ package bbGameStates
 		{
 			if (_StartGame) {
 				_Game.CurrentLevel = _Game.StartLevel;
-				return getQualifiedClassName(bbLoaderState);
+				return getQualifiedClassName(abLoaderState);
 			}
 			return Name;
 		}

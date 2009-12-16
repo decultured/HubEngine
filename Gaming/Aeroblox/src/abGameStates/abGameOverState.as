@@ -1,4 +1,4 @@
-package bbGameStates 
+package abGameStates 
 {
 	import HubGaming.*;
 	import flash.display.BitmapData;
@@ -6,24 +6,24 @@ package bbGameStates
 	import flash.utils.*;
 	import HubGraphics.*;
 	import HubInput.*;
-	import bbGameUI.*;
+	import abGameUI.*;
 	import flash.events.MouseEvent;
 	import flash.events.Event;
 	
-	public class bbGameOverState extends hGameState
+	public class abGameOverState extends hGameState
 	{
 		private var _StartGame:Boolean = false;
 		private var _MainMenu:Boolean = false;
-		private var _Game:BrickBreakerGame;
-		public var _GameOver:bbGameOver;
+		private var _Game:AerobloxGame;
+		public var _GameOver:abGameOver;
 		
-		public function bbGameOverState() 
+		public function abGameOverState() 
 		{
 			super();
-			_GameOver = new bbGameOver();
+			_GameOver = new abGameOver();
 		}
 		
-		public function set Game(game:BrickBreakerGame):void {_Game = game;}
+		public function set Game(game:AerobloxGame):void {_Game = game;}
 		
 		private function StartGameEvent(event:MouseEvent):void { _StartGame = true; }
 		private function MainMenuEvent(event:MouseEvent):void { _MainMenu = true; }
@@ -51,9 +51,9 @@ package bbGameStates
 
 			if (_StartGame) {
 				_Game.NewGame();
-				return getQualifiedClassName(bbGameState);
+				return getQualifiedClassName(abGameState);
 			} else if (_MainMenu)
-				return getQualifiedClassName(bbMenuState);
+				return getQualifiedClassName(abMenuState);
 			return Name;
 		}
 	}

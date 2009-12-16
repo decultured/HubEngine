@@ -9,7 +9,7 @@ import flash.events.*;
 import mx.events.*;
 import nl.demonsters.debugger.MonsterDebugger;
 
-public var MainGame:BrickBreaker;
+public var MainGame:Aeroblox;
 private var debugger:MonsterDebugger;
 private var StartLevel:String;
 
@@ -18,7 +18,7 @@ public function Initialize():void
 	debugger = new MonsterDebugger(this);
 //	MonsterDebugger.trace(this, "Hello World!");
 
-	MainGame = new BrickBreaker();
+	MainGame = new Aeroblox();
 	hGlobalInput.Initialize(ViewImage);
 
 	StartLevel = Application.application.parameters.start_level;

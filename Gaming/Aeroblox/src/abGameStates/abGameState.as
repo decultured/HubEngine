@@ -1,4 +1,4 @@
-package bbGameStates 
+package abGameStates 
 {
 	import HubGaming.*;
 	import flash.display.BitmapData;
@@ -7,16 +7,16 @@ package bbGameStates
 	import HubGraphics.*;
 	import HubInput.*;
 	
-	public class bbGameState extends hGameState
+	public class abGameState extends hGameState
 	{
-		public var _Game:BrickBreakerGame;
+		public var _Game:AerobloxGame;
 		
-		public function bbGameState() 
+		public function abGameState() 
 		{
 			super();
 		}
 		
-		public function set Game(game:BrickBreakerGame):void {_Game = game;}
+		public function set Game(game:AerobloxGame):void {_Game = game;}
 		
 		public override function Start():void
 		{
@@ -42,19 +42,19 @@ package bbGameStates
 			hGlobalGraphics.EndFrame();
 
 			if (hGlobalInput.Keyboard.KeyJustPressed(hKeyCodes.P) || hGlobalInput.Keyboard.KeyJustPressed(hKeyCodes.PAUSE) || !hGlobalInput.ApplicationActive)
-				return getQualifiedClassName(bbPausedState);
+				return getQualifiedClassName(abPausedState);
 			if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.Q)) {
-				return getQualifiedClassName(bbMenuState);
+				return getQualifiedClassName(abMenuState);
 			}
 			if (_Game.GameOver) {
-				return getQualifiedClassName(bbGameOverState);
+				return getQualifiedClassName(abGameOverState);
 			}
 			if (_Game.LevelWon) {
 				if (!_Game.NextLevel) {
-					return getQualifiedClassName(bbGameOverState);	
+					return getQualifiedClassName(abGameOverState);	
 				}
 				_Game.CurrentLevel = _Game.NextLevel;
-				return getQualifiedClassName(bbLoaderState);
+				return getQualifiedClassName(abLoaderState);
 			}
 			return Name;
 		}

@@ -1,14 +1,14 @@
 package 
 {
-	import bbGameObjects.*;
+	import abGameObjects.*;
 	import HubGraphics.*;
 	import HubAudio.*;
 	import HubMath.*;
 	import flash.geom.*;
-	import bbGameUI.*;
+	import abGameUI.*;
 	import nl.demonsters.debugger.MonsterDebugger;
 	
-	public class BrickBreakerGame 
+	public class AerobloxGame 
 	{
 		public var _Ball:Ball;
 		public var _Paddle:Paddle;
@@ -20,7 +20,7 @@ package
 		public var _PaddleBounceSound:hSound;
 		public var _FailSound:hSound;
 		public var _Music:hSound;
-		public var _HUD:bbGameHUD;
+		public var _HUD:abGameHUD;
 		
 		private var _StartLevel:String = "level1.xml";
 		private var _CurrentLevel:String = "level1.xml";
@@ -40,14 +40,14 @@ package
 		public function set StartLevel(startLevel:String):void {_StartLevel = startLevel;}
 		public function get CurrentLevel():String {return _CurrentLevel;}  
 		public function set CurrentLevel(currentLevel:String):void {_CurrentLevel = currentLevel;}  
-		public function get HUD():bbGameHUD {return _HUD;}
+		public function get HUD():abGameHUD {return _HUD;}
 
 		public function ShowHUD():void {hGlobalGraphics.View.ViewImage.addChild(_HUD);}
 		public function HideHUD():void {hGlobalGraphics.View.ViewImage.removeChild(_HUD);}
 		
-      	public function BrickBreakerGame()
+      	public function AerobloxGame()
         {
-			_HUD = new bbGameHUD();
+			_HUD = new abGameHUD();
 
 			_PaddleBounceSound = hGlobalAudio.SoundLibrary.GetSoundFromName("ball_hits_paddle");
 			_FailSound = hGlobalAudio.SoundLibrary.GetSoundFromName("ball_lost");

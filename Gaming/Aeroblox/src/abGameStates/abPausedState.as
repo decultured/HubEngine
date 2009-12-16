@@ -1,4 +1,4 @@
-package bbGameStates 
+package abGameStates 
 {
 	import HubGaming.*;
 	import flash.display.BitmapData;
@@ -7,23 +7,23 @@ package bbGameStates
 	import HubGraphics.*;
 	import HubInput.*;
 	import HubAudio.*;
-	import bbGameUI.*;
+	import abGameUI.*;
 	import flash.events.MouseEvent;
 	import flash.events.Event;
 	
-	public class bbPausedState extends hGameState
+	public class abPausedState extends hGameState
 	{
 		private var _StartGame:Boolean = false;
-		private var _Game:BrickBreakerGame;
-		public var _Paused:bbPaused;
+		private var _Game:AerobloxGame;
+		public var _Paused:abPaused;
 		
-		public function bbPausedState() 
+		public function abPausedState() 
 		{
 			super();
-			_Paused = new bbPaused();
+			_Paused = new abPaused();
 		}
 		
-		public function set Game(game:BrickBreakerGame):void {_Game = game;}
+		public function set Game(game:AerobloxGame):void {_Game = game;}
 		
 		private function StartGameEvent(event:MouseEvent):void { _StartGame = true; }
 
@@ -49,7 +49,7 @@ package bbGameStates
 			hGlobalGraphics.EndFrame();
 
 			if (hGlobalInput.Keyboard.KeyJustPressed(hKeyCodes.P) || hGlobalInput.Keyboard.KeyJustPressed(hKeyCodes.PAUSE) || _StartGame)
-				return getQualifiedClassName(bbGameState);
+				return getQualifiedClassName(abGameState);
 			return Name;
 		}
 	}

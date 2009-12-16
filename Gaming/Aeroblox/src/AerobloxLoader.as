@@ -4,14 +4,14 @@ package
 	import HubGraphics.*;
 	import HubAudio.*;
 
-	public class BrickBreakerLoader extends hGameLoader
+	public class AerobloxLoader extends hGameLoader
 	{
-		private var _Game:BrickBreakerGame;
+		private var _Game:AerobloxGame;
 
-		public function get Game():BrickBreakerGame {return _Game;}
-		public function set Game(game:BrickBreakerGame):void {_Game = game;}
+		public function get Game():AerobloxGame {return _Game;}
+		public function set Game(game:AerobloxGame):void {_Game = game;}
 
-		public function BrickBreakerLoader()
+		public function AerobloxLoader()
 		{
 			super();
 		}
