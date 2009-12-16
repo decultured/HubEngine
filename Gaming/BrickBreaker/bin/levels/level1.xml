@@ -1,12 +1,13 @@
 <?xml version="1.0"?>
 <hubgame>
 	<resources>
-		<image url="background-1.png?nocache=plz1" name="background" />
+		<image url="images/background-1.png?nocache=plz1" name="background" />
 		<!-- rectangle blocks -->
-		<image url="blocks/rectangle-spirte-sheet.png?nocache=plz1" name="block_rect" segment_width="60" segment_height="20"/>
-		<image url="paddle.png?nocache=plz1" name="paddle_normal" />
-		<image url="cursor.png?nocache=plz1" name="cursor_normal" />
-		<image url="ball.png?nocache=plz1" name="ball_normal" />
+		<image url="images/blocks/rectangle-spirte-sheet.png?nocache=plz1" name="block_rect" segment_width="60" segment_height="20"/>
+		<image url="images/powerups.png" name="powerups" segment_width="48" segment_height="24"/>
+		<image url="images/paddle.png?nocache=plz1" name="paddle_normal" />
+		<image url="images/cursor.png?nocache=plz1" name="cursor_normal" />
+		<image url="images/ball.png?nocache=plz1" name="ball_normal" />
 		<sound url="sounds/button-16.mp3" name="ball_hits_wall" />
 		<sound url="sounds/button-10.mp3" name="ball_lost" />
 		<sound url="sounds/ballpaddle.mp3" name="ball_hits_paddle" />
@@ -19,7 +20,8 @@
 		<ball image="ball_normal" width="16" height="16" />
 		<paddle image="paddle_normal" width="74" height="14" />
 		<cursor image="cursor_normal" width="16" height="16" />
-
+		<powerup type="slow_ball" width="48" height="24" image="powerups" start_frame="0" />
+		<powerup type="fast_ball" width="48" height="24" image="powerups" start_frame="1" />
 		<block image="block_rect" start_frame="6" shape="rectangle" x="20" y="40" width="60" height="20" />
 		<block image="block_rect" start_frame="6" shape="rectangle" x="80" y="40" width="60" height="20" />
 		<block image="block_rect" start_frame="6" shape="rectangle" x="140" y="40" width="60" height="20" />
@@ -41,46 +43,46 @@
 		<block image="block_rect" start_frame="6" shape="rectangle" x="500" y="60" width="60" height="20" />
 		<block image="block_rect" start_frame="6" shape="rectangle" x="560" y="60" width="60" height="20" />
 		
-		<block image="block_rect" start_frame="6" shape="rectangle" x="20" y="120" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="80" y="120" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="140" y="120" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="200" y="120" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="260" y="120" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="320" y="120" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="380" y="120" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="440" y="120" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="500" y="120" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="560" y="120" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="20" y="140" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="80" y="140" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="140" y="140" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="200" y="140" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="260" y="140" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="320" y="140" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="380" y="140" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="440" y="140" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="500" y="140" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="560" y="140" width="60" height="20" />
-		
-		<block image="block_rect" start_frame="6" shape="rectangle" x="20" y="200" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="80" y="200" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="140" y="200" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="200" y="200" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="260" y="200" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="320" y="200" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="380" y="200" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="440" y="200" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="500" y="200" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="560" y="200" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="20" y="220" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="80" y="220" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="140" y="220" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="200" y="220" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="260" y="220" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="320" y="220" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="380" y="220" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="440" y="220" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="500" y="220" width="60" height="20" />
-		<block image="block_rect" start_frame="6" shape="rectangle" x="560" y="220" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="fast_ball" x="20" y="120" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="fast_ball" x="80" y="120" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="fast_ball" x="140" y="120" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="fast_ball" x="200" y="120" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="fast_ball" x="260" y="120" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="fast_ball" x="320" y="120" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="fast_ball" x="380" y="120" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="fast_ball" x="440" y="120" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="fast_ball" x="500" y="120" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="fast_ball" x="560" y="120" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="fast_ball" x="20" y="140" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="fast_ball" x="80" y="140" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="fast_ball" x="140" y="140" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="fast_ball" x="200" y="140" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="fast_ball" x="260" y="140" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="fast_ball" x="320" y="140" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="fast_ball" x="380" y="140" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="fast_ball" x="440" y="140" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="fast_ball" x="500" y="140" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="fast_ball" x="560" y="140" width="60" height="20" />
+
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="slow_ball" x="20" y="200" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="slow_ball" x="80" y="200" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="slow_ball" x="140" y="200" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="slow_ball" x="200" y="200" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="slow_ball" x="260" y="200" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="slow_ball" x="320" y="200" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="slow_ball" x="380" y="200" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="slow_ball" x="440" y="200" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="slow_ball" x="500" y="200" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="slow_ball" x="560" y="200" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="slow_ball" x="20" y="220" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="slow_ball" x="80" y="220" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="slow_ball" x="140" y="220" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="slow_ball" x="200" y="220" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="slow_ball" x="260" y="220" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="slow_ball" x="320" y="220" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="slow_ball" x="380" y="220" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="slow_ball" x="440" y="220" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="slow_ball" x="500" y="220" width="60" height="20" />
+		<block image="block_rect" start_frame="6" shape="rectangle" powerup="slow_ball" x="560" y="220" width="60" height="20" />
 	</objects>
 </hubgame>

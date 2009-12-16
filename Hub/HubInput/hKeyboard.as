@@ -3,7 +3,6 @@ package HubInput
 	import flash.events.KeyboardEvent;
 	import flash.events.Event;
 	import mx.core.UIComponent;
-	import nl.demonsters.debugger.MonsterDebugger;
 		
 	public class hKeyboard 
 	{

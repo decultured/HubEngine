@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <hubgame>
 	<resources>
-		<image url="background-1.png?nocache=plz1" name="background" />
-		<image url="blocks/square-spirte-sheet.png?nocache=plz1" name="block_square" segment_width="20" segment_height="20"/>
+		<image url="images/background-1.png?nocache=plz1" name="background" />
+		<image url="images/blocks/square-spirte-sheet.png?nocache=plz1" name="block_square" segment_width="20" segment_height="20"/>
 		
-		<image url="paddle.png?nocache=plz1" name="paddle_normal" />
-		<image url="cursor.png?nocache=plz1" name="cursor_normal" />
-		<image url="ball.png?nocache=plz1" name="ball_normal" />
+		<image url="images/paddle.png?nocache=plz1" name="paddle_normal" />
+		<image url="images/cursor.png?nocache=plz1" name="cursor_normal" />
+		<image url="images/ball.png?nocache=plz1" name="ball_normal" />
 		<sound url="sounds/button-16.mp3" name="ball_hits_wall" />
 		<sound url="sounds/button-10.mp3" name="ball_lost" />
 		<sound url="sounds/ballpaddle.mp3" name="ball_hits_paddle" />

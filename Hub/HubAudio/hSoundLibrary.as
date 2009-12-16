@@ -3,7 +3,7 @@ package HubAudio
 	import flash.events.*;
 	import flash.display.*;
 
-	public class hSoundLibrary extends Sprite
+	public class hSoundLibrary extends EventDispatcher
 	{
 		public static var COMPLETE:String = "complete";
 		public static var PROGRESS:String = "progress";

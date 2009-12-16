@@ -6,7 +6,6 @@ package bbGameStates
 	import flash.utils.*;
 	import HubGraphics.*;
 	import bbGameUI.*;
-	import nl.demonsters.debugger.MonsterDebugger;
 	import flash.events.MouseEvent;
 	import flash.events.Event;
 	

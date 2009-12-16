@@ -2,7 +2,6 @@ package HubGaming
 {
 	import flash.geom.*;
 	import HubGraphics.*;
-	import nl.demonsters.debugger.MonsterDebugger;
 	
 	public class hGameObject
 	{
@@ -60,6 +59,21 @@ package HubGaming
 
 		public function hGameObject()
 		{
+		}
+
+		public function GetImageName():String
+		{
+			return _Image.Name; 	
+		}
+		
+		public function ObjectRectanglesCollide(object2:hGameObject):Boolean
+		{
+		    if (Bottom < object2.Top) return false;
+		    if (Top > object2.Bottom) return false;
+		    if (Right < object2.Left) return false;
+		    if (Left > object2.Right) return false;
+
+		    return true;
 		}
 		
 		public function SetImage(imageName:String):hImage

@@ -11,11 +11,15 @@ package HubGaming
 
 		protected var _LastTime:Number = 0;
 		protected var _ThisTime:Number = 0;
+		protected var _MaxTime:Number = 0;
 
 		public function get States():Object {return _States;}
 		public function get CurrentState():hGameState {return _CurrentState;}
 		public function get StateResponse():String {return _StateResponse;}
-		public function get ElapsedTime():Number { return _ThisTime - _LastTime; }
+		public function get ElapsedTime():Number {return _ThisTime - _LastTime;}
+		public function get MaximumTime():Number {return _MaxTime;}
+		public function set MaximumTime(maxTime:Number):void {_MaxTime = maxTime;}
+
 
 		public function hGameStateMachine()
 		{
@@ -49,6 +53,9 @@ package HubGaming
 		{
 			_LastTime = _ThisTime;
 			_ThisTime = Number(getTimer()) * 0.001;
+
+			if (_MaxTime > 0 && ElapsedTime > _MaxTime)
+				_LastTime = _ThisTime - _MaxTime;
 			
 			if (_CurrentState != null) {
 				_StateResponse = _CurrentState.Run(ElapsedTime);

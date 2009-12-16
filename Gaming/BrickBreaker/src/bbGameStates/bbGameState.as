@@ -6,7 +6,6 @@ package bbGameStates
 	import flash.utils.*;
 	import HubGraphics.*;
 	import HubInput.*;
-	import nl.demonsters.debugger.MonsterDebugger;
 	
 	public class bbGameState extends hGameState
 	{
@@ -22,7 +21,7 @@ package bbGameStates
 		public override function Start():void
 		{
 			if (_Game.GameOver)
-				_Game.Reset(true);
+				_Game.NewGame();
 
 			hGlobalInput.GetFocus();
 			_Game.ShowHUD();

@@ -1,15 +1,13 @@
 ﻿package HubGraphics
 {
-	import flash.display.Sprite;
 	import flash.display.Bitmap;
 	import flash.display.Loader;
     import flash.display.BitmapData;
 	import flash.net.URLRequest;
 	import flash.events.*;
 	import flash.geom.*;
-	import nl.demonsters.debugger.MonsterDebugger;
 	
-	public class hImage extends Sprite
+	public class hImage extends EventDispatcher
 	{
 		public static var COMPLETE:String = "complete";
 		public static var PROGRESS:String = "progress";
@@ -53,8 +51,6 @@
 				if (url) {
 					_URL = url;
 				} else {
-					MonsterDebugger.trace(this, "No URL provided for: " +_Name);
-					
 					dispatchEvent(new Event(hImage.IO_ERROR));
 					return;
 				}
@@ -84,9 +80,9 @@
 			var SegmentsX:uint = uint(_Bounds.width / _SegmentWidth);
 			var SegmentsY:uint = uint(_Bounds.height / _SegmentHeight);
 
-			for (var column:uint = 0; column < SegmentsX; column++)
+			for (var row:uint = 0; row < SegmentsY; row++)
 			{
-				for (var row:uint = 0; row < SegmentsY; row++)
+				for (var column:uint = 0; column < SegmentsX; column++)
 				{
 					_Segments.push(new Rectangle(column * _SegmentWidth, row * _SegmentHeight, _SegmentWidth, _SegmentHeight));
 				}
@@ -164,8 +160,6 @@
 
 		private function HandleError(event:IOErrorEvent):void
 		{
-			MonsterDebugger.trace(this, "Image IO Error on: " + _URL);
-			
 			dispatchEvent(new Event(hImage.IO_ERROR));
 		}
 		

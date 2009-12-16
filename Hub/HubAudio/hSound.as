@@ -1,12 +1,10 @@
 package HubAudio
 {
-	import flash.display.Sprite;
 	import flash.net.URLRequest;
 	import flash.events.*;
 	import flash.media.*;
-	import nl.demonsters.debugger.MonsterDebugger;
 	
-	public class hSound extends Sprite
+	public class hSound extends EventDispatcher
 	{
 		public static var COMPLETE:String = "complete";
 		public static var PROGRESS:String = "progress";
@@ -16,6 +14,7 @@ package HubAudio
 		private var _URL:String;
 		private var _Loaded:Boolean = false;
 		
+		private var _PausedPosition:int = 0;
 		private var _SoundChannel:SoundChannel;
 		private var _Sound:Sound; 
 
@@ -30,26 +29,50 @@ package HubAudio
 			_Name = name;
 		}
 
-		public function Play(loops:Number = 0):void
+		public function Play():void
 		{
 			if (!_Loaded)
 				return;
 				
-			_SoundChannel = _Sound.play(0,loops);
+			_SoundChannel = _Sound.play(0);
 		}
 		
-		public function PlayOnlyOne(loops:Number = 0):void
+		public function PlayOnlyOne(loops:Boolean = false):void
 		{
 			if (!_Loaded || _SoundChannel)
 				return;
 				
-			_SoundChannel = _Sound.play(0,loops);
+			_SoundChannel = _Sound.play(_PausedPosition);
+
+			if (loops)
+				_SoundChannel.addEventListener(Event.SOUND_COMPLETE, LoopSound);
+		}
+		
+
+		public function LoopSound(event:Event):void
+		{
+			Stop();
+			PlayOnlyOne(true);
+		}
+		
+		public function Pause():void
+		{
+			if (!_Loaded || !_SoundChannel)
+				return;
+
+			_PausedPosition = _SoundChannel.position;
+			_SoundChannel.stop();
+			_SoundChannel = null;
 		}
 		
 		public function Stop():void
 		{
-			if (_Loaded && _SoundChannel)
-				_SoundChannel.stop();
+			if (!_Loaded || !_SoundChannel)
+				return;
+
+			_PausedPosition = 0;
+			_SoundChannel.stop();
+			_SoundChannel = null;
 		}
 
 		public function set Volume(volume:Number):void

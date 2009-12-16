@@ -24,6 +24,8 @@ package
 		{
 			super();
 
+			MaximumTime = 0.075;
+
 			_Game = new BrickBreakerGame();
 
 			_MenuState = new bbMenuState();

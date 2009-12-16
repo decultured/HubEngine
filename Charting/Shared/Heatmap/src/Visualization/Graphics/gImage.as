@@ -5,7 +5,7 @@
 	import flash.events.*;
 	import flash.geom.*;
 	
-	public class gImage extends Sprite
+	public class gImage extends EventDispatcher
 	{
 		public static var COMPLETE:String = "complete"
 

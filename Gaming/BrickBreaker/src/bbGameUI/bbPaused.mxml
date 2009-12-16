@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="640" height="480">
-	<mx:backgroundImage>@Embed(source='../../bin/screens/paused/background.png')</mx:backgroundImage>
-	<mx:HBox  id="StartGameButton" width="640" backgroundImage="@Embed(source='../../bin/screens/paused/paused.png')" height="480" x="0" y="0">
+	<mx:backgroundImage>@Embed(source='../../bin/images/ui/paused/background.png')</mx:backgroundImage>
+	<mx:HBox  id="StartGameButton" width="640" backgroundImage="@Embed(source='../../bin/images/ui/paused/paused.png')" height="480" x="0" y="0">
 	</mx:HBox>
 </mx:Canvas>

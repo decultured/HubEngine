@@ -3,9 +3,8 @@
 	import flash.events.*;
 	import flash.display.*;
 	import flash.net.URLRequest;
-	import nl.demonsters.debugger.MonsterDebugger;
 
-	public class hImageLibrary extends Sprite
+	public class hImageLibrary extends EventDispatcher
 	{
 		public static var COMPLETE:String = "complete";
 		public static var PROGRESS:String = "progress";

@@ -4,22 +4,45 @@ package bbGameObjects
 	import HubGraphics.*;
 	import HubMath.*;
 	import flash.geom.*;
+	import HubAudio.*;
 	
 	public class Block extends hGameObject
 	{
+		static public var TOP_COLLISION:Number = 0;
+		static public var RIGHT_COLLISION:Number = 1;
+		static public var BOTTOM_COLLISION:Number = 2;
+		static public var LEFT_COLLISION:Number = 3;
+		
+		private var _PowerupName:String = null;
+		
 		private var _CollisionPoint:Point = new Point(0,0);
 		private var _Collided:Boolean = false;
-
-		// 0=top, 1=right, 2=bottom, 3=left
-		private var _CollisionSide:uint = 0;
+		private var _CollisionSide:uint = TOP_COLLISION;
 		
+		public var _BrickBounceSound:hSound;
+
 		public function get Collided():Boolean {return _Collided;}
 		public function get CollisionPoint():Point {return _CollisionPoint;}
 		public function get CollisionSide():uint {return _CollisionSide;}
+
+		// TODO : Verify powerup types
+		public function set PowerupName(powerupName:String):void {_PowerupName = powerupName;}
+		public function get PowerupName():String {return _PowerupName;}
 		
 		public function Block()
 		{
 			super();
+			_BrickBounceSound = hGlobalAudio.SoundLibrary.GetSoundFromName("ball_hits_brick");
+		}
+
+		public function Hit():Powerup
+		{
+			Active = false;
+			Visible = false;
+			
+			_BrickBounceSound.Play();
+
+			return null;
 		}
 		
 		public function DistanceSquaredToCollisionPoint(sourcePoint:Point):Number {
@@ -30,7 +53,7 @@ package bbGameObjects
 		{
 			_Collided = false;
 
-			if (!hCollision.PointInAlignedRect(position, Left, Top, Right, Bottom, 20)) {
+			if (!hCollision.PointCollidesWithRect(position.x, position.y, Left, Top, Right, Bottom, 20)) {
 				_CollisionPoint.x = 0;
 				_CollisionPoint.y = 0;
 				return _CollisionPoint;
@@ -46,7 +69,7 @@ package bbGameObjects
 				collisionPoint = hCollision.LineSegmentIntersectionPoint(previousPosition, position, BottomLeft, BottomRight);
 				if (collisionPoint != null && collisionPoint.x >= Left && collisionPoint.x <= Right && previousPosition.y >= Bottom && position.y <= Bottom) {
 					_CollisionPoint = collisionPoint;
-					_CollisionSide = 2;
+					_CollisionSide = Block.BOTTOM_COLLISION;
 					_Collided = true;
 				}
 			}
@@ -55,7 +78,7 @@ package bbGameObjects
 				collisionPoint = hCollision.LineSegmentIntersectionPoint(previousPosition, position, TopLeft, TopRight);
 				if (collisionPoint != null && collisionPoint.x >= Left && collisionPoint.x <= Right && previousPosition.y <= Top && position.y >= Top) {
 					_CollisionPoint = collisionPoint;
-					_CollisionSide = 0;
+					_CollisionSide = Block.TOP_COLLISION;
 					_Collided = true;
 				}
 			}
@@ -64,7 +87,7 @@ package bbGameObjects
 				collisionPoint = hCollision.LineSegmentIntersectionPoint(previousPosition, position, TopRight, BottomRight);
 				if (collisionPoint != null && collisionPoint.y >= Top && collisionPoint.y <= Bottom && previousPosition.x >= Right && position.x <= Right) {
 					_CollisionPoint = collisionPoint;
-					_CollisionSide = 1;
+					_CollisionSide = Block.RIGHT_COLLISION;
 					_Collided = true;
 				}
 			}
@@ -73,7 +96,7 @@ package bbGameObjects
 				collisionPoint = hCollision.LineSegmentIntersectionPoint(previousPosition, position, TopLeft, BottomLeft);
 				if (collisionPoint != null && collisionPoint.y >= Top && collisionPoint.y <= Bottom && previousPosition.x <= Left && position.x >= Left) {
 					_CollisionPoint = collisionPoint;
-					_CollisionSide = 3;
+					_CollisionSide = Block.LEFT_COLLISION;
 					_Collided = true;
 				}
 			}

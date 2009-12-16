@@ -1,5 +1,3 @@
-import flash.display.Sprite;
-import flash.text.TextField;
 import flash.display.*;
 import flash.geom.*;
 import flash.filters.*;

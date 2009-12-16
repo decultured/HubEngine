@@ -4,6 +4,8 @@ package HubGaming
 	
 	public class hGameState
 	{
+		public static var CHANGE_STATE:String = "change state";
+				
 		protected var _ElapsedTime:Number = 0;
 		
 		public function hGameState() 

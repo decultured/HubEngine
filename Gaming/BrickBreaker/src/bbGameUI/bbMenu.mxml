@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="640" height="480" backgroundImage="@Embed(source='../../bin/screens/background.png')" borderStyle="none" alpha="1.0">
-	<mx:Image x="197" y="275" source="@Embed(source='../../bin/screens/game-over/new-game-btn.png')" id="StartGameButton"/>
-	<mx:Image x="25" y="143" source="@Embed(source='../../bin/logo.png')"/>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="640" height="480" backgroundImage="@Embed(source='../../bin/images/ui/background.png')" borderStyle="none" alpha="1.0">
+	<mx:Image x="197" y="275" source="@Embed(source='../../bin/images/ui/game-over/new-game-btn.png')" id="StartGameButton"/>
+	<mx:Image x="25" y="143" source="@Embed(source='../../bin/images/ui/logo.png')"/>
 </mx:Canvas>

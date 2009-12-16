@@ -50,7 +50,7 @@ package bbGameStates
 			hGlobalInput.Update();
 
 			if (_StartGame) {
-				_Game.Reset(true);
+				_Game.NewGame();
 				return getQualifiedClassName(bbGameState);
 			} else if (_MainMenu)
 				return getQualifiedClassName(bbMenuState);

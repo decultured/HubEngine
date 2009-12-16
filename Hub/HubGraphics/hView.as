@@ -4,7 +4,6 @@ package HubGraphics
 	import mx.core.BitmapAsset;
 	import flash.display.*;
 	import flash.geom.*;
-	import nl.demonsters.debugger.MonsterDebugger;
 	
 	public class hView
 	{

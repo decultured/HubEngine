@@ -6,6 +6,7 @@ package bbGameStates
 	import flash.utils.*;
 	import HubGraphics.*;
 	import HubInput.*;
+	import HubAudio.*;
 	import bbGameUI.*;
 	import flash.events.MouseEvent;
 	import flash.events.Event;
@@ -29,6 +30,7 @@ package bbGameStates
 		public override function Start():void
 		{
 			_StartGame = false;
+			hGlobalAudio.PauseMusic();
 			hGlobalGraphics.View.ViewImage.addChild(_Paused);
 			_Paused.StartGameButton.addEventListener(MouseEvent.CLICK, StartGameEvent);
 		}

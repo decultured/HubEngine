@@ -8,7 +8,6 @@ package bbGameStates
 	import HubAudio.*;
 	import flash.events.*;
 	import bbGameUI.*;
-	import nl.demonsters.debugger.MonsterDebugger;
 	
 	public class bbLoaderState extends hGameState
 	{

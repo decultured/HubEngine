@@ -5,9 +5,8 @@ package HubGaming
 	import flash.net.*;
 	import HubGraphics.*;
 	import HubAudio.*;
-	import nl.demonsters.debugger.MonsterDebugger;
 	
-	public class hGameLoader extends Sprite
+	public class hGameLoader extends EventDispatcher
 	{
 		public static var COMPLETE:String = "complete";
 		public static var PROGRESS:String = "progress";
@@ -45,8 +44,6 @@ package HubGaming
 
 		private function HandleError(event:IOErrorEvent):void
 		{
-			MonsterDebugger.trace(this, "XML IO Error on: " + _URL);
-			
 			dispatchEvent(new Event(hGameLoader.IO_ERROR));
 		}
 		
@@ -62,7 +59,6 @@ package HubGaming
 		// causes an unreported error. 
 		private function HandleComplete(event:Event):void
 		{
-			MonsterDebugger.trace(this, "XML Loaded: " + _URL);
 			var XMLData:XML = new XML(event.target.data);
 			
 			LoadData(XMLData);
@@ -88,7 +84,7 @@ package HubGaming
 			if (newImage["@name"] == undefined)
 				return null;
 			
-			var newImageClass:hImage = hGlobalGraphics.ImageLibrary.AddImage(newImage["@name"], newImage["@url"]);
+			var newImageClass:hImage = hGlobalGraphics.ImageLibrary.AddImage(newImage["@name"], newImage["@url"], true);
 			
 			if (!newImageClass)
 				return null;
@@ -109,7 +105,7 @@ package HubGaming
 			if (newSound["@name"] == undefined)
 				return null;
 			
-			return hGlobalAudio.SoundLibrary.AddSound(newSound["@name"], newSound["@url"]);
+			return hGlobalAudio.SoundLibrary.AddSound(newSound["@name"], newSound["@url"], true);
 		}
 		
 		protected function AddMusic(newMusic:XML):hSound
@@ -117,7 +113,9 @@ package HubGaming
 			if (newMusic["@name"] == undefined)
 				return null;
 			
-			return hGlobalAudio.SoundLibrary.AddSound(newMusic["@name"], newMusic["@url"]);
+			hGlobalAudio.Music = newMusic["@name"];
+			
+			return hGlobalAudio.SoundLibrary.AddSound(newMusic["@name"], newMusic["@url"], true);
 		}
 	}	
 }
