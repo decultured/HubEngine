@@ -4,7 +4,7 @@
 		<image url="images/background-1.png?nocache=plz1" name="background" />
 		<!-- rectangle blocks -->
 		<image url="images/blocks/rectangle-spirte-sheet.png?nocache=plz1" name="block_rect" segment_width="60" segment_height="20"/>
-		<image url="images/powerups.png" name="powerups" segment_width="48" segment_height="24"/>
+		<image url="images/powerups.png?nocache=plz2" name="powerups" segment_width="60" segment_height="30"/>
 		<image url="images/paddle.png?nocache=plz1" name="paddle_normal" />
 		<image url="images/cursor.png?nocache=plz1" name="cursor_normal" />
 		<image url="images/ball.png?nocache=plz1" name="ball_normal" />
@@ -20,8 +20,8 @@
 		<ball image="ball_normal" width="16" height="16" />
 		<paddle image="paddle_normal" width="74" height="14" />
 		<cursor image="cursor_normal" width="16" height="16" />
-		<powerup type="slow_ball" width="48" height="24" image="powerups" start_frame="0" />
-		<powerup type="fast_ball" width="48" height="24" image="powerups" start_frame="1" />
+		<powerup type="slow_ball" width="60" height="30" image="powerups" start_frame="0" />
+		<powerup type="fast_ball" width="60" height="30" image="powerups" start_frame="1" />
 		<block image="block_rect" start_frame="6" shape="rectangle" x="20" y="40" width="60" height="20" />
 		<block image="block_rect" start_frame="6" shape="rectangle" x="80" y="40" width="60" height="20" />
 		<block image="block_rect" start_frame="6" shape="rectangle" x="140" y="40" width="60" height="20" />
