@@ -26,8 +26,8 @@ package
 		private var _CurrentLevel:String = "level1.xml";
 		private var _NextLevel:String = null;
 		private var _Score:Number = 0;
-		private var _Balls:Number = 3;
-		private var _StartingBalls:Number = 3;
+		private var _Balls:Number = 1;
+		private var _StartingBalls:Number = 1;
 		private var _GameOver:Boolean = false;
 		private var _LevelWon:Boolean = false;
 

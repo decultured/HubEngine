@@ -3,7 +3,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>AEROBLOX.com - A game by OneMorePoint.com</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
 	<script type="text/javascript" src="swfobject.js"></script>
+	<script type="text/javascript" src="http://onemorepoint.local/media/jscript/widgets.js"></script>
 	<style>
 		html, body {
 			background: #000 url(./splash/images/stars.gif) fixed;
@@ -52,11 +54,11 @@
 			text-shadow: #FFF 0px 0px 2px;
 		}
 		
-		#highscores-list thead th {
+		#highscores thead th {
 			background: red;
 		}
 		
-		#highscores-list tr.alt td {
+		#highscores tr.alt td {
 			background: url(./splash/images/table-tr-alt.png) bottom;
 			border-bottom: 1px dotted #666;
 		}
@@ -87,38 +89,20 @@
 			  swfobject.embedSWF(filename, "aeroblox-display", "640", "480", "10.0.0", "expressInstall.swf", flashvars, params, attributes);
 			</script>
 		</div>
-		<!-- <div id="sidebar">
-			<div id="highscores-list">
+		<div id="sidebar">
+			<div id="highscores">
 				<h2>Recent Highscores</h2>
-				<table border="0" cellpadding="4" cellspacing="0" width="100%">
-					<thead>
-						<tr>
-							<th align="left">Player</th>
-							<th align="right">Score</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
-						<tr class="alt"><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
-						<tr><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
-						<tr class="alt"><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
-						<tr><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
-						<tr class="alt"><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
-						<tr><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
-						<tr class="alt"><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
-						<tr><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
-						<tr class="alt"><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
-						<tr><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
-						<tr class="alt"><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
-						<tr><td>unhappyrobot</td><td align="right">1,000,000</td></tr>
-					</tbody>
-				</table>
+				<div id="highscores-list"></div>
 			</div>
-		</div> -->
+		</div>
 		<div class="clear"></div>
 		<div id="footer">
 			AEROBLOX is a game by <a href="http://onemorepoint.com">OneMorePoint.com</a> | &copy; 2009 OneMorePoint
 		</div>
 	</div>
+	
+	<script>
+		$('#highscores-list').highscores();
+	</script>
 </body>
 </html>

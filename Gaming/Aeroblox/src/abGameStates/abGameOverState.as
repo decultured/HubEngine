@@ -9,6 +9,7 @@ package abGameStates
 	import abGameUI.*;
 	import flash.events.MouseEvent;
 	import flash.events.Event;
+	import flash.net.*;
 	
 	public class abGameOverState extends hGameState
 	{
@@ -36,6 +37,25 @@ package abGameStates
 			_GameOver.Score.text = "Final Score: " + _Game.Score;
 			_GameOver.StartGameButton.addEventListener(MouseEvent.CLICK, StartGameEvent);
 			_GameOver.MainMenuButton.addEventListener(MouseEvent.CLICK, MainMenuEvent);
+			
+			var postvar:URLVariables = new URLVariables();
+			postvar.score = _Game.Score;
+			
+			var req:URLRequest = new URLRequest();
+			req.url = 'http://onemorepoint.com/api/game/aeroblox/scores/';
+			req.method = URLRequestMethod.POST;
+			req.data = postvar;
+			
+			var reqload:URLLoader = new URLLoader();
+			reqload.dataFormat = URLLoaderDataFormat.VARIABLES;
+			try 
+			{
+				reqload.load(req);
+			} 
+			catch (error:Error) 
+			{
+				trace('Unable to load requested document.');
+			}
 		}
 		
 		public override function Stop():void
