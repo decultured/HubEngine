@@ -82,8 +82,8 @@
 		<div id="game-wrapper">
 			<div id="aeroblox-display"></div>
 			<script type="text/javascript">
-			  var filename= "aeroblox.swf?seed=" + (Math.floor(Math.random()*99999999)).toString();
-			  var flashvars = {start_level: "levels/level1.xml?nocache=plz"};
+			  var filename= "http://onemorepoint.local/game/aeroblox/embed?seed=" + (Math.floor(Math.random()*99999999)).toString();
+			  var flashvars = {start_level: "http://onemorepoint.local/game/aeroblox/assets/levels/level1.xml?nocache=plz"};
 			  var params = {};
 			  var attributes = {};
 			  swfobject.embedSWF(filename, "aeroblox-display", "640", "480", "10.0.0", "expressInstall.swf", flashvars, params, attributes);
