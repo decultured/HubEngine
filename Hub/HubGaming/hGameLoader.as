@@ -22,6 +22,22 @@ package HubGaming
 		{
 		}
 		
+		public function BooleanFromString(value:String):Boolean
+		{
+			switch(value) {
+			    case "1":
+			    case "true":
+			    case "yes":
+			        return true;
+			    case "0":
+			    case "false":
+			    case "no":
+			        return false;
+			    default:
+			        return Boolean(value);
+			}	
+		}
+		
 		public function Load():void
 		{
 			if (!_URL)
@@ -96,8 +112,22 @@ package HubGaming
 				newImageClass.OffsetX = Number(newImage["@offset_x"]);
 			if (newImage["@offset_y"])
 				newImageClass.OffsetY = Number(newImage["@offset_y"]);
-			
+
+			for each (var newAnimation:XML in newImage.animation) {
+				AddAnimation(newImageClass, newAnimation);
+			}
+
 			return newImageClass;
+		}
+		
+		protected function AddAnimation(image:hImage, newAnimation:XML):hAnimation
+		{
+			if (newAnimation["@name"] == undefined || !image)
+				return null;
+
+			var animation:hAnimation = image.AddAnimation(newAnimation["@name"], uint(newAnimation["@start_frame"]), uint(newAnimation["@end_frame"]), Number(newAnimation["@duration"]), BooleanFromString(newAnimation["@loops"]), true);
+
+			return animation;
 		}
 		
 		protected function AddSound(newSound:XML):hSound

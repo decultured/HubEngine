@@ -10,6 +10,7 @@ package HubGraphics
 		static protected var _ImageLibrary:hImageLibrary;
 		static protected var _BackgroundImage:hImage = null;
 		static protected var _BackgroundPosition:Point = new Point(0,0);
+		static protected var _ParticleSystem:hParticleSystem;
 		
 		static public function Initialize(viewImage:Image):void
 		{
@@ -30,6 +31,15 @@ package HubGraphics
 				_ImageLibrary = new hImageLibrary();
 				
 			return _ImageLibrary;
+		}
+		
+		// TODO : Change hardcoded particle system num particles
+		static public function get ParticleSystem():hParticleSystem
+		{
+			if (_ParticleSystem == null)
+				_ParticleSystem = new hParticleSystem(500);
+				
+			return _ParticleSystem;
 		}
 		
 		public static function BeginFrame(clear:Boolean = true, clearColor:uint = 0xffffff):void 

@@ -27,6 +27,8 @@
 		private var _SegmentWidth:uint = 0;
 		private var _SegmentHeight:uint = 0;
 		
+		private var _Animations:Object = new Array();
+		
 		public function get OffsetX():Number {return _Offset.x;}
 		public function get OffsetY():Number {return _Offset.y;}
 		public function set OffsetX(offsetX:Number):void {_Offset.x = offsetX;}
@@ -64,12 +66,46 @@
 			BitmapLoader.load(new URLRequest(_URL));
 		}
 
+		public function AddAnimation(name:String, startFrame:uint, endFrame:uint, duration:Number, loops:Boolean, replace:Boolean = false):hAnimation
+		{
+			if (name == null)
+				return null;
+			
+			if (_Animations[name])
+			{
+				if (replace) {
+					_Animations[name].Duration = duration;	
+					_Animations[name].StartFrame = startFrame;
+					_Animations[name].EndFrame = endFrame;
+					_Animations[name].Loops	= loops;
+				}
+				return _Animations[name];
+			}
+				
+			var newAnimation:hAnimation = new hAnimation(name);
+			newAnimation.Duration = duration;	
+			newAnimation.StartFrame = startFrame;
+			newAnimation.EndFrame = endFrame;
+			newAnimation.Loops	= loops;
+			_Animations[name] = newAnimation;
+			return newAnimation;
+		}
+
+		public function GetAnimation(name:String):hAnimation {return _Animations[name];}
+		public function GetAnimationFrame(name:String, frameTime:Number):uint
+		{
+			if (_Animations[name]) {
+				return _Animations[name].CurrentFrame(frameTime);
+			}
+			return 0;
+		}
+
 		public function SetSegmentSize(segmentWidth:uint, segmentHeight:uint):void
 		{
 			_SegmentWidth = segmentWidth;
 			_SegmentHeight = segmentHeight;
 		}
-		
+	
 		private function Segment():void
 		{
 			if (!_SegmentWidth || !_SegmentHeight || _SegmentWidth > Width || _SegmentHeight > Height)
@@ -119,6 +155,11 @@
 			destinationBitmap.copyPixels(_Bitmap, sourceBounds, new Point(destinationPoint.x + _Offset.x, destinationPoint.y + _Offset.y), null, null, true); 
 		}
 
+		public function RenderSimpleAnimated(destinationBitmap:BitmapData, destinationPoint:Point, animationName:String, frameTime:Number):void
+		{
+			RenderSimple(destinationBitmap, destinationPoint, GetAnimationFrame(animationName, frameTime));
+		}
+		
 		public function RenderSimpleCentered(destinationBitmap:BitmapData, destinationPoint:Point, segment:uint = 0):void
 		{
 			if (!_Loaded)
@@ -129,6 +170,11 @@
 			destinationBitmap.copyPixels(_Bitmap, sourceBounds, new Point(destinationPoint.x - (sourceBounds.width * 0.5), destinationPoint.y - (sourceBounds.height * 0.5)), null, null, true); 
 		}
 
+		public function RenderSimpleCenteredAnimated(destinationBitmap:BitmapData, destinationPoint:Point, animationName:String, frameTime:Number):void
+		{
+			RenderSimpleCentered(destinationBitmap, destinationPoint, GetAnimationFrame(animationName, frameTime));
+		}
+		
 		public function RenderTransformed(destinationBitmap:BitmapData, transformMatrix:Matrix):void
 		{
 			if (!_Loaded)
