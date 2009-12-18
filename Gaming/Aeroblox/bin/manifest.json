@@ -1,0 +1,9 @@
+{
+    "slug": "aeroblox",
+    "game": "aeroblox.swf",
+    "assets": [
+        "images/",
+        "levels/",
+        "sounds/"
+    ]
+}
