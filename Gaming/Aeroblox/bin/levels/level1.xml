@@ -5,7 +5,7 @@
 		<!-- rectangle blocks -->
 		<image url="../bin/images/blocks/rectangle-spirte-sheet.png?nocache=plz1" name="block_rect" segment_width="60" segment_height="20" />
 		<image url="../bin/images/explosion_sheet.png?nocache=plz1" name="explosion_particle" segment_width="16" segment_height="16">
-			<animation name="explosion_particle" start_frame="0" end_frame="15" duration="0.4" loops="false" />
+			<animation name="explosion_particle" start_frame="0" end_frame="15" duration="1" loops="false" />
 		</image>
 		<image url="../bin/images/powerups.png?nocache=plz2" name="powerups" segment_width="60" segment_height="30"/>
 		<image url="../bin/images/paddle.png?nocache=plz1" name="paddle_normal" />

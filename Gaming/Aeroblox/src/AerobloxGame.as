@@ -3,6 +3,7 @@ package
 	import abGameObjects.*;
 	import HubGraphics.*;
 	import HubAudio.*;
+	import HubInput.*;
 	import HubMath.*;
 	import flash.geom.*;
 	import abGameUI.*;
@@ -30,6 +31,14 @@ package
 		private var _StartingBalls:Number = 1;
 		private var _GameOver:Boolean = false;
 		private var _LevelWon:Boolean = false;
+		
+		private var _Cheating:Boolean = true;
+		private var _Invincible:Boolean = false;
+		
+		private var _ExtraLivesCheat:Array = [hKeyCodes.I, hKeyCodes.D, hKeyCodes.K, hKeyCodes.F, hKeyCodes.A];
+		private var _InvincibleCheat:Array = [hKeyCodes.I, hKeyCodes.D, hKeyCodes.D, hKeyCodes.Q, hKeyCodes.D];
+		private var _NextLevelCheat:Array = [hKeyCodes.I, hKeyCodes.D, hKeyCodes.C, hKeyCodes.L, hKeyCodes.E, hKeyCodes.V];
+		private var _FireballCheat:Array = [hKeyCodes.I, hKeyCodes.D, hKeyCodes.C, hKeyCodes.L, hKeyCodes.I, hKeyCodes.P];
 
 		public function get Score():Number {return _Score;}
 		public function get GameOver():Boolean {return _GameOver;}
@@ -168,6 +177,28 @@ package
 
 		public function Update(elapsedTime:Number):void
 		{
+			if (hGlobalInput.Keyboard.KeySequenceEntered(_ExtraLivesCheat)) {
+				_Balls += 50;
+				_HUD.Balls.text = String(_Balls);
+				_Cheating = true;
+			}
+			
+			if (hGlobalInput.Keyboard.KeySequenceEntered(_InvincibleCheat)) {
+				_Invincible = !_Invincible;
+				_Cheating = true;
+			}
+
+			if (hGlobalInput.Keyboard.KeySequenceEntered(_NextLevelCheat)) {
+				_LevelWon = true;
+				_Cheating = true;
+			}
+			
+			if (_Cheating = true) {
+				_Score = 0;
+				_HUD.Score.text = String(_Score);
+			}
+
+			
 			hGlobalAudio.PlayMusic();
 			_Ball.Update(elapsedTime);
 			_Paddle.Update(elapsedTime);
@@ -180,7 +211,8 @@ package
 				if (_Paddle.ObjectRectanglesCollide(_Powerups[i])) {
 					_Powerups[i].Active = false;
 					_Powerups[i].Visible = false;
-					_Score += 250;
+					if (!_Cheating)
+						_Score += 250;
 					ApplyPowerup(_Powerups[i]);
 					_FailSound.Play();
 				}
@@ -221,7 +253,8 @@ package
 				collisionBlock.Hit();
 				
 				activeBlocks--;
-				_Score += 100;
+				if (!_Cheating)
+					_Score += 100;
 				_HUD.Score.text = String(_Score);
 				
 				ClonePowerupByType(collisionBlock.PowerupName, collisionBlock.Left, collisionBlock.Bottom);
@@ -248,11 +281,16 @@ package
 			
 			//Reset if Ball Hits Bottom
 			if (_Ball.Bottom > hGlobalGraphics.View.Height) {
-				_Balls--;
-				_FailSound.Play();	
-				Reset();
-				if (_Balls < 0)
-					_GameOver = true;
+				if (!_Invincible) {
+					_Balls--;
+					_FailSound.Play();	
+					Reset();
+					if (_Balls < 0)
+						_GameOver = true;
+				} else {
+					_Ball.ResetTranslation(_Ball.Position.x, Math.abs(_Ball.Position.y));
+					_Ball.ResetVelocity(_Ball.Velocity.x, -Math.abs(_Ball.Velocity.y));
+				}
 			}
 
 			hGlobalGraphics.ParticleSystem.Update(elapsedTime);

@@ -5,6 +5,7 @@ package abGameStates
 	import flash.geom.*;
 	import flash.utils.*;
 	import HubGraphics.*;
+	import HubAudio.*;
 	import HubInput.*;
 	
 	public class abGameState extends hGameState
@@ -29,6 +30,7 @@ package abGameStates
 		
 		public override function Stop():void
 		{
+			hGlobalAudio.PauseMusic();
 			_Game.HideHUD();
 		}
 		
@@ -43,7 +45,7 @@ package abGameStates
 
 			if (hGlobalInput.Keyboard.KeyJustPressed(hKeyCodes.P) || hGlobalInput.Keyboard.KeyJustPressed(hKeyCodes.PAUSE) || !hGlobalInput.ApplicationActive)
 				return getQualifiedClassName(abPausedState);
-			if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.Q)) {
+			if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.ESC)) {
 				return getQualifiedClassName(abMenuState);
 			}
 			if (_Game.GameOver) {
