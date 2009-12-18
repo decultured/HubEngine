@@ -15,10 +15,10 @@
 		<sound url="http://onemorepoint.com/game/aeroblox/embed/sounds/button-10.mp3" name="ball_lost" />
 		<sound url="http://onemorepoint.com/game/aeroblox/embed/sounds/ballpaddle.mp3" name="ball_hits_paddle" />
 		<sound url="http://onemorepoint.com/game/aeroblox/embed/sounds/button-29.mp3" name="ball_hits_brick" />
-		<music url="http://onemorepoint.com/game/aeroblox/embed/sounds/fractal.mp3" name="background_music" />
+		<!-- <!-- <music url="http://onemorepoint.com/game/aeroblox/embed/sounds/fractal.mp3" name="background_music" /> --> -->
 	</resources>
 	<objects>
-		<next_level url="levels/level2.xml" />
+		<next_level url="http://onemorepoint.com/game/aeroblox/embed/levels/level2.xml" />
 		<background image="background" />
 		<ball image="ball_normal" width="16" height="16" />
 		<paddle image="paddle_normal" width="74" height="14" />

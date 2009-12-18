@@ -14,3 +14,5 @@ scp package.zip onemorepoint.com:/tmp/
 echo "Telling server to deploy:"
 curl -d package=package.zip http://apigamedeployer:jaSPuphUv6KuVefa8am7FEchaD9g8s6g@onemorepoint.com/api/game/aeroblox/deploy/
 echo ""
+
+rm package.zip
