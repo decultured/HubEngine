@@ -65,14 +65,10 @@ package
 
 		public function ClearObjects():void
 		{
-			var blocksLength:uint = _Blocks.length;
-			for (var i:uint = 0; i < blocksLength; i++) {
-				if (!_Blocks[i] || !_Blocks[i] is Block)
-					continue;
-				delete _Blocks[i];
-			}
-			
-			_Blocks = new Array();
+			_Blocks.length = 0;
+			_Powerups.length = 0;
+			hGlobalGraphics.ParticleSystem.DeactivateAllParticles();			
+
 			_LevelWon = false;
 		}
 
@@ -85,7 +81,8 @@ package
 				_Blocks[i].Active = true;
 				_Blocks[i].Visible = true;
 			}
-			
+			_Powerups.length = 0;
+			hGlobalGraphics.ParticleSystem.DeactivateAllParticles();			
 			_GameOver = false;
 			_LevelWon = false;
 			_Score = 0;
@@ -183,6 +180,7 @@ package
 				if (_Paddle.ObjectRectanglesCollide(_Powerups[i])) {
 					_Powerups[i].Active = false;
 					_Powerups[i].Visible = false;
+					_Score += 250;
 					ApplyPowerup(_Powerups[i]);
 					_FailSound.Play();
 				}
@@ -256,10 +254,14 @@ package
 				if (_Balls < 0)
 					_GameOver = true;
 			}
+
+			hGlobalGraphics.ParticleSystem.Update(elapsedTime);
 		}
 		
 		public function Render():void
 		{
+			hGlobalGraphics.ParticleSystem.Render();
+			
 			var blocksLength:uint = _Blocks.length;
 			for (var i:uint = 0; i < blocksLength; i++) {
 				if (_Blocks[i] && _Blocks[i] is Block)

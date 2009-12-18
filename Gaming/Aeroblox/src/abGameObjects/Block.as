@@ -33,6 +33,7 @@ package abGameObjects
 		{
 			super();
 			_BrickBounceSound = hGlobalAudio.SoundLibrary.GetSoundFromName("ball_hits_brick");
+			StartAnimation("block");
 		}
 
 		public function Hit():Powerup

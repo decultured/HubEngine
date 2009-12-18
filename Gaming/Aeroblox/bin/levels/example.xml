@@ -3,7 +3,7 @@
 	<resources>
 		<image url="" name="" />
 		<image url="" name="" segmented="true" segment_width="" segment_height="" default_animation="" >
-			<animation name="" start_frame="" end_frame="" duration="" loops="true" next_animation="" />
+			<animation name="" start_frame="" end_frame="" duration="" loops="true" />
 		</image>
 		<sound url="" name="" />
 	</resources>

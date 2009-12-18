@@ -3,7 +3,6 @@
 	<resources>
 		<image url="images/background-1.png?nocache=plz1" name="background" />
 		<image url="images/blocks/square-spirte-sheet.png?nocache=plz1" name="block_square" segment_width="20" segment_height="20"/>
-		
 		<image url="images/paddle.png?nocache=plz1" name="paddle_normal" />
 		<image url="images/cursor.png?nocache=plz1" name="cursor_normal" />
 		<image url="images/ball.png?nocache=plz1" name="ball_normal" />

@@ -3,6 +3,7 @@ package abGameObjects
 	import HubGaming.*;
 	import HubGraphics.*;
 	import HubAudio.*;
+	import flash.geom.*;
 	
 	public class Ball extends hGameObject
 	{
@@ -15,14 +16,25 @@ package abGameObjects
 		
 		private var _SpeedChangeDuration:Number = 10;
 		private var _SpeedChangeElapsed:Number = 0;
-				
+		
+		private var _ExplosionEmitter:hParticleEmitter;
+		
 		public function get Speed():Number {return _Speed;}
 		
 		public function Ball()
 		{
 			super();
 			_WallBounceSound = hGlobalAudio.SoundLibrary.AddSound("ball_hits_wall");
-			
+			_ExplosionEmitter = new hParticleEmitter(hGlobalGraphics.ParticleSystem);
+			_ExplosionEmitter.SetImage("explosion_particle");
+			_ExplosionEmitter.CurrentAnimation = "explosion_particle";
+			_ExplosionEmitter.AnimationStartTimeRange = 0.02;
+			_ExplosionEmitter.StartVelocityRange = new Point(20, 20);
+			_ExplosionEmitter.StartAcceleration = new Point(0, 75);
+			_ExplosionEmitter.AnimationStartTimeRange = 0.2;
+			_ExplosionEmitter.ParticlesPerSecond = 20;
+			_ExplosionEmitter.ParticleLifespan = 0.75;
+
 			Reset();
 		}
 
@@ -64,6 +76,9 @@ package abGameObjects
 				_Speed = _DefaultSpeed;
 				Velocity.normalize(_Speed);
 			}
+			
+			_ExplosionEmitter.ResetTranslation(Position.x, Position.y);
+			_ExplosionEmitter.Update(elapsedTime);
 			
 			super.Update(elapsedTime);
 			
