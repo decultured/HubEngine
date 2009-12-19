@@ -11,7 +11,7 @@ package abGameObjects
 		private var _DefaultSpeed:Number = 220;
 		private var _SpeedVariation:Number = 75;
 		private var _MaxVelocity:Number = 370;
-		private var _MinVelocity:Number = 70;
+		private var _MinVelocity:Number = 140;
 		private var _WallBounceSound:hSound;
 		
 		private var _SpeedChangeDuration:Number = 10;
@@ -77,8 +77,8 @@ package abGameObjects
 				Velocity.normalize(_Speed);
 			}
 			
-			_ExplosionEmitter.ResetTranslation(Position.x, Position.y);
-			_ExplosionEmitter.Update(elapsedTime);
+//			_ExplosionEmitter.ResetTranslation(Position.x, Position.y);
+//			_ExplosionEmitter.Update(elapsedTime);
 			
 			super.Update(elapsedTime);
 			

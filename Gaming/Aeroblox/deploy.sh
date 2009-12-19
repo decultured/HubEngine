@@ -4,7 +4,7 @@
 ./build_release
 
 cd bin/
-zip -r ../package.zip ./*
+zip -9 -r ../package.zip ./*
 cd ../
 
 # transfer the game assets to the server games storage

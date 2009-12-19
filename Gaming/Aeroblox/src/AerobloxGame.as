@@ -28,11 +28,11 @@ package
 		private var _NextLevel:String = null;
 		private var _Score:Number = 0;
 		private var _Balls:Number = 1;
-		private var _StartingBalls:Number = 1;
+		private var _StartingBalls:Number = 5;
 		private var _GameOver:Boolean = false;
 		private var _LevelWon:Boolean = false;
 		
-		private var _Cheating:Boolean = true;
+		private var _Cheating:Boolean = false;
 		private var _Invincible:Boolean = false;
 		
 		private var _ExtraLivesCheat:Array = [hKeyCodes.I, hKeyCodes.D, hKeyCodes.K, hKeyCodes.F, hKeyCodes.A];
@@ -41,6 +41,7 @@ package
 		private var _FireballCheat:Array = [hKeyCodes.I, hKeyCodes.D, hKeyCodes.C, hKeyCodes.L, hKeyCodes.I, hKeyCodes.P];
 
 		public function get Score():Number {return _Score;}
+		public function get Balls():Number {return _Balls;}
 		public function get GameOver():Boolean {return _GameOver;}
 		public function get LevelWon():Boolean {return _LevelWon;}
 		public function get NextLevel():String {return _NextLevel;}  
@@ -50,10 +51,10 @@ package
 		public function get CurrentLevel():String {return _CurrentLevel;}  
 		public function set CurrentLevel(currentLevel:String):void {_CurrentLevel = currentLevel;}  
 		public function get HUD():abGameHUD {return _HUD;}
-
-		public function ShowHUD():void {hGlobalGraphics.View.ViewImage.addChild(_HUD);}
-		public function HideHUD():void {hGlobalGraphics.View.ViewImage.removeChild(_HUD);}
 		
+		public function ShowHUD():void {hGlobalGraphics.View.ViewImage.addChild(_HUD);}
+        public function HideHUD():void {hGlobalGraphics.View.ViewImage.removeChild(_HUD);}
+
       	public function AerobloxGame()
         {
 			_HUD = new abGameHUD();
@@ -61,7 +62,7 @@ package
 			_PaddleBounceSound = hGlobalAudio.SoundLibrary.GetSoundFromName("ball_hits_paddle");
 			_FailSound = hGlobalAudio.SoundLibrary.GetSoundFromName("ball_lost");
 			
-			_Balls = _StartingBalls;
+			Balls = _StartingBalls;
 			_Cursor = new Cursor();
 			_Ball = new Ball();
 			_Paddle = new Paddle();
@@ -72,12 +73,48 @@ package
 			Reset();
         }
 
+		public function AddScore(value:Number):Number
+		{
+			Score = Score + value;
+			
+			return Score;
+		}
+
+		public function set Score(value:Number):void
+		{
+			if (!_Cheating)
+				_Score = value;
+			else
+				_Score = 0;
+				
+			if (_HUD && _HUD.Score) {
+				_HUD.Score.text = String(_Score);
+			}
+		}
+		
+		public function AddBalls(numBalls:int):Number
+		{
+			Balls = Balls + numBalls;
+			
+			return _Balls;
+		}
+		
+		public function set Balls(numBalls:Number):void
+		{
+			_Balls = numBalls;
+			
+			if (_HUD && _HUD.Balls)
+				_HUD.Balls.text = String(_Balls);
+
+			if (_Balls < 0)
+				_GameOver = true;
+		}
+
 		public function ClearObjects():void
 		{
 			_Blocks.length = 0;
 			_Powerups.length = 0;
-			hGlobalGraphics.ParticleSystem.DeactivateAllParticles();			
-
+			hGlobalGraphics.ParticleSystem.DeactivateAllParticles();
 			_LevelWon = false;
 		}
 
@@ -94,19 +131,14 @@ package
 			hGlobalGraphics.ParticleSystem.DeactivateAllParticles();			
 			_GameOver = false;
 			_LevelWon = false;
-			_Score = 0;
-			_Balls = _StartingBalls;
+			Score = 0;
+			Balls = _StartingBalls;
 
 			Reset()
 		}
 
 		public function Reset():void
 		{
-			if (_HUD && _HUD.Balls && _HUD.Score) {
-				_HUD.Balls.text = String(_Balls);
-				_HUD.Score.text = String(_Score);
-			}
-			
 			_Ball.Reset();
 			_Paddle.ResetTranslation(320 - _Paddle.Width * 0.5, _Paddle.DefaultYPosition)
 		}
@@ -178,8 +210,7 @@ package
 		public function Update(elapsedTime:Number):void
 		{
 			if (hGlobalInput.Keyboard.KeySequenceEntered(_ExtraLivesCheat)) {
-				_Balls += 50;
-				_HUD.Balls.text = String(_Balls);
+				Balls = Balls + 50;
 				_Cheating = true;
 			}
 			
@@ -192,13 +223,7 @@ package
 				_LevelWon = true;
 				_Cheating = true;
 			}
-			
-			if (_Cheating = true) {
-				_Score = 0;
-				_HUD.Score.text = String(_Score);
-			}
-
-			
+		
 			hGlobalAudio.PlayMusic();
 			_Ball.Update(elapsedTime);
 			_Paddle.Update(elapsedTime);
@@ -211,8 +236,7 @@ package
 				if (_Paddle.ObjectRectanglesCollide(_Powerups[i])) {
 					_Powerups[i].Active = false;
 					_Powerups[i].Visible = false;
-					if (!_Cheating)
-						_Score += 250;
+					Score += 250;
 					ApplyPowerup(_Powerups[i]);
 					_FailSound.Play();
 				}
@@ -223,8 +247,16 @@ package
 			var blocksLength:uint = _Blocks.length;
 			var activeBlocks:uint = 0;
 			for (i = 0; i < blocksLength; i++) {
-				if (!_Blocks[i] || !_Blocks[i] is Block || !_Blocks[i].Active)
+				if (!_Blocks[i] || !_Blocks[i] is Block)
+				 	continue;
+				if (!_Blocks[i].Active && _Blocks[i].ExplosionEmitter) {
+					if (_Blocks[i].ExplosionEmitter.IsAlive) {
+						_Blocks[i].ExplosionEmitter.StartPositionRange = _Blocks[i].Height * 0.5;
+						_Blocks[i].ExplosionEmitter.ResetTranslation(_Blocks[i].CollisionPoint.x, _Blocks[i].CollisionPoint.y);
+						_Blocks[i].ExplosionEmitter.Update(elapsedTime);
+					}
 					continue;
+				}
 					
 				activeBlocks++;
 				
@@ -253,9 +285,7 @@ package
 				collisionBlock.Hit();
 				
 				activeBlocks--;
-				if (!_Cheating)
-					_Score += 100;
-				_HUD.Score.text = String(_Score);
+				Score += 100;
 				
 				ClonePowerupByType(collisionBlock.PowerupName, collisionBlock.Left, collisionBlock.Bottom);
 			}
@@ -282,11 +312,9 @@ package
 			//Reset if Ball Hits Bottom
 			if (_Ball.Bottom > hGlobalGraphics.View.Height) {
 				if (!_Invincible) {
-					_Balls--;
+					Balls -= 1;
 					_FailSound.Play();	
 					Reset();
-					if (_Balls < 0)
-						_GameOver = true;
 				} else {
 					_Ball.ResetTranslation(_Ball.Position.x, Math.abs(_Ball.Position.y));
 					_Ball.ResetVelocity(_Ball.Velocity.x, -Math.abs(_Ball.Velocity.y));
@@ -302,7 +330,7 @@ package
 			
 			var blocksLength:uint = _Blocks.length;
 			for (var i:uint = 0; i < blocksLength; i++) {
-				if (_Blocks[i] && _Blocks[i] is Block)
+				if (_Blocks[i] && _Blocks[i] is Block && _Blocks[i].Visible)
 					_Blocks[i].Render();
 			}
 			

@@ -10,7 +10,7 @@
 		<sound url="http://onemorepoint.com/game/aeroblox/embed/sounds/button-10.mp3" name="ball_lost" />
 		<sound url="http://onemorepoint.com/game/aeroblox/embed/sounds/ballpaddle.mp3" name="ball_hits_paddle" />
 		<sound url="http://onemorepoint.com/game/aeroblox/embed/sounds/button-29.mp3" name="ball_hits_brick" />
-		<!-- <music url="http://onemorepoint.com/game/aeroblox/embed/sounds/fractal.mp3" name="background_music" /> -->
+		<music url="http://onemorepoint.com/game/aeroblox/embed/sounds/fractal.mp3" name="background_music" />
 	</resources>
 	<objects>
 		<next_level url="http://onemorepoint.com/game/aeroblox/embed/levels/mario.xml" />

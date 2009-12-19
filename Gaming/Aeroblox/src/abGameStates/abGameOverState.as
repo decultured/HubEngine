@@ -38,23 +38,25 @@ package abGameStates
 			_GameOver.StartGameButton.addEventListener(MouseEvent.CLICK, StartGameEvent);
 			_GameOver.MainMenuButton.addEventListener(MouseEvent.CLICK, MainMenuEvent);
 			
-			var postvar:URLVariables = new URLVariables();
-			postvar.score = _Game.Score;
+			if(_Game.Score > 0) {
+				var postvar:URLVariables = new URLVariables();
+				postvar.score = _Game.Score;
 			
-			var req:URLRequest = new URLRequest();
-			req.url = 'http://onemorepoint.com/api/game/aeroblox/scores/';
-			req.method = URLRequestMethod.POST;
-			req.data = postvar;
+				var req:URLRequest = new URLRequest();
+				req.url = 'http://www.onemorepoint.com/api/game/aeroblox/scores/';
+				req.method = URLRequestMethod.POST;
+				req.data = postvar;
 			
-			var reqload:URLLoader = new URLLoader();
-			reqload.dataFormat = URLLoaderDataFormat.VARIABLES;
-			try 
-			{
-				reqload.load(req);
-			} 
-			catch (error:Error) 
-			{
-				trace('Unable to load requested document.');
+				var reqload:URLLoader = new URLLoader();
+				reqload.dataFormat = URLLoaderDataFormat.VARIABLES;
+				try 
+				{
+					reqload.load(req);
+				} 
+				catch (error:Error) 
+				{
+					trace('Unable to load requested document.');
+				}
 			}
 		}
 		
