@@ -16,7 +16,7 @@ private var StartLevel:String;
 public function Initialize():void
 {
 	debugger = new MonsterDebugger(this);
-//	MonsterDebugger.trace(this, "Hello World!");
+/*	MonsterDebugger.trace(this, "Hello World!");*/
 
 	MainGame = new Aeroblox();
 	hGlobalInput.Initialize(ViewImage);

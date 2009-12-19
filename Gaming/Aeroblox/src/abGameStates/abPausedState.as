@@ -30,7 +30,6 @@ package abGameStates
 		public override function Start():void
 		{
 			_StartGame = false;
-			hGlobalAudio.PauseMusic();
 			hGlobalGraphics.View.ViewImage.addChild(_Paused);
 			_Paused.StartGameButton.addEventListener(MouseEvent.CLICK, StartGameEvent);
 		}
