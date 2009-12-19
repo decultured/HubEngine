@@ -24,6 +24,7 @@ package HubGraphics
 		
 		private var _ParticleSystem:hParticleSystem;
 		
+		public function set Lifespan(lifespan:Number):void {_Lifespan = lifespan;} 
 		public function set AnimationStartTimeRange(timeRange:Number):void {_AnimationStartTimeRange = timeRange;} 
 		public function set StartPositionRange(positionRange:Number):void {_StartPositionRange = positionRange;} 
 		public function set StartVelocity(velocity:Point):void {_StartVelocity = velocity;} 
@@ -34,6 +35,8 @@ package HubGraphics
 		public function set ParticleLifespan(particleLifespan:Number):void {_ParticleLifespan = particleLifespan;} 
 		public function set ParticleLifespanRange(particleLifespanRange:Number):void {_ParticleLifespanRange = particleLifespanRange;} 
 
+		public function get IsAlive():Boolean {if (_Lifespan && _Age > _Lifespan) return false; return true;}
+
 		public function hParticleEmitter(particleSystem:hParticleSystem)
 		{
 			_ParticleSystem = particleSystem;
@@ -43,7 +46,7 @@ package HubGraphics
 		
 		public override function Update(elapsedTime:Number):void
 		{
-			_Age += elapsedTime;		
+			_Age += elapsedTime;
 
 			if (_Lifespan && _Age > _Lifespan)
 				return;

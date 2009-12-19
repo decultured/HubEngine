@@ -20,7 +20,10 @@ package abGameObjects
 		private var _CollisionSide:uint = TOP_COLLISION;
 		
 		public var _BrickBounceSound:hSound;
-
+		
+		private var _ExplosionEmitter:hParticleEmitter;
+		
+		public function get ExplosionEmitter():hParticleEmitter {return _ExplosionEmitter;}
 		public function get Collided():Boolean {return _Collided;}
 		public function get CollisionPoint():Point {return _CollisionPoint;}
 		public function get CollisionSide():uint {return _CollisionSide;}
@@ -33,7 +36,17 @@ package abGameObjects
 		{
 			super();
 			_BrickBounceSound = hGlobalAudio.SoundLibrary.GetSoundFromName("ball_hits_brick");
-			StartAnimation("block");
+
+			_ExplosionEmitter = new hParticleEmitter(hGlobalGraphics.ParticleSystem);
+			_ExplosionEmitter.SetImage("sparkle_particle");
+			_ExplosionEmitter.CurrentAnimation = "sparkle_particle";
+			_ExplosionEmitter.AnimationStartTimeRange = 0.02;
+			_ExplosionEmitter.StartVelocityRange = new Point(300, 300);
+			_ExplosionEmitter.StartAcceleration = new Point(0, 200);
+			_ExplosionEmitter.Lifespan = 0.2;
+			_ExplosionEmitter.ParticlesPerSecond = 120;
+			_ExplosionEmitter.ParticleLifespan = 0.4;
+			_ExplosionEmitter.ResetTranslation(Center.x, Center.y);
 		}
 
 		public function Hit():Powerup
