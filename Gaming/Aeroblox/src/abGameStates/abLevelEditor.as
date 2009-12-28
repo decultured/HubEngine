@@ -11,31 +11,27 @@ package abGameStates
 	import flash.events.MouseEvent;
 	import flash.events.Event;
 	
-	public class abPausedState extends hGameState
+	public class abLevelEditor extends hGameState
 	{
 		private var _Game:AerobloxGame;
-		public var _Paused:abPaused;
+		public var _EditorHUD:abLevelEditorMain;
 		
-		public function abPausedState(name:String)
+		public function abLevelEditor(name:String)
 		{
 			super(name);
-			_Paused = new abPaused();
+			_EditorHUD = new abLevelEditorMain();
 		}
 		
 		public function set Game(game:AerobloxGame):void {_Game = game;}
 		
-		private function StartGameEvent(event:MouseEvent):void { ChangeState("GameState"); }
-
 		public override function Start():void
 		{
-			hGlobalGraphics.View.ViewImage.addChild(_Paused);
-			_Paused.StartGameButton.addEventListener(MouseEvent.CLICK, StartGameEvent);
+			hGlobalGraphics.View.ViewImage.addChild(_EditorHUD);
 		}
 		
 		public override function Stop():void
 		{
-			hGlobalGraphics.View.ViewImage.removeChild(_Paused);
-			_Paused.StartGameButton.removeEventListener(MouseEvent.CLICK, StartGameEvent);
+			hGlobalGraphics.View.ViewImage.removeChild(_EditorHUD);
 		}
 		
 		public override function Run(elapsedTime:Number):void
@@ -44,9 +40,6 @@ package abGameStates
 			hGlobalGraphics.BeginFrame(true, 0xcccccc);
 			_Game.Render();
 			hGlobalGraphics.EndFrame();
-
-			if (hGlobalInput.Keyboard.KeyJustPressed(hKeyCodes.P) || hGlobalInput.Keyboard.KeyJustPressed(hKeyCodes.PAUSE))
-				ChangeState("GameState");
 		}
 	}
 }

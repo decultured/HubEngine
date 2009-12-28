@@ -6,7 +6,7 @@
 	layout="absolute"
 	enterFrame="EnterFrame(event)"
 	xmlns:custom="abGameUI.*"
-	frameRate="120"
+	frameRate="40"
 	activate="hGlobalInput.ApplicationActivate(event);"
 	deactivate="hGlobalInput.ApplicationDeactivate(event);">
 	<mx:Script source="Main.as"/>

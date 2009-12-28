@@ -183,7 +183,7 @@
 			var matrix:Matrix = new Matrix();
 			matrix.translate(_Offset.x, _Offset.y);
 			matrix.concat(transformMatrix);
-
+			
 			destinationBitmap.draw(_Bitmap, transformMatrix, null, null, null, true); 
 		}
 		

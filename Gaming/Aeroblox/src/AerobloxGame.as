@@ -1,16 +1,22 @@
 package 
 {
+	import flash.events.*;
+	import flash.geom.*;
+	import abGameUI.*;
 	import abGameObjects.*;
 	import HubGraphics.*;
 	import HubAudio.*;
 	import HubInput.*;
 	import HubMath.*;
-	import flash.geom.*;
-	import abGameUI.*;
-	import nl.demonsters.debugger.MonsterDebugger;
 	
-	public class AerobloxGame 
+	public class AerobloxGame extends EventDispatcher
 	{
+		// Static Members : Event Response Strings
+		public static var LEVEL_WON:String = "next level";
+		public static var GAME_OVER:String = "game over";
+
+		// Private Members
+		// Game Objects
 		public var _Ball:Ball;
 		public var _Paddle:Paddle;
 		public var _Blocks:Array;
@@ -18,33 +24,34 @@ package
 		public var _Powerups:Array;
 		public var _Cursor:Cursor;
 
+		// Sounds
 		public var _PaddleBounceSound:hSound;
 		public var _FailSound:hSound;
 		public var _Music:hSound;
+
+		// HUD UI
 		public var _HUD:abGameHUD;
-		
+
+		// Game State Vars
 		private var _StartLevel:String = "level1.xml";
 		private var _CurrentLevel:String = "level1.xml";
 		private var _NextLevel:String = null;
 		private var _Score:Number = 0;
 		private var _Balls:Number = 1;
 		private var _StartingBalls:Number = 5;
-		private var _GameOver:Boolean = false;
-		private var _LevelWon:Boolean = false;
-		
 		private var _Cheating:Boolean = false;
 		private var _Invincible:Boolean = false;
-		
+
+		// Cheats
 		private var _ExtraLivesCheat:Array = [hKeyCodes.I, hKeyCodes.D, hKeyCodes.K, hKeyCodes.F, hKeyCodes.A];
 		private var _InvincibleCheat:Array = [hKeyCodes.I, hKeyCodes.D, hKeyCodes.D, hKeyCodes.Q, hKeyCodes.D];
 		private var _NextLevelCheat:Array = [hKeyCodes.I, hKeyCodes.D, hKeyCodes.C, hKeyCodes.L, hKeyCodes.E, hKeyCodes.V];
 		private var _FireballCheat:Array = [hKeyCodes.I, hKeyCodes.D, hKeyCodes.C, hKeyCodes.L, hKeyCodes.I, hKeyCodes.P];
 
+		// Mutators and Accessors
 		public function get Score():Number {return _Score;}
 		public function get Balls():Number {return _Balls;}
-		public function get GameOver():Boolean {return _GameOver;}
-		public function get LevelWon():Boolean {return _LevelWon;}
-		public function get NextLevel():String {return _NextLevel;}  
+		public function get NextLevel():String {return _NextLevel;}
 		public function set NextLevel(nextLevel:String):void {_NextLevel = nextLevel;}  
 		public function get StartLevel():String {return _StartLevel;}  
 		public function set StartLevel(startLevel:String):void {_StartLevel = startLevel;}
@@ -52,31 +59,9 @@ package
 		public function set CurrentLevel(currentLevel:String):void {_CurrentLevel = currentLevel;}  
 		public function get HUD():abGameHUD {return _HUD;}
 		
-		public function ShowHUD():void {hGlobalGraphics.View.ViewImage.addChild(_HUD);}
-        public function HideHUD():void {hGlobalGraphics.View.ViewImage.removeChild(_HUD);}
-
-      	public function AerobloxGame()
-        {
-			_HUD = new abGameHUD();
-
-			_PaddleBounceSound = hGlobalAudio.SoundLibrary.GetSoundFromName("ball_hits_paddle");
-			_FailSound = hGlobalAudio.SoundLibrary.GetSoundFromName("ball_lost");
-			
-			Balls = _StartingBalls;
-			_Cursor = new Cursor();
-			_Ball = new Ball();
-			_Paddle = new Paddle();
-			_Blocks = new Array();
-			_PowerupTypes = new Array();
-			_Powerups = new Array();
-
-			Reset();
-        }
-
 		public function AddScore(value:Number):Number
 		{
 			Score = Score + value;
-			
 			return Score;
 		}
 
@@ -95,7 +80,6 @@ package
 		public function AddBalls(numBalls:int):Number
 		{
 			Balls = Balls + numBalls;
-			
 			return _Balls;
 		}
 		
@@ -106,20 +90,50 @@ package
 			if (_HUD && _HUD.Balls)
 				_HUD.Balls.text = String(_Balls);
 
-			if (_Balls < 0)
-				_GameOver = true;
+			if (_Balls < 0) {
+				_Balls = _StartingBalls;
+				LevelWon();
+			}
 		}
 
-		public function ClearObjects():void
+		/////////////////
+		// Constructor //
+		/////////////////
+      	public function AerobloxGame()
+        {
+			_HUD = new abGameHUD();
+
+			_PaddleBounceSound = hGlobalAudio.SoundLibrary.GetSoundFromName("ball_hits_paddle");
+			_FailSound = hGlobalAudio.SoundLibrary.GetSoundFromName("ball_lost");
+			
+			Balls = _StartingBalls;
+			_Cursor = new Cursor();
+			_Ball = new Ball();
+			_Paddle = new Paddle();
+			_Blocks = new Array();
+			_PowerupTypes = new Array();
+			_Powerups = new Array();
+
+			Reset();
+        }
+
+		//////////////////////////////////
+		// Game State Setting Functions //
+		//////////////////////////////////
+		public function ClearObjects():void 
 		{
-			_Blocks.length = 0;
+			hGlobalGraphics.ParticleSystem.DeactivateAllParticles();			
 			_Powerups.length = 0;
-			hGlobalGraphics.ParticleSystem.DeactivateAllParticles();
-			_LevelWon = false;
+			_Blocks.length = 0;
 		}
-
+		
 		public function NewGame():void
 		{
+			hGlobalGraphics.ParticleSystem.DeactivateAllParticles();			
+			_Powerups.length = 0;
+			Score = 0;
+			Balls = _StartingBalls;
+
 			var blocksLength:uint = _Blocks.length;
 			for (var i:uint = 0; i < blocksLength; i++) {
 				if (!_Blocks[i] || !_Blocks[i] is Block)
@@ -127,22 +141,39 @@ package
 				_Blocks[i].Active = true;
 				_Blocks[i].Visible = true;
 			}
-			_Powerups.length = 0;
-			hGlobalGraphics.ParticleSystem.DeactivateAllParticles();			
-			_GameOver = false;
-			_LevelWon = false;
-			Score = 0;
-			Balls = _StartingBalls;
 
-			Reset()
+			Reset();
 		}
 
 		public function Reset():void
 		{
+			_Powerups.length = 0;
 			_Ball.Reset();
 			_Paddle.ResetTranslation(320 - _Paddle.Width * 0.5, _Paddle.DefaultYPosition)
 		}
-		
+
+		//////////////////////////////////
+		// Show and Display the Game UI //
+		//////////////////////////////////
+		public function ShowHUD():void {if (hGlobalGraphics.View.ViewImage && _HUD) hGlobalGraphics.View.ViewImage.addChild(_HUD);}
+        public function HideHUD():void {if (hGlobalGraphics.View.ViewImage && _HUD) hGlobalGraphics.View.ViewImage.removeChild(_HUD);}
+
+		///////////////////////
+		// Event Dispatchers //
+		///////////////////////
+		public function LevelWon():void
+		{
+			dispatchEvent(new Event(LEVEL_WON));			
+		}
+
+		public function GameOver():void
+		{
+			dispatchEvent(new Event(GAME_OVER));			
+		}
+
+		////////////////////////////////////////////
+		// Object Creation - Used by Level Loader //
+		////////////////////////////////////////////
 		public function AddBlock(imageName:String, shape:String, xPos:Number, yPos:Number, width:Number, height:Number, currentFrame:uint, powerupName:String):void
 		{
 			var newBlock:Block = new Block();
@@ -180,6 +211,9 @@ package
 			_Ball.Height = height;
 		}
 
+		//////////////////////
+		// Powerup Handling //
+		//////////////////////
 		public function ClonePowerupByType(type:String, xPos:Number, yPos:Number):void
 		{
 			var powerupsLength:uint = _PowerupTypes.length;
@@ -209,6 +243,7 @@ package
 
 		public function Update(elapsedTime:Number):void
 		{
+			hGlobalAudio.PlayMusic();
 			if (hGlobalInput.Keyboard.KeySequenceEntered(_ExtraLivesCheat)) {
 				Balls = Balls + 50;
 				_Cheating = true;
@@ -220,11 +255,10 @@ package
 			}
 
 			if (hGlobalInput.Keyboard.KeySequenceEntered(_NextLevelCheat)) {
-				_LevelWon = true;
+				LevelWon();
 				_Cheating = true;
 			}
 		
-			hGlobalAudio.PlayMusic();
 			_Ball.Update(elapsedTime);
 			_Paddle.Update(elapsedTime);
 
@@ -292,7 +326,7 @@ package
 			
 			// End Level if No More Blocks
 			if (activeBlocks < 1)
-				_LevelWon = true;		
+				LevelWon();
 			
 			//Collide Ball With Paddle
 			if (hCollision.PointCollidesWithRect(_Ball.Center.x, _Ball.Center.y, _Paddle.Left, _Paddle.Top, _Paddle.Right, _Paddle.Bottom))

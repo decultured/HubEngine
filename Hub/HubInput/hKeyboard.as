@@ -27,6 +27,13 @@ package HubInput
 			}
 		}
 		
+		public function Reset():void
+		{
+			for (var i:uint = 0; i < _Keys.length; i++) {
+				_Keys[i] == 0;
+			}
+		}
+		
 		public function KeyPressed(keyCode:uint):Boolean
 		{
 			if (keyCode < 256 && _Keys[keyCode] > 0)
@@ -51,7 +58,7 @@ package HubInput
 					return false;
 			}
 			
-			_KeySequence.splice(0, keySequence.length);
+			_KeySequence.splice(_KeySequence.length - keySequence.length, keySequence.length);
 			
 			return true;
 		}

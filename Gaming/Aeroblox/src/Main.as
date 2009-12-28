@@ -6,6 +6,7 @@ import HubMath.*;
 import HubGaming.*;
 import HubInput.*;
 import flash.events.*;
+import flash.events.*;
 import mx.events.*;
 import nl.demonsters.debugger.MonsterDebugger;
 
@@ -15,6 +16,7 @@ private var StartLevel:String;
 
 public function Initialize():void
 {
+	Security.allowDomain('*');
 	debugger = new MonsterDebugger(this);
 //	MonsterDebugger.trace(this, "Hello World!");
 

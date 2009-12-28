@@ -1,7 +1,8 @@
 package HubGaming 
 {
 	import flash.utils.getTimer;
-
+	import flash.events.*;
+	
 	public class hGameStateMachine
 	{
 		protected var _States:Object = new Object(); 
@@ -20,34 +21,65 @@ package HubGaming
 		public function get MaximumTime():Number {return _MaxTime;}
 		public function set MaximumTime(maxTime:Number):void {_MaxTime = maxTime;}
 
-
 		public function hGameStateMachine()
 		{
 		}
 		
 		public function AddState(newState:hGameState, makeDefault:Boolean = false):String
 		{
-			if (newState == null)
+			if (!newState || !newState.Name)
 				return null;
 			
 			_States[newState.Name] = newState;
-			
-			if (makeDefault)
+
+			if (makeDefault) {
 				_DefaultState = newState;
+			}
 				
 			return newState.Name;
 		}
+
+		private function ChangeState(newState:hGameState):void
+		{
+			if (!newState)
+				return;
+
+			if (_CurrentState) {
+				_CurrentState.Stop();
+				_CurrentState.removeEventListener(hGameState.CHANGE_STATE, HandleStateChange);
+			}
+			_CurrentState = newState;
+			_CurrentState.addEventListener(hGameState.CHANGE_STATE, HandleStateChange);
+			_CurrentState.Start();
+		}
 		
-		public function SetCurrentStateByName(stateName:String):Boolean
+		private function SetCurrentStateByName(stateName:String):Boolean
 		{
 			if (_States[stateName]) {
-				_CurrentState = _States[stateName];
+				ChangeState(_States[stateName]);
 				return true;
 			}
 			return false;
 		}
 		
+		private function SetDefaultState():void
+		{
+			ChangeState(_DefaultState);
+		}
+		
 		public function GetStateByName(stateName:String):Boolean {return _States[stateName];}
+		
+		private function HandleStateChange(event:Event):void
+		{
+			if (!_CurrentState) {
+				SetDefaultState();
+				return;
+			}
+			if (!_CurrentState.NextState)
+				return;
+			
+			SetCurrentStateByName(_CurrentState.NextState);
+		}
 		
 		public function Run():void
 		{
@@ -57,17 +89,10 @@ package HubGaming
 			if (_MaxTime > 0 && ElapsedTime > _MaxTime)
 				_LastTime = _ThisTime - _MaxTime;
 			
-			if (_CurrentState != null) {
-				_StateResponse = _CurrentState.Run(ElapsedTime);
-				if (_StateResponse != _CurrentState.Name && _States[_StateResponse] != null) {
-					_CurrentState.Stop();
-					_CurrentState = _States[_StateResponse];
-					_CurrentState.Start();
-				}
-			} else if (_DefaultState != null) {
-				_CurrentState = _DefaultState;
-				_CurrentState.Start();				
-			}
+			if (_CurrentState)
+				_CurrentState.Run(ElapsedTime);
+			else
+				SetDefaultState();
 		}
 	}
 }

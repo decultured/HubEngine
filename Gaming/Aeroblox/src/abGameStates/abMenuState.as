@@ -18,9 +18,9 @@ package abGameStates
 
 		public function set Game(game:AerobloxGame):void {_Game = game;}
 		
-		public function abMenuState() 
+		public function abMenuState(name:String)
 		{
-			super();
+			super(name);
 			_Menu = new abMenu();
 		}
 		
@@ -39,13 +39,12 @@ package abGameStates
 			_Menu.StartGameButton.removeEventListener(MouseEvent.CLICK, StartGameEvent);
 		}
 		
-		public override function Run(elapsedTime:Number):String
+		public override function Run(elapsedTime:Number):void
 		{
 			if (_StartGame) {
 				_Game.CurrentLevel = _Game.StartLevel;
-				return getQualifiedClassName(abLoaderState);
+				ChangeState("LoaderState");
 			}
-			return Name;
 		}
 	}
 }

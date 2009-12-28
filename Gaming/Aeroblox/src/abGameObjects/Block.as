@@ -35,16 +35,17 @@ package abGameObjects
 		public function Block()
 		{
 			super();
+			
 			_BrickBounceSound = hGlobalAudio.SoundLibrary.GetSoundFromName("ball_hits_brick");
 
 			_ExplosionEmitter = new hParticleEmitter(hGlobalGraphics.ParticleSystem);
 			_ExplosionEmitter.SetImage("sparkle_particle");
 			_ExplosionEmitter.CurrentAnimation = "sparkle_particle";
 			_ExplosionEmitter.AnimationStartTimeRange = 0.02;
-			_ExplosionEmitter.StartVelocityRange = new Point(300, 300);
-			_ExplosionEmitter.StartAcceleration = new Point(0, 200);
+			_ExplosionEmitter.StartVelocityRange = new Point(200, 200);
+			_ExplosionEmitter.StartAcceleration = new Point(0, 1500);
 			_ExplosionEmitter.Lifespan = 0.2;
-			_ExplosionEmitter.ParticlesPerSecond = 120;
+			_ExplosionEmitter.ParticlesPerSecond = 100;
 			_ExplosionEmitter.ParticleLifespan = 0.4;
 			_ExplosionEmitter.ResetTranslation(Center.x, Center.y);
 		}
