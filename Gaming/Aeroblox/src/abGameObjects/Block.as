@@ -45,8 +45,8 @@ package abGameObjects
 			_ExplosionEmitter.StartVelocityRange = new Point(200, 200);
 			_ExplosionEmitter.StartAcceleration = new Point(0, 1500);
 			_ExplosionEmitter.Lifespan = 0.2;
-			_ExplosionEmitter.ParticlesPerSecond = 100;
-			_ExplosionEmitter.ParticleLifespan = 0.4;
+			_ExplosionEmitter.ParticlesPerSecond = 150;
+			_ExplosionEmitter.ParticleLifespan = 0.2;
 			_ExplosionEmitter.ResetTranslation(Center.x, Center.y);
 		}
 

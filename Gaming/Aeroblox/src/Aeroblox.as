@@ -15,6 +15,7 @@ package
 		private var _GameState:abGameState;
 		private var _PausedState:abPausedState;
 		private var _GameOverState:abGameOverState;
+		private var _LevelEditorState:abLevelEditorState;
 
 		private var _Game:AerobloxGame;
 
@@ -38,12 +39,15 @@ package
 			_PausedState.Game = _Game;
 			_GameOverState = new abGameOverState("GameOverState");
 			_GameOverState.Game = _Game;
+			_LevelEditorState = new abLevelEditorState("LevelEditorState");
+			_LevelEditorState.Game = _Game;
 			
 			AddState(_MenuState, true);		
 			AddState(_LoaderState);
 			AddState(_GameState);
 			AddState(_PausedState);
 			AddState(_GameOverState);
+			AddState(_LevelEditorState);
 		}
 	}
 }

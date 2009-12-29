@@ -92,7 +92,7 @@ package
 
 			if (_Balls < 0) {
 				_Balls = _StartingBalls;
-				LevelWon();
+				GameOver();
 			}
 		}
 

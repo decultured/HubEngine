@@ -7,8 +7,8 @@
 		<image url="http://onemorepoint.com/game/aeroblox/embed/images/explosion_sheet.png?nocache=plz1" name="explosion_particle" segment_width="16" segment_height="16">
 			<animation name="explosion_particle" start_frame="0" end_frame="15" duration="0.4" loops="false" />
 		</image>
-		<image url="http://onemorepoint.com/game/aeroblox/embed/images/block_explosion.png?nocache=plz3" name="sparkle_particle" segment_width="16" segment_height="16">
-			<animation name="sparkle_particle" start_frame="0" end_frame="15" duration="0.4" loops="false" />
+		<image url="http://onemorepoint.com/game/aeroblox/embed/images/block_explosion.png?nocache=plz4" name="sparkle_particle" segment_width="16" segment_height="16">
+			<animation name="sparkle_particle" start_frame="0" end_frame="15" duration="0.2" loops="false" />
 		</image>
 		<image url="http://onemorepoint.com/game/aeroblox/embed/images/powerups.png?nocache=plz2" name="powerups" segment_width="60" segment_height="30"/>
 		<image url="http://onemorepoint.com/game/aeroblox/embed/images/paddle.png?nocache=plz1" name="paddle_normal" />

@@ -100,6 +100,7 @@ package abGameStates
 			_LoaderUI.StartGameButton.addEventListener(MouseEvent.CLICK, CompleteEvent);
 			_LoaderUI.StartGameButton.enabled = true;
 			_LoaderUI.StartGameButton.alpha = 100;
+			_LoaderUI.Loading.visible = false;
 		}
 	}
 }

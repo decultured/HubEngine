@@ -11,8 +11,6 @@ package abGameStates
 	
 	public class abMenuState extends hGameState
 	{
-		private var _StartGame:Boolean = false;
-		
 		public var _Menu:abMenu;
 		private var _Game:AerobloxGame;
 
@@ -24,27 +22,29 @@ package abGameStates
 			_Menu = new abMenu();
 		}
 		
-		private function StartGameEvent(event:MouseEvent):void { _StartGame = true; }
+		private function StartGameEvent(event:MouseEvent):void
+		{
+			_Game.CurrentLevel = _Game.StartLevel;
+			ChangeState("LoaderState");
+		}
+		
+		private function LevelEditorEvent(event:MouseEvent):void
+		{
+			ChangeState("LevelEditorState");
+		}
 		
 		public override function Start():void
 		{
-			_StartGame = false;
 			hGlobalGraphics.View.ViewImage.addChild(_Menu);
 			_Menu.StartGameButton.addEventListener(MouseEvent.CLICK, StartGameEvent);
+			_Menu.LevelEditorButton.addEventListener(MouseEvent.CLICK, LevelEditorEvent);
 		}
 		
 		public override function Stop():void
 		{
 			hGlobalGraphics.View.ViewImage.removeChild(_Menu);
 			_Menu.StartGameButton.removeEventListener(MouseEvent.CLICK, StartGameEvent);
-		}
-		
-		public override function Run(elapsedTime:Number):void
-		{
-			if (_StartGame) {
-				_Game.CurrentLevel = _Game.StartLevel;
-				ChangeState("LoaderState");
-			}
+			_Menu.LevelEditorButton.removeEventListener(MouseEvent.CLICK, LevelEditorEvent);
 		}
 	}
 }
