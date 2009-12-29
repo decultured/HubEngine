@@ -1,6 +1,6 @@
 {
-    "slug": "aeroblox",
-    "game": "aeroblox.swf",
+    "slug": "meteor",
+    "game": "meteor.swf",
     "assets": [
         "images/",
         "levels/",
