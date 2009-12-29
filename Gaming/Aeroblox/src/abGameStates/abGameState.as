@@ -32,7 +32,6 @@ package abGameStates
 				
 		private function HandleGameOver(event:Event):void
 		{ 
-			_Game.NewGame();
 			ChangeState("GameOverState");
 		}
 
