@@ -13,16 +13,22 @@ import nl.demonsters.debugger.MonsterDebugger;
 public var MainGame:Aeroblox;
 private var debugger:MonsterDebugger;
 private var StartLevel:String;
+/*pplante*/
+private var AuthToken:String;
 
 public function Initialize():void
 {
 	Security.allowDomain('*');
 	debugger = new MonsterDebugger(this);
-//	MonsterDebugger.trace(this, "Hello World!");
+/*	MonsterDebugger.trace(this, "Hello World!");*/
 
 	MainGame = new Aeroblox();
 	hGlobalInput.Initialize(ViewImage);
 
+	/*pplante*/
+	AuthToken = Application.application.parameters.auth_token;
+	APIInterface.AuthToken = AuthToken;
+	
 	StartLevel = Application.application.parameters.start_level;
 	MainGame.Game.StartLevel = StartLevel;
 	MainGame.Game.CurrentLevel = StartLevel;
