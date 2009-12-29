@@ -1,0 +1,3 @@
+#!/bin/sh
+
+mxmlc -source-path=../../hub/ -target-player=10 -incremental=true -debug=true -output=bin/meteor.swf src/Main.mxml
