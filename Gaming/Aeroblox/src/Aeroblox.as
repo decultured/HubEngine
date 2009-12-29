@@ -28,15 +28,15 @@ package
 
 			_Game = new AerobloxGame();
 
-			_MenuState = new abMenuState();
+			_MenuState = new abMenuState("MenuState");
 			_MenuState.Game = _Game;
-			_LoaderState = new abLoaderState();
+			_LoaderState = new abLoaderState("LoaderState");
 			_LoaderState.Game = _Game;
-			_GameState = new abGameState();
+			_GameState = new abGameState("GameState");
 			_GameState.Game = _Game;
-			_PausedState = new abPausedState();
+			_PausedState = new abPausedState("PausedState");
 			_PausedState.Game = _Game;
-			_GameOverState = new abGameOverState();
+			_GameOverState = new abGameOverState("GameOverState");
 			_GameOverState.Game = _Game;
 			
 			AddState(_MenuState, true);		

@@ -14,9 +14,23 @@ package HubAudio
 		}
 		
 		static public function set Music(musicName:String):void {_Music = SoundLibrary.GetSoundFromName(musicName);}
-		static public function PlayMusic():void {_Music.PlayOnlyOne(true);}
-		static public function PauseMusic():void {_Music.Pause();}
-		static public function StopMusic():void {_Music.Stop();}
+		static public function PlayMusic():void
+		{
+			if (_Music)
+				_Music.PlayOnlyOne(true);
+		}
+		
+		static public function PauseMusic():void
+		{
+			if (_Music)
+				_Music.Pause();
+		}
+		
+		static public function StopMusic():void
+		{
+			if (_Music)
+				_Music.Stop();
+		}
 		
 		static public function Update():void
 		{

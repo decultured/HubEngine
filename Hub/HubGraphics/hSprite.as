@@ -171,7 +171,7 @@ package HubGraphics
 				if (_Rotation != 0.0)
 					_TransformMatrix.rotate(_Rotation);
 				_TransformMatrix.translate(_Position.x, _Position.y);
-				_Image.RenderTransformed(hGlobalGraphics.View.ViewBitmapData, _TransformMatrix);			
+				_Image.RenderTransformed(hGlobalGraphics.View.ViewBitmapData, _TransformMatrix);
 			}
 		}
 	}

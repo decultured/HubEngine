@@ -38,6 +38,11 @@ package HubInput
 			_Target.setFocus();
 		}
 		
+		static public function Reset():void
+		{
+			_KeyboardController.Reset();
+		}
+		
 		static public function Update():void
 		{
 			if (_MouseController)

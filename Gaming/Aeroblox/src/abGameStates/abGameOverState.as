@@ -18,9 +18,9 @@ package abGameStates
 		private var _Game:AerobloxGame;
 		public var _GameOver:abGameOver;
 		
-		public function abGameOverState() 
+		public function abGameOverState(name:String)
 		{
-			super();
+			super(name);
 			_GameOver = new abGameOver();
 		}
 		
@@ -51,16 +51,15 @@ package abGameStates
 			_GameOver.MainMenuButton.removeEventListener(MouseEvent.CLICK, MainMenuEvent);
 		}
 		
-		public override function Run(elapsedTime:Number):String
+		public override function Run(elapsedTime:Number):void
 		{
 			hGlobalInput.Update();
 
 			if (_StartGame) {
 				_Game.NewGame();
-				return getQualifiedClassName(abGameState);
+				ChangeState("GameState");
 			} else if (_MainMenu)
-				return getQualifiedClassName(abMenuState);
-			return Name;
+				ChangeState("MenuState");
 		}
 	}
 }

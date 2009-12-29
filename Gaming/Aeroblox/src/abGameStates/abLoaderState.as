@@ -20,9 +20,9 @@ package abGameStates
 
 		public function set Game(game:AerobloxGame):void {_Game = game;}
 
-		public function abLoaderState() 
+		public function abLoaderState(name:String)
 		{
-			super();
+			super(name);
 			_LoaderUI = new abLoader();
 			_GameLoader = new AerobloxLoader();
 		}
@@ -35,6 +35,10 @@ package abGameStates
 			_Complete = false;
 			_LoaderError = false;
 
+			if (_LoaderUI && _LoaderUI.StartGameButton) {
+				_LoaderUI.StartGameButton.enabled = false;
+				_LoaderUI.StartGameButton.alpha = 50;
+			}
 			hGlobalGraphics.View.ViewImage.addChild(_LoaderUI);
 
 			if (!_Game) {
@@ -43,6 +47,7 @@ package abGameStates
 			}
 			
 			_Game.ClearObjects();
+			_Game.Reset();
 			
 			_GameLoader.Game = _Game;
 			_GameLoader.URL = _Game.CurrentLevel;
@@ -69,24 +74,25 @@ package abGameStates
 		
 		public override function Stop():void
 		{
-			hGlobalGraphics.View.ViewImage.removeChild(_LoaderUI);
+			_LoaderUI.StartGameButton.enabled = false;
+			_LoaderUI.StartGameButton.alpha = 50;
 			_LoaderUI.StartGameButton.removeEventListener(MouseEvent.CLICK, CompleteEvent);
+			hGlobalGraphics.View.ViewImage.removeChild(_LoaderUI);
 		}
 		
-		public override function Run(elapsedTime:Number):String
+		public override function Run(elapsedTime:Number):void
 		{
 			if (_Complete) {
 				_LoaderUI.StartGameButton.enabled = false;
 				_LoaderUI.StartGameButton.alpha = 50;
 				_Game.Reset();
-				return getQualifiedClassName(abGameState);
+				ChangeState("GameState");
 			}
 			if (_LoaderError) {
 				_LoaderUI.StartGameButton.enabled = false;
 				_LoaderUI.StartGameButton.alpha = 50;
-				return getQualifiedClassName(abMenuState);
+				ChangeState("MenuState");
 			}
-			return Name;
 		}
 		
 		private function HandleComplete(event:Event):void

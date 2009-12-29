@@ -31,7 +31,7 @@ package HubAudio
 
 		public function Play():void
 		{
-			if (!_Loaded)
+			if (!_Loaded || _Sound.isBuffering || _Sound.isBuffering || !_Sound.bytesLoaded)
 				return;
 				
 			_SoundChannel = _Sound.play(0);
@@ -39,7 +39,7 @@ package HubAudio
 		
 		public function PlayOnlyOne(loops:Boolean = false):void
 		{
-			if (!_Loaded || _SoundChannel)
+			if (!_Loaded || _SoundChannel || _Sound.isBuffering || !_Sound.bytesLoaded)
 				return;
 				
 			_SoundChannel = _Sound.play(_PausedPosition);
