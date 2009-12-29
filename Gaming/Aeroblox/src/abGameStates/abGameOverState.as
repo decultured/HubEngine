@@ -13,8 +13,6 @@ package abGameStates
 	
 	public class abGameOverState extends hGameState
 	{
-		private var _StartGame:Boolean = false;
-		private var _MainMenu:Boolean = false;
 		private var _Game:AerobloxGame;
 		public var _GameOver:abGameOver;
 		
@@ -26,13 +24,19 @@ package abGameStates
 		
 		public function set Game(game:AerobloxGame):void {_Game = game;}
 		
-		private function StartGameEvent(event:MouseEvent):void { _StartGame = true; }
-		private function MainMenuEvent(event:MouseEvent):void { _MainMenu = true; }
+		private function StartGameEvent(event:MouseEvent):void
+		{
+			_Game.NewGame();
+			ChangeState("GameState");
+		}
+		private function MainMenuEvent(event:MouseEvent):void
+		{ 
+			_Game.NewGame();
+			ChangeState("MenuState");
+		}
 
 		public override function Start():void
 		{
-			_StartGame = false;
-			_MainMenu = false;
 			hGlobalGraphics.View.ViewImage.addChild(_GameOver);
 			_GameOver.Score.text = "Final Score: " + _Game.Score;
 			_GameOver.StartGameButton.addEventListener(MouseEvent.CLICK, StartGameEvent);
@@ -54,12 +58,6 @@ package abGameStates
 		public override function Run(elapsedTime:Number):void
 		{
 			hGlobalInput.Update();
-
-			if (_StartGame) {
-				_Game.NewGame();
-				ChangeState("GameState");
-			} else if (_MainMenu)
-				ChangeState("MenuState");
 		}
 	}
 }
