@@ -76,7 +76,7 @@ package mGameObjects
 			
 			_ExplosionEmitter.ParticlesPerSecond = 50 * (_Speed / _MaxSpeed);
 			_ExplosionEmitter.StartVelocity = new Point(-_Sine * 200, _Cosine * 200);
-			_ExplosionEmitter.ResetTranslation(Position.x, Position.y);
+			_ExplosionEmitter.ResetTranslation(Position.x - 8, Position.y - 8);
 			_ExplosionEmitter.Update(elapsedTime);
 			
 			if (_Speed > _MaxSpeed)

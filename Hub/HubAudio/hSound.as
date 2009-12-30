@@ -3,7 +3,6 @@ package HubAudio
 	import flash.net.URLRequest;
 	import flash.events.*;
 	import flash.media.*;
-	import nl.demonsters.debugger.MonsterDebugger;
 	
 	public class hSound extends EventDispatcher
 	{
@@ -28,18 +27,13 @@ package HubAudio
 		{
 			_URL = url;
 			_Name = name;
-			MonsterDebugger.trace(this, "New! " + _URL + " " + _Name);
-			
 		}
 
 		public function Play():void
 		{
-			MonsterDebugger.trace(this, "Play? " + _URL + " " + _Name);
-
 			if (!_Loaded || !_Sound.bytesLoaded)
 				return;
 				
-			MonsterDebugger.trace(this, "Sound!");
 			_SoundChannel = _Sound.play(0);
 		}
 		
