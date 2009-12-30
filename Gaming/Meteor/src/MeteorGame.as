@@ -8,7 +8,6 @@ package
 	import HubAudio.*;
 	import HubInput.*;
 	import HubMath.*;
-	import nl.demonsters.debugger.MonsterDebugger;
 	
 	public class MeteorGame extends EventDispatcher
 	{
@@ -145,14 +144,12 @@ package
 			if (_LargeMeteors.length) {
 				for (var i:uint = 0; i < 5; i++)
 				{
-					MonsterDebugger.trace(this, _LargeMeteors.length);
 					CloneMeteor(_LargeMeteors[uint(Math.random() * (_LargeMeteors.length - 1))], Math.random() * 640, Math.random() * 480, Math.random() * _MeteorMaxSpeed - _MeteorMaxSpeed * 0.5, Math.random() * _MeteorMaxSpeed - _MeteorMaxSpeed * 0.5);
 				}
 			}
 			
 			// Create a Mega Meteor
 			if (_MegaMeteors.length) {
-				MonsterDebugger.trace(this, _MegaMeteors.length);
 				CloneMeteor(_MegaMeteors[uint(Math.random() * (_MegaMeteors.length - 1))], Math.random() * 640, Math.random() * 480, Math.random() * _MeteorMaxSpeed - _MeteorMaxSpeed * 0.5, Math.random() * _MeteorMaxSpeed - _MeteorMaxSpeed * 0.5);
 			}
 		}
@@ -162,7 +159,6 @@ package
 			if (typeArray.length) {
 				for (var i:uint = 0; i < num; i++)
 				{
-					MonsterDebugger.trace(this, typeArray.length);
 					CloneMeteor(typeArray[uint(Math.random() * (typeArray.length - 1))], posX, posY, Math.random() * _MeteorMaxSpeed - _MeteorMaxSpeed * 0.5, Math.random() * _MeteorMaxSpeed - _MeteorMaxSpeed * 0.5);
 				}
 			}
@@ -225,7 +221,6 @@ package
 			newProjectile.Height = height;
 			newProjectile.SetImage(imageName);
 			_ProjectileTypes.push(newProjectile);
-			MonsterDebugger.trace(this, "Projectile " + imageName);
 		}
 		
 		public function AddShip(imageName:String, invincibleImageName:String, width:Number, height:Number):void
@@ -236,7 +231,6 @@ package
 			_Ship.Width = width;
 			_Ship.Height = height;
 			_Ship.Translate(hGlobalGraphics.View.Width * 0.5 - width * 0.5, hGlobalGraphics.View.Height * 0.5 - height * 0.5);
-			MonsterDebugger.trace(this, "Ship " + imageName);
 		}
 
 		//////////////////////
