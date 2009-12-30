@@ -3,7 +3,7 @@
     "game": "meteor.swf",
     "assets": [
         "images/",
-        "levels/",
+        "resources.xml",
         "sounds/"
     ]
 }
