@@ -46,7 +46,7 @@ package
 		private var _Resources:String = null;
 		private var _Score:Number = 0;
 		private var _Ships:Number = 1;
-		private var _StartingShips:Number = 5;
+		private var _StartingShips:Number = 3;
 		private var _Cheating:Boolean = false;
 		private var _Invincible:Boolean = false;
 
