@@ -3,6 +3,7 @@
 	import flash.events.*;
 	import flash.display.*;
 	import flash.net.URLRequest;
+	import nl.demonsters.debugger.MonsterDebugger;
 
 	public class hImageLibrary extends EventDispatcher
 	{
@@ -73,6 +74,7 @@
 			}
 
 			var newImage:hImage = _LoaderQueue.pop();
+			MonsterDebugger.trace(this, newImage.URL);
 			newImage.addEventListener(hImage.COMPLETE, HandleComplete);
 			newImage.addEventListener(hImage.IO_ERROR, HandleError);
 			newImage.LoadFromURL();
@@ -85,6 +87,7 @@
 
 		private function HandleError(event:Event):void
 		{
+			MonsterDebugger.trace(this, "Hello World!");
 			dispatchEvent(new Event(hImageLibrary.IO_ERROR));	
 		}
 	}

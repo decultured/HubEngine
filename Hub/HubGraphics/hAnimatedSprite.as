@@ -1,6 +1,5 @@
 package HubGraphics
 {
-	
 	public class hAnimatedSprite extends hSprite
 	{
 		private var _Animating:Boolean = false;

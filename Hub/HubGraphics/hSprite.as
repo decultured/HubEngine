@@ -12,6 +12,8 @@ package HubGraphics
 		protected var _Width:Number = 0;
 		protected var _Height:Number = 0;
 
+		protected var _Centered:Boolean = false;
+
 		protected var _CurrentFrame:uint = 0;
 
 		protected var _PreviousPosition:Point = new Point(0, 0);
@@ -29,6 +31,9 @@ package HubGraphics
 		protected var _TransformMatrix:Matrix = new Matrix();
 		
 		public function get ImageName():String {if (_Image) return _Image.Name else return null;} 
+
+		public function get Centered():Boolean {return _Centered;}
+		public function set Centered(centered:Boolean):void {_Centered = centered;}
 
 		public function get Width():Number {return _Width;}
 		public function get Height():Number {return _Height;}
@@ -161,9 +166,12 @@ package HubGraphics
 		{
 			if (!_Image || !_Visible)
 				return;
-
+			
 			if (_Scale == 1.0 && _Rotation == 0.0) {
-				_Image.RenderSimple(hGlobalGraphics.View.ViewBitmapData, _Position, _CurrentFrame);
+				if (_Centered)
+					_Image.RenderSimpleCentered(hGlobalGraphics.View.ViewBitmapData, _Position, _CurrentFrame);
+				else
+					_Image.RenderSimple(hGlobalGraphics.View.ViewBitmapData, _Position, _CurrentFrame);
 			} else {
 				_TransformMatrix.identity();
 				if (_Scale != 1.0)
@@ -171,7 +179,10 @@ package HubGraphics
 				if (_Rotation != 0.0)
 					_TransformMatrix.rotate(_Rotation);
 				_TransformMatrix.translate(_Position.x, _Position.y);
-				_Image.RenderTransformed(hGlobalGraphics.View.ViewBitmapData, _TransformMatrix);
+				if (_Centered)
+					_Image.RenderTransformedCentered(hGlobalGraphics.View.ViewBitmapData, _TransformMatrix);
+				else
+					_Image.RenderTransformed(hGlobalGraphics.View.ViewBitmapData, _TransformMatrix);
 			}
 		}
 	}

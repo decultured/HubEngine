@@ -6,13 +6,13 @@
 	<script type="text/javascript" src="swfobject.js"></script>
 </head>
 <body>
-<div id="aeroblox-display"></div>
+<div id="meteor-display"></div>
 <script type="text/javascript">
   var filename= "../bin/meteor.swf?seed=" + (Math.floor(Math.random()*99999999)).toString();
-  var flashvars = {start_level: "../bin/levels/meteor.xml?nocache=plz"};
+  var flashvars = {resources: "../bin/resources.xml?nocache=plz"};
   var params = {};
   var attributes = {};
-  swfobject.embedSWF(filename, "aeroblox-display", "640", "480", "10.0.0", "expressInstall.swf", flashvars, params, attributes);
+  swfobject.embedSWF(filename, "meteor-display", "640", "480", "10.0.0", "expressInstall.swf", flashvars, params, attributes);
 </script>
 </body>
 </html>

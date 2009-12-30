@@ -8,6 +8,7 @@ package
 	import HubAudio.*;
 	import HubInput.*;
 	import HubMath.*;
+	import nl.demonsters.debugger.MonsterDebugger;
 	
 	public class MeteorGame extends EventDispatcher
 	{
@@ -18,10 +19,16 @@ package
 		// Private Members
 		// Game Objects
 		public var _Ship:Ship;
-		public var _MeteorTypes:Array;
-		public var _Meteors:Array;
-		public var _ProjectileTypes:Array;
-		public var _Projectiles:Array;
+
+		public var _SmallMeteors:Array = new Array();
+		public var _MediumMeteors:Array = new Array();
+		public var _LargeMeteors:Array = new Array();
+		public var _MegaMeteors:Array = new Array();
+
+		public var _ActiveMeteors:Array = new Array();
+
+		public var _ProjectileTypes:Array = new Array();
+		public var _Projectiles:Array = new Array();
 
 		// HUD UI
 		public var _HUD:mGameHUD;
@@ -92,9 +99,6 @@ package
 
 			Ships = _StartingShips;
 			_Ship = new Ship();
-			_Meteors = new Array();
-			_ProjectileTypes = new Array();
-			_Projectiles = new Array();
 
 			Reset();
         }
@@ -106,16 +110,41 @@ package
 		{
 			hGlobalGraphics.ParticleSystem.DeactivateAllParticles();			
 			_Projectiles.length = 0;
-			_Meteors.length = 0;
+			_ActiveMeteors.length = 0;
 		}
 		
 		public function NewGame():void
 		{
-			ClearObjects();
 			Score = 0;
 			Ships = _StartingShips;
-
+			NewLevel();
+		}
+		
+		public function NewLevel():void
+		{
+			ClearObjects();
+			CreateMeteors();
 			Reset();
+		}
+		
+		public function CreateMeteors():void
+		{
+			
+			// Create Some Large Meteors
+			if (_LargeMeteors.length) {
+				for (var i:uint = 0; i < 5; i++)
+				{
+					MonsterDebugger.trace(this, _LargeMeteors.length);
+					CloneMeteor(_LargeMeteors[uint(Math.random() * (_LargeMeteors.length - 1))], Math.random() * 640, Math.random() * 480, Math.random() * 300 - 150, Math.random() * 300 - 150);
+				}
+			}
+			
+			
+			// Create a Mega Meteor
+			if (_MegaMeteors.length) {
+				MonsterDebugger.trace(this, _MegaMeteors.length);
+				CloneMeteor(_MegaMeteors[uint(Math.random() * (_MegaMeteors.length - 1))], Math.random() * 640, Math.random() * 480, Math.random() * 300 - 150, Math.random() * 300 - 150);
+			}
 		}
 
 		public function Reset():void
@@ -146,26 +175,34 @@ package
 		////////////////////////////////////////////
 		// Object Creation - Used by Level Loader //
 		////////////////////////////////////////////
-		public function AddMeteor(imageName:String, type:String, shape:String, width:Number, height:Number, currentFrame:uint, powerupName:String):void
+		public function AddMeteor(imageName:String, shape:String, width:Number, height:Number, currentFrame:uint, powerupName:String = null):void
 		{
 			var newMeteor:Meteor = new Meteor();
+			newMeteor.Shape = shape;
 			newMeteor.Width = width;
 			newMeteor.Height = height;
 			newMeteor.CurrentFrame = currentFrame;
 			newMeteor.SetImage(imageName);
 			newMeteor.PowerupName = powerupName;
-			_MeteorTypes.push(newMeteor);
+			
+			if (newMeteor.Shape == "small")
+				_SmallMeteors.push(newMeteor);
+			else if (newMeteor.Shape == "medium")
+				_MediumMeteors.push(newMeteor);
+			else if (newMeteor.Shape == "large")
+				_LargeMeteors.push(newMeteor);
+			else if (newMeteor.Shape == "mega")
+				_MegaMeteors.push(newMeteor);	
 		}
 		
-		public function AddProjectile(imageName:String, type:String, width:Number, height:Number, currentFrame:uint):void
+		public function AddProjectile(imageName:String, width:Number, height:Number):void
 		{
 			var newProjectile:Projectile = new Projectile();
 			newProjectile.Width = width;
 			newProjectile.Height = height;
-			newProjectile.CurrentFrame = currentFrame;
 			newProjectile.SetImage(imageName);
-			newProjectile.Type = type;
 			_ProjectileTypes.push(newProjectile);
+			MonsterDebugger.trace(this, "Projectile " + imageName);
 		}
 		
 		public function AddShip(imageName:String, width:Number, height:Number):void
@@ -173,6 +210,8 @@ package
 			_Ship.SetImage(imageName);
 			_Ship.Width = width;
 			_Ship.Height = height;
+			_Ship.Translate(hGlobalGraphics.View.Width * 0.5 - width * 0.5, hGlobalGraphics.View.Height * 0.5 - height * 0.5);
+			MonsterDebugger.trace(this, "Ship " + imageName);
 		}
 
 		//////////////////////
@@ -194,6 +233,19 @@ package
 					break;
 				}
 			}
+		}
+		
+		public function CloneMeteor(meteor:Meteor, xPos:Number, yPos:Number, velX:Number, velY:Number):void
+		{
+			var newMeteor:Meteor = new Meteor();
+			newMeteor.Width = meteor.Width;
+			newMeteor.Height = meteor.Height;
+			newMeteor.CurrentFrame = meteor.CurrentFrame;
+			newMeteor.SetImage(meteor.GetImageName());
+			newMeteor.Shape = meteor.Shape;
+			newMeteor.Translate(xPos, yPos);
+			newMeteor.AddVelocity(velX, velY);
+			_ActiveMeteors.push(newMeteor);
 		}
 		
 		public function ApplyProjectile(powerup:Projectile):void
@@ -232,15 +284,15 @@ package
 				_Projectiles[i].Update(elapsedTime);
 			}
 
-			var blocksLength:uint = _Meteors.length;
+			var meteorsLength:uint = _ActiveMeteors.length;
 			var activeMeteors:uint = 0;
-			for (i = 0; i < blocksLength; i++) {
-				if (!_Meteors[i] || !_Meteors[i] is Meteor)
+			for (i = 0; i < meteorsLength; i++) {
+				if (!_ActiveMeteors[i] || !_ActiveMeteors[i] is Meteor)
 				 	continue;
 					
 				activeMeteors++;
 				
-				_Meteors[i].Update(elapsedTime);
+				_ActiveMeteors[i].Update(elapsedTime);
 			}
 
 			// End Level if No More Meteors
@@ -254,10 +306,10 @@ package
 		{
 			hGlobalGraphics.ParticleSystem.Render();
 			
-			var meteorsLength:uint = _Meteors.length;
+			var meteorsLength:uint = _ActiveMeteors.length;
 			for (var i:uint = 0; i < meteorsLength; i++) {
-				if (_Meteors[i] && _Meteors[i] is Meteor && _Meteors[i].Visible)
-					_Meteors[i].Render();
+				if (_ActiveMeteors[i] && _ActiveMeteors[i] is Meteor && _ActiveMeteors[i].Visible)
+					_ActiveMeteors[i].Render();
 			}
 			
 			for (i = 0; i < _Projectiles.length; i++) {
