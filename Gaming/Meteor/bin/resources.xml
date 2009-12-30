@@ -1,24 +1,24 @@
 <?xml version="1.0"?>
 <hubgame>
 	<resources>
-		<image url="../bin/images/game-background.png?nocache=plz1" name="background" />
-		<image url="../bin/images/explosion_sheet.png?nocache=plz1" name="explosion_particle" segment_width="16" segment_height="16">
+		<image url="http://www.onemorepoint.com/game/meteor/embed/images/game-background.png?nocache=plz1" name="background" />
+		<image url="http://www.onemorepoint.com/game/meteor/embed/images/explosion_sheet.png?nocache=plz1" name="explosion_particle" segment_width="16" segment_height="16">
 			<animation name="explosion_particle" start_frame="0" end_frame="15" duration="0.4" loops="false" />
 		</image>
-		<image url="../bin/images/block_explosion.png?nocache=plz4" name="sparkle_particle" segment_width="16" segment_height="16">
+		<image url="http://www.onemorepoint.com/game/meteor/embed/images/block_explosion.png?nocache=plz4" name="sparkle_particle" segment_width="16" segment_height="16">
 			<animation name="sparkle_particle" start_frame="0" end_frame="15" duration="0.95" loops="false" />
 		</image>
-		<image url="../bin/images/photon.png?nocache=plz2" name="photon" segment_width="15" segment_height="15">
+		<image url="http://www.onemorepoint.com/game/meteor/embed/images/photon.png?nocache=plz2" name="photon" segment_width="15" segment_height="15">
 			<animation name="projectile" start_frame="0" end_frame="3" duration="0.4" loops="true" />
 		</image>
-		<image url="../bin/images/ship.png?nocache=plz2" name="ship"/>
-		<image url="../bin/images/ship_invincible.png?nocache=plz2" name="ship_invincible"/>
-		<image url="../bin/images/mega-meteor.png?nocache=plz1" name="mega_meteor" />
-		<image url="../bin/images/large-meteor1.png?nocache=plz1" name="large_meteor1" />
-		<image url="../bin/images/large-meteor2.png?nocache=plz1" name="large_meteor2" />
-		<image url="../bin/images/large-meteor3.png?nocache=plz1" name="large_meteor3" />
-		<image url="../bin/images/medium-meteors.png?nocache=plz1" name="medium_meteor" segment_width="64" segment_height="50"/>
-		<image url="../bin/images/small-meteors.png?nocache=plz1" name="small_meteors" segment_width="32" segment_height="25"/>
+		<image url="http://www.onemorepoint.com/game/meteor/embed/images/ship.png?nocache=plz2" name="ship"/>
+		<image url="http://www.onemorepoint.com/game/meteor/embed/images/ship_invincible.png?nocache=plz2" name="ship_invincible"/>
+		<image url="http://www.onemorepoint.com/game/meteor/embed/images/mega-meteor.png?nocache=plz1" name="mega_meteor" />
+		<image url="http://www.onemorepoint.com/game/meteor/embed/images/large-meteor1.png?nocache=plz1" name="large_meteor1" />
+		<image url="http://www.onemorepoint.com/game/meteor/embed/images/large-meteor2.png?nocache=plz1" name="large_meteor2" />
+		<image url="http://www.onemorepoint.com/game/meteor/embed/images/large-meteor3.png?nocache=plz1" name="large_meteor3" />
+		<image url="http://www.onemorepoint.com/game/meteor/embed/images/medium-meteors.png?nocache=plz1" name="medium_meteor" segment_width="64" segment_height="50"/>
+		<image url="http://www.onemorepoint.com/game/meteor/embed/images/small-meteors.png?nocache=plz1" name="small_meteors" segment_width="32" segment_height="25"/>
 	</resources>
 	<objects>
 		<background image="background" />
