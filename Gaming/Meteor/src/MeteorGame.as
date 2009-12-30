@@ -338,7 +338,7 @@ package
 				}
 				
 				for (j = 0; j < _ActiveMeteors.length; j++) {
-					if (!_ActiveMeteors[i] || !_ActiveMeteors[i] is Meteor || !_ActiveMeteors[i].Active)
+					if (!_ActiveMeteors[j] || !_ActiveMeteors[j] is Meteor || !_ActiveMeteors[j].Active)
 					 	continue;
 
 					if (_Projectiles[i].ObjectRectanglesCollide(_ActiveMeteors[j]))
