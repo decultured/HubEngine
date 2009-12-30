@@ -13,6 +13,8 @@ import nl.demonsters.debugger.MonsterDebugger;
 public var MainGame:MeteorMain;
 private var debugger:MonsterDebugger;
 
+private var AuthToken:String;
+
 public function Initialize():void
 {
 	Security.allowDomain('*');
@@ -21,9 +23,13 @@ public function Initialize():void
 
 	MainGame = new MeteorMain();
 	hGlobalInput.Initialize(ViewImage);
-
+	
 	MainGame.Game.Resources = Application.application.parameters.resources;
-
+	
+	/*pplante*/
+	AuthToken = Application.application.parameters.auth_token;
+	APIInterface.AuthToken = AuthToken;
+	
 	AppResize(null);
 }
 
