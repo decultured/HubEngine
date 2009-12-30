@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="640" height="480" backgroundImage="@Embed(source='../../embeds/background.png')">
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="640" height="480" backgroundImage="@Embed(source='../../embeds/background.jpg')">
 	<mx:Image x="247" y="315" enabled="false" id="StartGameButton" source="@Embed(source='../../embeds/loading/start-game-btn.png')" alpha="0.25"/>
 	<mx:Image x="175.5" y="106" id="Loading" source="@Embed(source='../../embeds/loading/loading-txt.png')"/>
 	<mx:Label x="10" y="225" color="#FF5A00" fontSize="28" id="ErrorMessage" textAlign="center" width="620"/>
