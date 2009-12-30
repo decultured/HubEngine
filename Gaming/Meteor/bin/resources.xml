@@ -19,6 +19,9 @@
 		<image url="../bin/images/large-meteor3.png?nocache=plz1" name="large_meteor3" />
 		<image url="../bin/images/medium-meteors.png?nocache=plz1" name="medium_meteor" segment_width="64" segment_height="50"/>
 		<image url="../bin/images/small-meteors.png?nocache=plz1" name="small_meteors" segment_width="32" segment_height="25"/>
+		<sound url="../bin/sounds/new-ship.mp3" name="explosion" />
+		<sound url="../bin/sounds/explosion.mp3" name="lost_ship" />
+		<sound url="../bin/sounds/lazer.mp3" name="fire" />
 	</resources>
 	<objects>
 		<background image="background" />

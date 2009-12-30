@@ -30,6 +30,11 @@ package
 		public var _ProjectileTypes:Array = new Array();
 		public var _Projectiles:Array = new Array();
 
+		// Sounds
+		public var _ExplosionSound:hSound;
+		public var _LostShipSound:hSound;
+		public var _FireSound:hSound;
+
 		// HUD UI
 		public var _HUD:mGameHUD;
 
@@ -102,6 +107,10 @@ package
 
 			Ships = _StartingShips;
 			_Ship = new Ship();
+			
+			_ExplosionSound = hGlobalAudio.SoundLibrary.GetSoundFromName("explosion");
+			_LostShipSound = hGlobalAudio.SoundLibrary.GetSoundFromName("lost_ship");
+			_FireSound = hGlobalAudio.SoundLibrary.GetSoundFromName("fire");
 
 			Reset();
         }
@@ -301,6 +310,7 @@ package
 			{
 				if (_SinceLastProjectile > _ProjectileTime) 
 				{
+					_FireSound.Play();
 					_SinceLastProjectile = 0;
 					var ProjVel:Point = new Point(_Ship.Sine, -_Ship.Cosine);
 					ProjVel.normalize(400);
@@ -344,6 +354,8 @@ package
 							Score = Score + 25;
 						}
 
+						_ExplosionSound.Play();
+
 						_ActiveMeteors.splice(j, 1);
 						j--;
 
@@ -367,6 +379,8 @@ package
 				if (_Ship.ObjectRectanglesCollide(_ActiveMeteors[i]))
 				{
 					if (!_Invincible && !_Ship.Invincible) {
+						_LostShipSound.Play();
+					
 						Ships -= 1;
 						Reset();
 					}
