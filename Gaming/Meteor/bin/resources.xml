@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<hubgame>
+	<resources>
+		<image url="../bin/images/game-background.png?nocache=plz1" name="background" />
+		<image url="../bin/images/explosion_sheet.png?nocache=plz1" name="explosion_particle" segment_width="16" segment_height="16">
+			<animation name="explosion_particle" start_frame="0" end_frame="15" duration="0.4" loops="false" />
+		</image>
+		<image url="../bin/images/block_explosion.png?nocache=plz4" name="sparkle_particle" segment_width="16" segment_height="16">
+			<animation name="sparkle_particle" start_frame="0" end_frame="15" duration="0.2" loops="false" />
+		</image>
+		<image url="../bin/images/photon.png?nocache=plz2" name="photon" segment_width="15" segment_height="15">
+			<animation name="projectile" start_frame="0" end_frame="3" duration="0.2" loops="true" />
+		</image>
+		<image url="../bin/images/ship.png?nocache=plz2" name="ship"/>
+		<image url="../bin/images/mega-meteor.png?nocache=plz1" name="mega_meteor" />
+		<image url="../bin/images/large-meteor1.png?nocache=plz1" name="large_meteors" />
+		<image url="../bin/images/large-meteor2.png?nocache=plz1" name="large_meteors" />
+		<image url="../bin/images/large-meteor3.png?nocache=plz1" name="large_meteors" />
+		<image url="../bin/images/medium-meteors.png?nocache=plz1" name="medium_meteor" />
+		<image url="../bin/images/small-meteors.png?nocache=plz1" name="small_meteors" segment_width="32" segment_height="25"/>
+	</resources>
+	<objects>
+		<background image="background" />
+		<ship image="ship" width="24" height="24" />
+		<projectile image="photon" width="15" height="15" />
+		<meteor shape="mega"   image="mega_meteor"   start_frame="0" width="160" height="105" />
+		<meteor shape="large"  image="large_meteor1" start_frame="0" width="98" height="74" />
+		<meteor shape="large"  image="large_meteor2" start_frame="0" width="98" height="74" />
+		<meteor shape="large"  image="large_meteor3" start_frame="0" width="98" height="74" />
+		<meteor shape="medium" image="medium_meteor" start_frame="0" width="64" height="50" />
+		<meteor shape="medium" image="medium_meteor" start_frame="1" width="64" height="50" />
+		<meteor shape="medium" image="medium_meteor" start_frame="2" width="64" height="50" />
+		<meteor shape="small"  image="small_meteors" start_frame="0" width="32" height="25" />
+		<meteor shape="small"  image="small_meteors" start_frame="1" width="32" height="25" />
+		<meteor shape="small"  image="small_meteors" start_frame="2" width="32" height="25" />
+		<meteor shape="small"  image="small_meteors" start_frame="3" width="32" height="25" />
+		<meteor shape="small"  image="small_meteors" start_frame="4" width="32" height="25" />
+	</objects>                                                      
+</hubgame>
