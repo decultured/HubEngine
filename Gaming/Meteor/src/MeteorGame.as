@@ -137,6 +137,7 @@ package
 		public function NewLevel():void
 		{
 			_Level += 1;
+			Ships += 2;
 			if (_HUD && _HUD.Level) {
 				_HUD.Level.text = String(_Level);
 			}
