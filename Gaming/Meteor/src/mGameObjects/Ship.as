@@ -4,18 +4,17 @@ package mGameObjects
 	import HubGraphics.*;
 	import HubInput.*;
 	
-	public class Ship extends hGameObject
+	public class Ship extends MeteorGameObject
 	{
-		private var _MaxXVelocity:Number = 400;
-		private var _YPosition:Number = 400;
-		
-		public function get DefaultYPosition():Number {return _YPosition;}
+		private var _MoveAcceleration:Number = 150;
+		private var _MaxVelocity:Number = 400;
+		private var _MaxVelocitySquared:Number = 160000;
+		private var _MaxRotationalVelocity:Number = 3.5;
 		
 		public function Ship()
 		{
 			super();
-			
-			ResetTranslation(0, _YPosition);
+			Centered = true;
 		}
 		
 		public function Reset():void
@@ -26,27 +25,20 @@ package mGameObjects
 		public override function Update(elapsedTime:Number):void
 		{
 			if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.RIGHT_ARROW) && !hGlobalInput.Keyboard.KeyPressed(hKeyCodes.LEFT_ARROW))
-				AddVelocity(_MaxXVelocity * elapsedTime * 10, 0);
+				Rotate(_MaxRotationalVelocity * elapsedTime);
 			else if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.LEFT_ARROW) && !hGlobalInput.Keyboard.KeyPressed(hKeyCodes.RIGHT_ARROW))
-				AddVelocity(-_MaxXVelocity * elapsedTime * 10, 0);
-			else
-				ResetVelocity(0, 0);
-
-			if (Velocity.x > _MaxXVelocity)
-				ResetVelocity(_MaxXVelocity, 0);
-			if (Velocity.x < -_MaxXVelocity)
-				ResetVelocity(-_MaxXVelocity, 0);
+				Rotate(-_MaxRotationalVelocity * elapsedTime);
+			if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.UP_ARROW) && !hGlobalInput.Keyboard.KeyPressed(hKeyCodes.DOWN_ARROW)) {
+				AddVelocity(Math.sin(Rotation) * _MoveAcceleration * elapsedTime, -Math.cos(Rotation) * _MoveAcceleration * elapsedTime);
+			} else if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.DOWN_ARROW) && !hGlobalInput.Keyboard.KeyPressed(hKeyCodes.UP_ARROW)) {
+				AddVelocity(-Math.sin(Rotation) * _MoveAcceleration * elapsedTime, Math.cos(Rotation) * _MoveAcceleration * elapsedTime);
+			}
+			
+			if (Velocity.x * Velocity.x + Velocity.y * Velocity.y > _MaxVelocitySquared)
+				Velocity.normalize(_MaxVelocity);
+			
 
 			super.Update(elapsedTime);
-			
-			if (Position.x < 0) {
-				Position.x = 0;
-			}
-
-			if (Position.x > hGlobalGraphics.View.Width - Width) {
-				Position.x = hGlobalGraphics.View.Width - Width;
-			}
-
 		}
 	}
 }

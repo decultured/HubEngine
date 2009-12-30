@@ -66,6 +66,7 @@ package mGameStates
 		
 		private function HandleLoaderError(event:Event):void
 		{
+			
 			_LoaderUI.ErrorMessage.text = "Error Loading Required Files!"
 			_LoaderUI.StartGameButton.addEventListener(MouseEvent.CLICK, LoaderErrorClicked);
 			_LoaderUI.StartGameButton.enabled = true;
@@ -85,12 +86,13 @@ package mGameStates
 			if (_Complete) {
 				_LoaderUI.StartGameButton.enabled = false;
 				_LoaderUI.StartGameButton.alpha = 50;
-				_Game.Reset();
+				_Game.NewLevel();
 				ChangeState("GameState");
 			}
 			if (_LoaderError) {
 				_LoaderUI.StartGameButton.enabled = false;
 				_LoaderUI.StartGameButton.alpha = 50;
+				_Game.NewGame();
 				ChangeState("MenuState");
 			}
 		}

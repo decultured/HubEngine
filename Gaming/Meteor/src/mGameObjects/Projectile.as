@@ -5,7 +5,7 @@ package mGameObjects
 	import HubInput.*;
 	import flash.ui.*;
 	
-	public class Projectile extends hGameObject
+	public class Projectile extends MeteorGameObject
 	{
 		private var _Type:String = null;
 		  
