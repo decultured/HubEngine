@@ -34,6 +34,9 @@ package
 		public var _HUD:mGameHUD;
 
 		// Game State Vars
+		private var _MeteorMaxSpeed:Number = 150;
+		private var _SinceLastProjectile:Number = 1000;
+		private var _ProjectileTime:Number = 0.25;
 		private var _Resources:String = null;
 		private var _Score:Number = 0;
 		private var _Ships:Number = 1;
@@ -86,7 +89,7 @@ package
 
 			if (_Ships < 0) {
 				_Ships = _StartingShips;
-				LevelWon();
+				GameOver();
 			}
 		}
 
@@ -129,26 +132,36 @@ package
 		
 		public function CreateMeteors():void
 		{
-			
 			// Create Some Large Meteors
 			if (_LargeMeteors.length) {
 				for (var i:uint = 0; i < 5; i++)
 				{
 					MonsterDebugger.trace(this, _LargeMeteors.length);
-					CloneMeteor(_LargeMeteors[uint(Math.random() * (_LargeMeteors.length - 1))], Math.random() * 640, Math.random() * 480, Math.random() * 300 - 150, Math.random() * 300 - 150);
+					CloneMeteor(_LargeMeteors[uint(Math.random() * (_LargeMeteors.length - 1))], Math.random() * 640, Math.random() * 480, Math.random() * _MeteorMaxSpeed - _MeteorMaxSpeed * 0.5, Math.random() * _MeteorMaxSpeed - _MeteorMaxSpeed * 0.5);
 				}
 			}
-			
 			
 			// Create a Mega Meteor
 			if (_MegaMeteors.length) {
 				MonsterDebugger.trace(this, _MegaMeteors.length);
-				CloneMeteor(_MegaMeteors[uint(Math.random() * (_MegaMeteors.length - 1))], Math.random() * 640, Math.random() * 480, Math.random() * 300 - 150, Math.random() * 300 - 150);
+				CloneMeteor(_MegaMeteors[uint(Math.random() * (_MegaMeteors.length - 1))], Math.random() * 640, Math.random() * 480, Math.random() * _MeteorMaxSpeed - _MeteorMaxSpeed * 0.5, Math.random() * _MeteorMaxSpeed - _MeteorMaxSpeed * 0.5);
+			}
+		}
+
+		public function SpawnMeteors(typeArray:Array, num:uint, posX:Number, posY:Number):void
+		{
+			if (typeArray.length) {
+				for (var i:uint = 0; i < num; i++)
+				{
+					MonsterDebugger.trace(this, typeArray.length);
+					CloneMeteor(typeArray[uint(Math.random() * (typeArray.length - 1))], posX, posY, Math.random() * _MeteorMaxSpeed - _MeteorMaxSpeed * 0.5, Math.random() * _MeteorMaxSpeed - _MeteorMaxSpeed * 0.5);
+				}
 			}
 		}
 
 		public function Reset():void
 		{
+			hGlobalGraphics.ParticleSystem.DeactivateAllParticles();			
 			_Projectiles.length = 0;
 			_Ship.Reset();
 		}
@@ -195,9 +208,10 @@ package
 				_MegaMeteors.push(newMeteor);	
 		}
 		
-		public function AddProjectile(imageName:String, width:Number, height:Number):void
+		public function AddProjectile(imageName:String, type:String, width:Number, height:Number):void
 		{
 			var newProjectile:Projectile = new Projectile();
+			newProjectile.Type = type;
 			newProjectile.Width = width;
 			newProjectile.Height = height;
 			newProjectile.SetImage(imageName);
@@ -205,9 +219,11 @@ package
 			MonsterDebugger.trace(this, "Projectile " + imageName);
 		}
 		
-		public function AddShip(imageName:String, width:Number, height:Number):void
+		public function AddShip(imageName:String, invincibleImageName:String, width:Number, height:Number):void
 		{
 			_Ship.SetImage(imageName);
+			_Ship.NormalImage = imageName;
+			_Ship.InvincibleImage = invincibleImageName;
 			_Ship.Width = width;
 			_Ship.Height = height;
 			_Ship.Translate(hGlobalGraphics.View.Width * 0.5 - width * 0.5, hGlobalGraphics.View.Height * 0.5 - height * 0.5);
@@ -217,7 +233,7 @@ package
 		//////////////////////
 		// Projectile Handling //
 		//////////////////////
-		public function CloneProjectileByType(type:String, xPos:Number, yPos:Number):void
+		public function CloneProjectileByType(type:String, xPos:Number, yPos:Number, velX:Number, velY:Number):void
 		{
 			var powerupsLength:uint = _ProjectileTypes.length;
 			for (var i:uint = 0; i < powerupsLength; i++) {
@@ -228,7 +244,8 @@ package
 					newProjectile.CurrentFrame = _ProjectileTypes[i].CurrentFrame;
 					newProjectile.SetImage(_ProjectileTypes[i].GetImageName());
 					newProjectile.Type = type;
-					newProjectile.Translate(xPos, yPos);
+					newProjectile.ResetTranslation(xPos, yPos);
+					newProjectile.ResetVelocity(velX, velY);
 					_Projectiles.push(newProjectile);
 					break;
 				}
@@ -259,6 +276,9 @@ package
 
 		public function Update(elapsedTime:Number):void
 		{
+			var i:uint = 0;
+			var j:uint = 0;
+			
 			hGlobalAudio.PlayMusic();
 			
 			if (hGlobalInput.Keyboard.KeySequenceEntered(_ExtraLivesCheat)) {
@@ -276,11 +296,63 @@ package
 				_Cheating = true;
 			}
 		
+			_SinceLastProjectile += elapsedTime;
+			if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.SPACEBAR))
+			{
+				if (_SinceLastProjectile > _ProjectileTime) 
+				{
+					_SinceLastProjectile = 0;
+					var ProjVel:Point = new Point(_Ship.Sine, -_Ship.Cosine);
+					ProjVel.normalize(400);
+					CloneProjectileByType("photon", _Ship.Position.x, _Ship.Position.y, ProjVel.x, ProjVel.y);
+				}
+			}
+			
+			
 			_Ship.Update(elapsedTime);
 
-			for (var i:uint = 0; i < _Projectiles.length; i++) {
-				if (!_Projectiles[i] || !_Projectiles[i] is Projectile || !_Projectiles[i].Active)
+			for (i = 0; i < _Projectiles.length; i++) {
+				if (!_Projectiles[i] || !_Projectiles[i] is Projectile)
 					continue;
+
+				if (!_Projectiles[i].Active) {
+					_Projectiles.splice(i, 1);
+					i--;
+					continue;
+				}
+				
+				for (j = 0; j < _ActiveMeteors.length; j++) {
+					if (!_ActiveMeteors[i] || !_ActiveMeteors[i] is Meteor || !_ActiveMeteors[i].Active)
+					 	continue;
+
+					if (_Projectiles[i].ObjectRectanglesCollide(_ActiveMeteors[j]))
+					{
+						// Spawn Smaller and Score
+						if (_ActiveMeteors[j].Shape == "small") {
+							Score = Score + 250;
+						}
+						else if (_ActiveMeteors[j].Shape == "medium") {
+							SpawnMeteors(_SmallMeteors, 3, _ActiveMeteors[j].Position.x, _ActiveMeteors[j].Position.y);
+							Score = Score + 150;
+						}
+						else if (_ActiveMeteors[j].Shape == "large") {
+							SpawnMeteors(_MediumMeteors, 3, _ActiveMeteors[j].Position.x, _ActiveMeteors[j].Position.y);
+							Score = Score + 75;
+						}
+						else if (_ActiveMeteors[j].Shape == "mega") {
+							SpawnMeteors(_LargeMeteors, 2, _ActiveMeteors[j].Position.x, _ActiveMeteors[j].Position.y);
+							Score = Score + 25;
+						}
+
+						_ActiveMeteors.splice(j, 1);
+						j--;
+
+						_Projectiles.splice(i, 1);
+						i--;
+						continue;
+					}
+				}
+				
 				_Projectiles[i].Update(elapsedTime);
 			}
 
@@ -291,6 +363,14 @@ package
 				 	continue;
 					
 				activeMeteors++;
+				
+				if (_Ship.ObjectRectanglesCollide(_ActiveMeteors[i]))
+				{
+					if (!_Invincible && !_Ship.Invincible) {
+						Ships -= 1;
+						Reset();
+					}
+				}
 				
 				_ActiveMeteors[i].Update(elapsedTime);
 			}
