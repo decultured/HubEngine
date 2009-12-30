@@ -9,7 +9,7 @@
 			<animation name="sparkle_particle" start_frame="0" end_frame="15" duration="0.95" loops="false" />
 		</image>
 		<image url="http://www.onemorepoint.com/game/meteor/embed/images/photon.png?nocache=plz2" name="photon" segment_width="15" segment_height="15">
-			<animation name="projectile" start_frame="0" end_frame="3" duration="0.4" loops="true" />
+			<animation name="projectile" start_frame="0" end_frame="7" duration="0.5" loops="true" />
 		</image>
 		<image url="http://www.onemorepoint.com/game/meteor/embed/images/ship.png?nocache=plz2" name="ship"/>
 		<image url="http://www.onemorepoint.com/game/meteor/embed/images/ship_invincible.png?nocache=plz2" name="ship_invincible"/>
