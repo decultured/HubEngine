@@ -132,11 +132,8 @@ package HubGraphics
 		
 		private function CalcCenter():void
 		{
-			if (_Image != null)
-			{
-				_Center.x = _Position.x + (_Image.Width * 0.5);
-				_Center.y = _Position.y + (_Image.Height * 0.5);
-			}
+			_Center.x = _Position.x + Width * 0.5;
+			_Center.y = _Position.y + Height * 0.5;
 		}
 
 		public function Update(elapsedTime:Number):void
