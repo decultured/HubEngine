@@ -4,11 +4,11 @@
 	<mx:Image id="count_down_2" x="289.5" y="198" source="@Embed(source='../../embeds/count-2.png')" visible="false" />
 	<mx:Image id="count_down_3" x="289.5" y="198" source="@Embed(source='../../embeds/count-3.png')" visible="false" />
 	<mx:HBox styleName="hudBar" bottom="8" left="0" right="0" horizontalAlign="left" verticalAlign="middle" backgroundImage="@Embed(source='../../embeds/hud-bg.png')" height="44" paddingLeft="20" paddingRight="20">
-       <mx:Label text="Score: " styleName="hudText"/>
+       <mx:Label text="SCORE: " styleName="hudText"/>
        <mx:Label id="Score" text="0" styleName="hudText"/>
-       <mx:Label text="Ships: " styleName="hudText"/>
+       <mx:Label text="SHIPS: " styleName="hudText"/>
        <mx:Label id="Ships" text="5" styleName="hudText"/>
-       <mx:Label text="Level: " styleName="hudText"/>
+       <mx:Label text="LEVEL: " styleName="hudText"/>
        <mx:Label id="Level" text="1" styleName="hudText"/>
 	</mx:HBox>
 </mx:Canvas>

@@ -58,6 +58,7 @@ package
 		// Mutators and Accessors
 		public function get Score():Number {return _Score;}
 		public function get Ships():Number {return _Ships;}
+		public function get Level():Number {return _Level;}
 		public function get Resources():String {return _Resources;}  
 		public function set Resources(resources:String):void {_Resources = resources;}
 		public function get HUD():mGameHUD {return _HUD;}
@@ -112,10 +113,10 @@ package
 			_ExplosionSound = hGlobalAudio.SoundLibrary.GetSoundFromName("explosion");
 			_LostShipSound = hGlobalAudio.SoundLibrary.GetSoundFromName("lost_ship");
 			_FireSound = hGlobalAudio.SoundLibrary.GetSoundFromName("fire");
-
+			
 			Reset();
-        }
-
+		}
+		
 		//////////////////////////////////
 		// Game State Setting Functions //
 		//////////////////////////////////
@@ -129,6 +130,7 @@ package
 		public function NewGame():void
 		{
 			Score = 0;
+			_Level = 0;
 			_MeteorMaxSpeed = _MeteorStartMaxSpeed;
 			Ships = _StartingShips;
 			NewLevel();
@@ -149,17 +151,19 @@ package
 		
 		public function CreateMeteors():void
 		{
+			var i:uint = 0;
 			// Create Some Large Meteors
-			if (_LargeMeteors.length) {
+			/*if (_LargeMeteors.length) {
 				var LargeSpawnNumber:uint = uint(((_Level + 1) / 3) + 1);
-				for (var i:uint = 0; i < LargeSpawnNumber; i++)
+				for (i = 0; i < LargeSpawnNumber; i++)
 				{
 					CloneMeteor(_LargeMeteors[uint(Math.random() * (_LargeMeteors.length - 1))], Math.random() * 640, Math.random() * 480, Math.random() * _MeteorMaxSpeed - _MeteorMaxSpeed * 0.5, Math.random() * _MeteorMaxSpeed - _MeteorMaxSpeed * 0.5);
 				}
 			}
-			
+			*/
 			if (_MediumMeteors.length) {
 				var MediumSpawnNumber:uint = uint(_Level / 7);
+				MediumSpawnNumber = 1;
 				for (i = 0; i < MediumSpawnNumber; i++)
 				{
 					CloneMeteor(_MediumMeteors[uint(Math.random() * (_MediumMeteors.length - 1))], Math.random() * 640, Math.random() * 480, Math.random() * _MeteorMaxSpeed - _MeteorMaxSpeed * 0.5, Math.random() * _MeteorMaxSpeed - _MeteorMaxSpeed * 0.5);
@@ -167,13 +171,13 @@ package
 			}
 			
 			// Create a Mega Meteor
-			if (_MegaMeteors.length) {
+			/*if (_MegaMeteors.length) {
 				var MegaSpawnNumber:uint = uint((_Level / 5) + 1);
 				for (i = 0; i < MegaSpawnNumber; i++)
 				{
 					CloneMeteor(_MegaMeteors[uint(Math.random() * (_MegaMeteors.length - 1))], Math.random() * 640, Math.random() * 480, Math.random() * _MeteorMaxSpeed - _MeteorMaxSpeed * 0.5, Math.random() * _MeteorMaxSpeed - _MeteorMaxSpeed * 0.5);
 				}
-			}
+			}*/
 		}
 
 		public function SpawnMeteors(typeArray:Array, num:uint, posX:Number, posY:Number):void

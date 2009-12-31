@@ -2,6 +2,7 @@ package
 {
 	import flash.events.*;
 	import flash.net.*;
+	import mx.controls.Alert;
 	
 	public class APIRequest extends EventDispatcher {
 		private var _http_method:String;
@@ -35,7 +36,6 @@ package
 			_request.data = _parameters;
 			
 			_loader = new URLLoader();
-			_loader.dataFormat = URLLoaderDataFormat.VARIABLES;
 			_loader.addEventListener(APIRequest.COMPLETE, HandleComplete);
 			_loader.addEventListener(APIRequest.IO_ERROR, HandleError);
 		}
@@ -53,8 +53,8 @@ package
 		{
 			var XMLData:XML = new XML(event.target.data);
 			
-			for each (var authToken:XML in XMLData..auth_token) {
-				APIInterface.AuthToken = authToken.text();
+			for each (var authToken:XML in XMLData.auth_token) {
+				APIInterface.AuthToken = authToken.toString();
 			}
 			
 			dispatchEvent(new Event(APIRequest.COMPLETE));
