@@ -329,18 +329,20 @@ package
 				LevelWon();
 			
 			//Collide Ball With Paddle
-			if (hCollision.PointCollidesWithRect(_Ball.Center.x, _Ball.Center.y, _Paddle.Left, _Paddle.Top, _Paddle.Right, _Paddle.Bottom))
-			{
-				_Ball.Position.y = _Paddle.Position.y - _Ball.Height;
-				
-				_Ball.AddVelocity((_Ball.Center.x - _Paddle.Center.x) * 8, 0);
-				_Ball.ResetVelocity(_Ball.Velocity.x, -Math.abs(_Ball.Velocity.y));
-				if (_Ball.Velocity.x > 220)
-					_Ball.ResetVelocity(220, _Ball.Velocity.y);
-				if (_Ball.Velocity.x < -220)
-					_Ball.ResetVelocity(-220, _Ball.Velocity.y);
-				_Ball.Velocity.normalize(_Ball.Speed);
-				_PaddleBounceSound.Play();
+			if (_Ball.PreviousCenter.y <= _Paddle.Top && _Ball.Center.y >= _Paddle.Top) { 
+				var CollisionPoint:Point = hCollision.LineSegmentIntersectionPoint(new Point(_Ball.PreviousCenter.x, _Ball.PreviousPosition.y + _Ball.Height), new Point(_Ball.Center.x, _Ball.Position.y + _Ball.Height), new Point(_Paddle.Left, _Paddle.Top), new Point(_Paddle.Right, _Paddle.Top));
+				if (CollisionPoint.x >= _Paddle.Left - _Ball.Width && CollisionPoint.x <= _Paddle.Right + _Ball.Width) {
+//					_Ball.ResetTranslation(CollisionPoint.x, CollisionPoint.y - _Ball.Height);
+					_Ball.Position.y = _Paddle.Position.y - _Ball.Height;
+					_Ball.AddVelocity((_Ball.Center.x - _Paddle.Center.x) * 8, 0);
+					_Ball.ResetVelocity(_Ball.Velocity.x, -Math.abs(_Ball.Velocity.y));
+					if (_Ball.Velocity.x > 220)
+						_Ball.ResetVelocity(220, _Ball.Velocity.y);
+					if (_Ball.Velocity.x < -220)
+						_Ball.ResetVelocity(-220, _Ball.Velocity.y);
+					_Ball.Velocity.normalize(_Ball.Speed);
+					_PaddleBounceSound.Play();
+				}
 			}
 			
 			//Reset if Ball Hits Bottom
