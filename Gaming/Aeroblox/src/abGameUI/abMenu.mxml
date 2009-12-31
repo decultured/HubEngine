@@ -2,5 +2,5 @@
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="640" height="480" backgroundImage="@Embed(source='../../embeds/background.png')" borderStyle="none" alpha="1.0">
 	<mx:Image x="197" y="275" source="@Embed(source='../../embeds/game-over/new-game-btn.png')" id="StartGameButton"/>
 	<mx:Image x="25" y="143" source="@Embed(source='../../embeds/logo.png')"/>
-	<mx:Image x="197" y="360" source="@Embed(source='../../embeds/game-over/new-game-btn.png')" id="LevelEditorButton"/>
+	<mx:Image x="197" y="360" source="@Embed(source='../../embeds/game-over/new-game-btn.png')" id="LevelEditorButton" visible="false" />
 </mx:Canvas>
