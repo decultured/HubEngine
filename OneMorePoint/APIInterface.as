@@ -4,7 +4,7 @@ package
 	import flash.net.*;
 	
 	public class APIInterface {
-		private static var _APIUri:String = 'http://www.onemorepoint.com/api/';
+		private static var _APIUri:String = 'http://onemorepoint.local/api/';
 		
 		private static var _AuthToken:String = null;
 		

@@ -38,7 +38,7 @@ package abGameStates
 		public override function Start():void
 		{
 			hGlobalGraphics.View.ViewImage.addChild(_GameOver);
-			_GameOver.Score.text = "Final Score: " + _Game.Score;
+			_GameOver.Score.text = "FINAL SCORE: " + _Game.Score;
 			_GameOver.StartGameButton.addEventListener(MouseEvent.CLICK, StartGameEvent);
 			_GameOver.MainMenuButton.addEventListener(MouseEvent.CLICK, MainMenuEvent);
 			

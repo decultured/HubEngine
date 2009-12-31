@@ -1,6 +1,10 @@
 <?xml version="1.0"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="640" height="480" backgroundImage="@Embed(source='../../embeds/background.jpg')">
+	<mx:Label id="Score" text="TOTAL SCORE: 1234567890" color="#00036E" top="230" horizontalCenter="0"  fontSize="32" fontWeight="normal" width="620" textAlign="center" visible="false" />
+	<mx:Label id="Ships" text="SHIPS: 3" color="#00036E" top="170" horizontalCenter="0"  fontSize="32" fontWeight="normal" width="620" textAlign="center" visible="false" />
 	<mx:Image x="155" y="315" enabled="false" id="StartGameButton" source="@Embed(source='../../embeds/loading/start-game-btn.png')" alpha="0.25"/>
+	<mx:Image x="155" y="315" enabled="false" visible="false" id="NextWaveButton" source="@Embed(source='../../embeds/loading/next-wave-btn.png')" alpha="0.25"/>
 	<mx:Image x="155" y="86" id="Loading" source="@Embed(source='../../embeds/loading/loading-txt.png')"/>
+	<mx:Image x="38" y="40" id="EarthSafe" source="@Embed(source='../../embeds/loading/earth-safe-txt.png')" visible="false" />
 	<mx:Label x="10" y="225" color="#FF5A00" fontSize="28" id="ErrorMessage" textAlign="center" width="620"/>
 </mx:Canvas>
