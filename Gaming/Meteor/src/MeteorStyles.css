@@ -4,6 +4,16 @@
 
 .hudText {
     color: #FFF;
-    font-size: 22pt;
+    font-size: 20pt;
+	padding:0;
+	margin:0;
+    textTransform: uppercase;
+}
+
+.smallHudText {
+    color: #FFF;
+    font-size: 12pt;
+	padding:0;
+	margin:0;
     textTransform: uppercase;
 }

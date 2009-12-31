@@ -3,14 +3,16 @@
 	<mx:Image id="count_down_1" x="289.5" y="198" source="@Embed(source='../../embeds/count-1.png')" visible="false" />
 	<mx:Image id="count_down_2" x="289.5" y="198" source="@Embed(source='../../embeds/count-2.png')" visible="false" />
 	<mx:Image id="count_down_3" x="289.5" y="198" source="@Embed(source='../../embeds/count-3.png')" visible="false" />
-	<mx:HBox styleName="hudBar" bottom="8" left="0" right="0" horizontalAlign="left" verticalAlign="middle" backgroundImage="@Embed(source='../../embeds/hud-bg.png')" height="44" paddingLeft="20" paddingRight="20">
-	    <mx:Label text="SCORE: " styleName="hudText"/>
-	    <mx:Label id="Score" text="0" styleName="hudText"/>
-	    <mx:Label text="SHIPS: " styleName="hudText"/>
-	    <mx:Label id="Ships" text="5" styleName="hudText"/>
-	    <mx:Label text="LEVEL: " styleName="hudText"/>
-	    <mx:Label id="Level" text="1" styleName="hudText"/>
-	    <mx:Label text="SHIELDS: " styleName="hudText"/>
-		<mx:ProgressBar maximum="100" minimum="0" id="Shields" />
-	</mx:HBox>
+	<mx:Canvas styleName="hudBar" bottom="8" left="0" right="0" backgroundImage="@Embed(source='../../embeds/hud-bg.png')" height="44">
+	    <mx:Label text="SHIPS:" styleName="smallHudText" left="25" top="4"/>
+	    <mx:Label id="Ships" text="5" styleName="smallHudText" left="75" top="4"/>
+    	<mx:Label text="LEVEL:" styleName="smallHudText" left="25" bottom="4"/>
+    	<mx:Label id="Level" text="1" styleName="smallHudText" left="75" bottom="4"/>
+		<mx:HBox left="115" top="7" bottom="5" verticalAlign="true" >
+			<mx:Label text="SCORE: " styleName="hudText" />
+		    <mx:Label id="Score" text="0" styleName="hudText"/>
+		</mx:HBox>
+    	<mx:Label text="SHIELDS:" styleName="hudText" verticalCenter="0" right="150"/>
+		<mx:ProgressBar maximum="100" minimum="0" id="Shields" direction="right" mode="manual" label="" labelPlacement="center" width="115" trackColors="[0x00000000,0x00000000]" height="15" verticalCenter="0" right="25"/>
+	</mx:Canvas>
 </mx:Canvas>

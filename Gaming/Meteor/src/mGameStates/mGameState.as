@@ -36,6 +36,8 @@ package mGameStates
 			hGlobalInput.Reset();
 			hGlobalInput.GetFocus();
 			_Game.ShowHUD();
+			// Forces draw of shields progress bar
+			_Game.Shields = _Game.Shields;
 			_Game.addEventListener(MeteorGame.LEVEL_WON, HandleNextLevel);
 			_Game.addEventListener(MeteorGame.GAME_OVER, HandleGameOver);
 		}

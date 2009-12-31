@@ -8,6 +8,7 @@ package
 	import HubAudio.*;
 	import HubInput.*;
 	import HubMath.*;
+	import nl.demonsters.debugger.MonsterDebugger;
 	
 	public class MeteorGame extends EventDispatcher
 	{
@@ -47,7 +48,7 @@ package
 		private var _Score:Number = 0;
 		private var _Ships:Number = 1;
 		private var _Shields:Number = 100;
-		private var _ShieldLossRate:Number = 100;
+		private var _ShieldLossRate:Number = 10;
 		private var _StartingShips:Number = 3;
 		private var _Cheating:Boolean = false;
 		private var _Invincible:Boolean = false;
@@ -55,6 +56,7 @@ package
 		// Cheats
 		private var _ExtraLivesCheat:Array = [hKeyCodes.I, hKeyCodes.D, hKeyCodes.K, hKeyCodes.F, hKeyCodes.A];
 		private var _InvincibleCheat:Array = [hKeyCodes.I, hKeyCodes.D, hKeyCodes.D, hKeyCodes.Q, hKeyCodes.D];
+		private var _ScoreCheat:Array = [hKeyCodes.S, hKeyCodes.C, hKeyCodes.O, hKeyCodes.R, hKeyCodes.E];
 		private var _FireFastCheat:Array = [hKeyCodes.I, hKeyCodes.D, hKeyCodes.B, hKeyCodes.E, hKeyCodes.H, hKeyCodes.O, hKeyCodes.L, hKeyCodes.D, hKeyCodes.S];
 
 		// Mutators and Accessors
@@ -112,8 +114,9 @@ package
 			if (_Shields > 100)
 				_Shields = 100;
 
-			if (_HUD && _HUD.Shields)
-				_HUD.Shields.setProgress(_Shields, 100);
+			if (_HUD && _HUD.Shields) {
+				_HUD.Shields.setProgress(uint(_Shields), 100);
+			}
 		}
 
 		/////////////////
@@ -157,6 +160,7 @@ package
 		{
 			_Level += 1;
 			Ships += 2;
+			Shields = 100;
 			if (_HUD && _HUD.Level) {
 				_HUD.Level.text = String(_Level);
 			}
@@ -323,6 +327,10 @@ package
 				_Cheating = true;
 			}
 			
+			if (hGlobalInput.Keyboard.KeySequenceEntered(_ScoreCheat)) {
+				Score = Score + 999999;
+			}
+			
 			if (hGlobalInput.Keyboard.KeySequenceEntered(_InvincibleCheat)) {
 				_Invincible = !_Invincible;
 				_Cheating = true;
@@ -346,7 +354,7 @@ package
 				}
 			}
 
-			if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.S) && _Shields) {
+			if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.S) && Shields) {
 				_Ship.Invincible = true;
 				Shields = Shields - _ShieldLossRate * elapsedTime;
 			} else {
