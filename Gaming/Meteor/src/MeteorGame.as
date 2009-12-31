@@ -46,6 +46,8 @@ package
 		private var _Resources:String = null;
 		private var _Score:Number = 0;
 		private var _Ships:Number = 1;
+		private var _Shields:Number = 100;
+		private var _ShieldLossRate:Number = 100;
 		private var _StartingShips:Number = 3;
 		private var _Cheating:Boolean = false;
 		private var _Invincible:Boolean = false;
@@ -58,6 +60,7 @@ package
 		// Mutators and Accessors
 		public function get Score():Number {return _Score;}
 		public function get Ships():Number {return _Ships;}
+		public function get Shields():Number {return _Shields;}
 		public function get Resources():String {return _Resources;}  
 		public function set Resources(resources:String):void {_Resources = resources;}
 		public function get HUD():mGameHUD {return _HUD;}
@@ -99,6 +102,19 @@ package
 			}
 		}
 
+		public function set Shields(numShields:Number):void
+		{
+			_Shields = numShields;
+			
+			if (_Shields < 0)
+				_Shields = 0;
+			if (_Shields > 100)
+				_Shields = 100;
+
+			if (_HUD && _HUD.Shields)
+				_HUD.Shields.setProgress(_Shields, 100);
+		}
+
 		/////////////////
 		// Constructor //
 		/////////////////
@@ -128,6 +144,7 @@ package
 		
 		public function NewGame():void
 		{
+			
 			Score = 0;
 			_MeteorMaxSpeed = _MeteorStartMaxSpeed;
 			Ships = _StartingShips;
@@ -323,6 +340,13 @@ package
 					ProjVel.normalize(400);
 					CloneProjectileByType("photon", _Ship.Position.x - 7, _Ship.Position.y - 7, ProjVel.x, ProjVel.y);
 				}
+			}
+
+			if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.S) && _Shields) {
+				_Ship.Invincible = true;
+				Shields = Shields - _ShieldLossRate * elapsedTime;
+			} else {
+				_Ship.Invincible = false;	
 			}
 			
 			

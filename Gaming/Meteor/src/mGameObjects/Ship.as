@@ -19,11 +19,12 @@ package mGameObjects
 		
 		private var _NormalImage:String = "ship";
 		private var _InvincibleImage:String = "ship";
+		private var _Invincible:Boolean = false;
 		
 		public function set NormalImage(image:String):void {_NormalImage = image;}
 		public function set InvincibleImage(image:String):void {_InvincibleImage = image;}
-		
-		public function get Invincible():Boolean {return (_TimeAlive < _InvincibleTime);}
+		public function set Invincible(invincible:Boolean):void {_Invincible = invincible;}
+		public function get Invincible():Boolean {return (_TimeAlive < _InvincibleTime || _Invincible);}
 		public function get Sine():Number {return _Sine;}
 		public function get Cosine():Number {return _Cosine;}
 		public function get Speed():Number {return _Speed;}
@@ -61,7 +62,9 @@ package mGameObjects
 			if (_TimeAlive > 2000)
 			 	_TimeAlive -= 1000;
 			
-			if (!Invincible)
+			if (Invincible)
+				SetImage(_InvincibleImage);
+			else
 				SetImage(_NormalImage);
 
 			if (hGlobalInput.Keyboard.KeyPressed(hKeyCodes.RIGHT_ARROW) && !hGlobalInput.Keyboard.KeyPressed(hKeyCodes.LEFT_ARROW))
