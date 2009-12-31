@@ -40,17 +40,17 @@
 		<block image="block_square" start_frame="7" shape="square" x="180" y="240" width="20" height="20" />
 		<block image="block_square" start_frame="7" shape="square" x="180" y="260" width="20" height="20" />
 		<block image="block_square" start_frame="7" shape="square" x="200" y="20" width="20" height="20" />
-		<block image="block_square" start_frame="7" shape="square" x="220" y="20" width="20" height="20" /><block image="block_square" start_frame="7" shape="square" x="200" y="20" width="20" height="20" />
-		<block image="block_square" start_frame="7" shape="square" x="240" y="20" width="20" height="20" /><block image="block_square" start_frame="7" shape="square" x="200" y="20" width="20" height="20" />
-		<block image="block_square" start_frame="7" shape="square" x="260" y="20" width="20" height="20" /><block image="block_square" start_frame="7" shape="square" x="200" y="20" width="20" height="20" />
-		<block image="block_square" start_frame="7" shape="square" x="280" y="20" width="20" height="20" /><block image="block_square" start_frame="7" shape="square" x="200" y="20" width="20" height="20" />
-		<block image="block_square" start_frame="7" shape="square" x="300" y="20" width="20" height="20" /><block image="block_square" start_frame="7" shape="square" x="200" y="20" width="20" height="20" />
-		<block image="block_square" start_frame="7" shape="square" x="320" y="20" width="20" height="20" /><block image="block_square" start_frame="7" shape="square" x="200" y="20" width="20" height="20" />
-		<block image="block_square" start_frame="7" shape="square" x="340" y="20" width="20" height="20" /><block image="block_square" start_frame="7" shape="square" x="200" y="20" width="20" height="20" />
-		<block image="block_square" start_frame="7" shape="square" x="360" y="20" width="20" height="20" /><block image="block_square" start_frame="7" shape="square" x="200" y="20" width="20" height="20" />
-		<block image="block_square" start_frame="7" shape="square" x="380" y="20" width="20" height="20" /><block image="block_square" start_frame="7" shape="square" x="200" y="20" width="20" height="20" />
-		<block image="block_square" start_frame="7" shape="square" x="400" y="20" width="20" height="20" /><block image="block_square" start_frame="7" shape="square" x="200" y="20" width="20" height="20" />
-		<block image="block_square" start_frame="7" shape="square" x="420" y="20" width="20" height="20" /><block image="block_square" start_frame="7" shape="square" x="200" y="20" width="20" height="20" />
+		<block image="block_square" start_frame="7" shape="square" x="220" y="20" width="20" height="20" />
+		<block image="block_square" start_frame="7" shape="square" x="240" y="20" width="20" height="20" />
+		<block image="block_square" start_frame="7" shape="square" x="260" y="20" width="20" height="20" />
+		<block image="block_square" start_frame="7" shape="square" x="280" y="20" width="20" height="20" />
+		<block image="block_square" start_frame="7" shape="square" x="300" y="20" width="20" height="20" />
+		<block image="block_square" start_frame="7" shape="square" x="320" y="20" width="20" height="20" />
+		<block image="block_square" start_frame="7" shape="square" x="340" y="20" width="20" height="20" />
+		<block image="block_square" start_frame="7" shape="square" x="360" y="20" width="20" height="20" />
+		<block image="block_square" start_frame="7" shape="square" x="380" y="20" width="20" height="20" />
+		<block image="block_square" start_frame="7" shape="square" x="400" y="20" width="20" height="20" />
+		<block image="block_square" start_frame="7" shape="square" x="420" y="20" width="20" height="20" />
 		
 		<block image="block_square" start_frame="8" shape="square" x="200" y="40" width="20" height="20" />
 		<block image="block_square" start_frame="8" shape="square" x="220" y="40" width="20" height="20" />

@@ -140,75 +140,40 @@
 		<block image="block_square" start_frame="0" shape="square" x="380" y="240" width="20" height="20" />
 		<block image="block_square" start_frame="0" shape="square" x="400" y="240" width="20" height="20" />
 		<block image="block_square" start_frame="0" shape="square" x="400" y="260" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="240" y="120" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="240" y="140" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="240" y="160" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="260" y="160" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="280" y="140" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="280" y="160" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="340" y="140" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="340" y="160" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="360" y="160" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="380" y="100" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="380" y="120" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="380" y="140" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="380" y="160" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="240" y="220" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="260" y="220" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="260" y="240" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="280" y="200" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="300" y="200" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="320" y="200" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="340" y="200" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="280" y="220" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="300" y="220" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="320" y="220" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="340" y="220" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="280" y="240" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="300" y="240" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="320" y="240" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="340" y="240" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="280" y="260" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="300" y="260" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="320" y="260" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="340" y="260" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="360" y="220" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		<block image="block_square" start_frame="15" shape="square" x="360" y="240" width="20" height="20" />
-		<block image="block_square" start_frame="15" shape="square" x="240" y="100" width="20" height="20" />
 		
 	</objects>
 </hubgame>

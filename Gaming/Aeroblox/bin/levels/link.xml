@@ -122,11 +122,8 @@
 		<block image="block_square" start_frame="8" shape="square" x="260" y="120" width="20" height="20" />
 		<block image="block_square" start_frame="8" shape="square" x="40" y="260" width="20" height="20" />
 		<block image="block_square" start_frame="8" shape="square" x="60" y="260" width="20" height="20" />
-		<block image="block_square" start_frame="8" shape="square" x="40" y="260" width="20" height="20" />
 		<block image="block_square" start_frame="8" shape="square" x="60" y="280" width="20" height="20" />
-		<block image="block_square" start_frame="8" shape="square" x="40" y="260" width="20" height="20" />
 		<block image="block_square" start_frame="8" shape="square" x="80" y="280" width="20" height="20" />
-		<block image="block_square" start_frame="8" shape="square" x="40" y="260" width="20" height="20" />
 		
 		
 		<block image="block_square" start_frame="10" shape="square" x="160" y="20" width="20" height="20" />
