@@ -46,6 +46,11 @@ package abGameStates
 				return;
 			}
 			
+			if(_Game.Score > 0) {
+				var req:APIRequest = APIInterface.newRequest('POST', 'game/aeroblox/scores/', {score: _Game.Score});
+				req.sendRequest();
+			}
+			
 			_Game.ClearObjects();
 			_Game.Reset();
 			
