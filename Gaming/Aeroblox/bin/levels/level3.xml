@@ -1,22 +1,22 @@
 <?xml version="1.0"?>
 <hubgame>
 	<resources>
-		<image url="http://onemorepoint.local/game/aeroblox/embed/images/background-1.png?nocache=plz1" name="background" />
-		<image url="http://onemorepoint.local/game/aeroblox/embed/images/blocks/square-spirte-sheet.png?nocache=plz1" name="block_square" segment_width="20" segment_height="20"/>
-		<image url="http://onemorepoint.local/game/aeroblox/embed/images/explosion_sheet.png?nocache=plz1" name="explosion_particle" segment_width="16" segment_height="16">
+		<image url="http://www.onemorepoint.com/game/aeroblox/embed/images/background-1.png?nocache=plz1" name="background" />
+		<image url="http://www.onemorepoint.com/game/aeroblox/embed/images/blocks/square-spirte-sheet.png?nocache=plz1" name="block_square" segment_width="20" segment_height="20"/>
+		<image url="http://www.onemorepoint.com/game/aeroblox/embed/images/explosion_sheet.png?nocache=plz1" name="explosion_particle" segment_width="16" segment_height="16">
 			<animation name="explosion_particle" start_frame="0" end_frame="15" duration="0.4" loops="false" />
 		</image>
-		<image url="http://onemorepoint.local/game/aeroblox/embed/images/block_explosion.png?nocache=plz3" name="sparkle_particle" segment_width="16" segment_height="16">
+		<image url="http://www.onemorepoint.com/game/aeroblox/embed/images/block_explosion.png?nocache=plz3" name="sparkle_particle" segment_width="16" segment_height="16">
 			<animation name="sparkle_particle" start_frame="0" end_frame="15" duration="0.4" loops="false" />
 		</image>
-		<image url="http://onemorepoint.local/game/aeroblox/embed/images/paddle.png?nocache=plz1" name="paddle_normal" />
-		<image url="http://onemorepoint.local/game/aeroblox/embed/images/cursor.png?nocache=plz1" name="cursor_normal" />
-		<image url="http://onemorepoint.local/game/aeroblox/embed/images/ball.png?nocache=plz1" name="ball_normal" />
-		<sound url="http://onemorepoint.local/game/aeroblox/embed/sounds/button-16.mp3" name="ball_hits_wall" />
-		<sound url="http://onemorepoint.local/game/aeroblox/embed/sounds/button-10.mp3" name="ball_lost" />
-		<sound url="http://onemorepoint.local/game/aeroblox/embed/sounds/ballpaddle.mp3" name="ball_hits_paddle" />
-		<sound url="http://onemorepoint.local/game/aeroblox/embed/sounds/button-29.mp3" name="ball_hits_brick" />
-		<music url="http://onemorepoint.local/game/aeroblox/embed/sounds/fractal.mp3" name="background_music" />
+		<image url="http://www.onemorepoint.com/game/aeroblox/embed/images/paddle.png?nocache=plz1" name="paddle_normal" />
+		<image url="http://www.onemorepoint.com/game/aeroblox/embed/images/cursor.png?nocache=plz1" name="cursor_normal" />
+		<image url="http://www.onemorepoint.com/game/aeroblox/embed/images/ball.png?nocache=plz1" name="ball_normal" />
+		<sound url="http://www.onemorepoint.com/game/aeroblox/embed/sounds/button-16.mp3" name="ball_hits_wall" />
+		<sound url="http://www.onemorepoint.com/game/aeroblox/embed/sounds/button-10.mp3" name="ball_lost" />
+		<sound url="http://www.onemorepoint.com/game/aeroblox/embed/sounds/ballpaddle.mp3" name="ball_hits_paddle" />
+		<sound url="http://www.onemorepoint.com/game/aeroblox/embed/sounds/button-29.mp3" name="ball_hits_brick" />
+		<music url="http://www.onemorepoint.com/game/aeroblox/embed/sounds/fractal.mp3" name="background_music" />
 	</resources>
 	<objects>
 		<background image="background" />
